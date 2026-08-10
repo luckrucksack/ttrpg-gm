@@ -132,9 +132,9 @@ def test_system():
     print("-" * 40)
     
     tests = [
-        ("DeepSeek API", "python3 -c \"import os; from agents.deepseek_client import DeepSeekClient; client = DeepSeekClient(); print('✅ API connected')\""),
-        ("Dice Roller", "python3 -c \"from agents.dice_roller import DiceRoller; r = DiceRoller(); result = r.roll('1d20'); print(f'✅ Dice roll: {result}')\""),
-        ("State Manager", "python3 -c \"from agents.state_manager import StateManager; sm = StateManager('data'); print(f'✅ Loaded {len(sm.characters)} characters')\""),
+        ("DeepSeek API", "python3 -c \"import os; from gm_core.agents.deepseek_client import DeepSeekClient; client = DeepSeekClient(); print('✅ API connected')\""),
+        ("Dice Roller", "python3 -c \"from gm_core.dice import DiceRoller; r = DiceRoller(); result = r.roll('1d20'); print(f'✅ Dice roll: {result}')\""),
+        ("State Manager", "python3 -c \"from gm_core.agents.state_manager import StateManager; sm = StateManager('campaigns/dying_earth'); print(f'✅ Loaded {len(sm.characters)} characters')\""),
     ]
     
     for name, cmd in tests:

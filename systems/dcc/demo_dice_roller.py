@@ -6,9 +6,9 @@ Shows practical usage for DCC gameplay
 
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from dice_roller import DCCDiceRoller
+from systems.dcc.dice import DCCDiceRoller
 
 def demonstrate_basic_rolls():
     """Show basic dice rolling"""
@@ -162,7 +162,8 @@ def demonstrate_batch_rolls():
     # Show percentage separately
     print("\nPercentage Roll (separate):")
     percent, desc = roller.roll_percentage()
-    print(f"  Random Chance: d% → {percent}% ({desc})")    print("\n=== BATCH ROLLING ===")
+    print(f"  Random Chance: d% → {percent}% ({desc})")
+    print("\n=== BATCH ROLLING ===")
     roller = DCCDiceRoller()
     
     # Simulate a combat round

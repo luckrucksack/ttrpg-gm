@@ -16,14 +16,14 @@ echo "================================================"
 echo ""
 
 # Check if we're in the right directory
-if [ ! -f "dcc_judge.py" ]; then
-    echo "Error: dcc_judge.py not found in current directory"
+if [ ! -f "systems/dcc/judge.py" ]; then
+    echo "Error: systems/dcc/judge.py not found — run this from the repo root"
     echo "Please run from: /Users/chriscoon/ttrpg_gm/"
     exit 1
 fi
 
 # Check adventure file
-ADVENTURE_FILE="data/adventures/dcc_mechanics_test_adventure.md"
+ADVENTURE_FILE="campaigns/dying_earth/adventures/dcc_mechanics_test_adventure.md"
 if [ ! -f "$ADVENTURE_FILE" ]; then
     echo "Error: Adventure file not found: $ADVENTURE_FILE"
     exit 1
@@ -34,10 +34,10 @@ echo ""
 
 # Character files
 CHARACTERS=(
-    "data/characters/dying_earth_noble.json"
-    "data/characters/dying_earth_thief.json" 
-    "data/characters/dying_earth_wizard.json"
-    "data/characters/dying_earth_cleric.json"
+    "campaigns/dying_earth/characters/dying_earth_noble.json"
+    "campaigns/dying_earth/characters/dying_earth_thief.json"
+    "campaigns/dying_earth/characters/dying_earth_wizard.json"
+    "campaigns/dying_earth/characters/dying_earth_cleric.json"
 )
 
 # Verify all characters exist
@@ -97,12 +97,12 @@ done
 CHAR_LIST=${CHAR_LIST:1}  # Remove leading comma
 
 # Run the adventure
-echo "Command: python3 dcc_judge.py --adventure \"$ADVENTURE_FILE\" --characters \"$CHAR_LIST\""
+echo "Command: python3 systems/dcc/judge.py --adventure \"$ADVENTURE_FILE\" --characters \"$CHAR_LIST\""
 echo ""
 echo "------------------------------------------------"
 echo ""
 
-python3 dcc_judge.py --adventure "$ADVENTURE_FILE" --characters "$CHAR_LIST"
+python3 systems/dcc/judge.py --adventure "$ADVENTURE_FILE" --characters "$CHAR_LIST"
 
 ADVENTURE_RESULT=$?
 

@@ -27,9 +27,9 @@ pip install --upgrade pip
 echo -e "\nInstalling requirements..."
 pip install -r requirements.txt
 
-# Create necessary directories
+# Create necessary directories (campaign layer, see campaigns/README.md)
 echo -e "\nCreating directory structure..."
-mkdir -p data/{adventures,world_state,characters}
+mkdir -p campaigns/dying_earth/{adventures,world_state,characters}
 mkdir -p logs
 
 # Create environment template
@@ -44,7 +44,8 @@ DISCORD_GAME_CHANNEL_ID=your_discord_channel_id_here
 
 # System Configuration
 LOG_LEVEL=INFO
-DATA_DIR=./data
+ACTIVE_SYSTEM=dcc
+DATA_DIR=./campaigns/dying_earth
 EOF
 
 echo -e "\nCopying template to .env (edit with your actual values)..."
@@ -52,7 +53,7 @@ cp .env.template .env
 
 # Create a sample adventure for testing
 echo -e "\nCreating sample adventure structure..."
-cat > data/world_state/sample_adventure.json << 'EOF'
+cat > campaigns/dying_earth/world_state/sample_adventure.json << 'EOF'
 {
   "metadata": {
     "adventure_name": "sample_adventure",
@@ -90,7 +91,7 @@ EOF
 
 # Create a sample character
 echo -e "\nCreating sample character..."
-cat > data/characters/sample_character.json << 'EOF'
+cat > campaigns/dying_earth/characters/sample_character.json << 'EOF'
 {
   "name": "Sample Character",
   "class": "Fighter",
@@ -132,11 +133,11 @@ EOF
 # Make scripts executable
 echo -e "\nMaking scripts executable..."
 chmod +x main.py
-find agents/ -name "*.py" -exec chmod +x {} \;
+find gm_core systems tests -name "*.py" -exec chmod +x {} \;
 
 # Create a quick test script
 echo -e "\nCreating test script..."
-cat > test_system.py << 'EOF'
+cat > tests/test_system.py << 'EOF'
 #!/usr/bin/env python3
 """
 Quick test of system components.
@@ -145,7 +146,7 @@ Quick test of system components.
 import sys
 sys.path.insert(0, '.')
 
-from agents.dice_roller import DiceRoller
+from gm_core.dice import DiceRoller
 
 print("Testing Dice Roller...")
 roller = DiceRoller()
@@ -162,12 +163,12 @@ print(check["details"])
 print("\n✅ Basic components working!")
 print("\nNext steps:")
 print("1. Edit .env with your API keys")
-print("2. Add adventure PDFs to data/adventures/")
+print("2. Add adventure PDFs to campaigns/dying_earth/adventures/")
 print("3. Run: python main.py --import <pdf_path> <adventure_name>")
 print("4. Run: python main.py <adventure_name>")
 EOF
 
-chmod +x test_system.py
+chmod +x tests/test_system.py
 
 echo -e "\n========================================="
 echo "Setup complete!"
@@ -175,7 +176,7 @@ echo "========================================="
 echo -e "\nNext steps:"
 echo "1. Edit .env with your actual API keys and Discord tokens"
 echo "2. Run: ./test_system.py (to verify installation)"
-echo "3. Add adventure PDFs to data/adventures/"
+echo "3. Add adventure PDFs to campaigns/dying_earth/adventures/"
 echo "4. Import an adventure: python main.py --import <pdf> <name>"
 echo "5. Run the system: python main.py <adventure_name>"
 echo -e "\nFor Discord bot setup:"

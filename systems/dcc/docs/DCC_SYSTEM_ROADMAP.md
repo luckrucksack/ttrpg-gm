@@ -1,5 +1,10 @@
 # DCC System Issue Tracker & Improvement Roadmap
 
+> **PATH NOTE (2026-08-10):** Repo restructured. This doc is a March-era
+> snapshot; paths inside may be stale. Current layout: judge =
+> `systems/dcc/judge.py`, campaign data = `campaigns/dying_earth/`.
+> See README.md and systems/README.md for the live map.
+
 **Created:** March 22, 2026, 6:05 AM  
 **System:** Dungeon Crawl Classics Judge + Dying Earth Campaign  
 **Status:** Initial Release (v1.0) - Ready for Testing

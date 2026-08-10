@@ -13,9 +13,9 @@ from enum import Enum
 import sys
 import os
 
-# Add parent directory to path to import dice_roller
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from dice_roller import DCCDiceRoller
+# Bootstrap repo root so package imports resolve regardless of cwd
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from systems.dcc.dice import DCCDiceRoller
 
 class DCCDice(Enum):
     """DCC dice chain"""

@@ -3,6 +3,9 @@
 # DCC System Test Script
 # Created: March 22, 2026
 # Purpose: Quick validation of DCC Judge system with pre-generated characters
+# NOTE: stale script — expects campaign character files (noble/thief/wizard/cleric)
+# under campaigns/dying_earth/characters/; mechanics coverage lives in
+# systems/dcc/tests/test_dcc_dice.py.
 
 echo "========================================="
 echo "DCC Judge System Test Suite"
@@ -26,17 +29,17 @@ fi
 # Check DCC Judge file
 echo ""
 echo "2. Checking DCC Judge system..."
-if [ -f "dcc_judge.py" ]; then
-    echo "✓ dcc_judge.py found"
+if [ -f "systems/dcc/judge.py" ]; then
+    echo "✓ systems/dcc/judge.py found"
     # Try to get help
-    python3 dcc_judge.py --help 2>/dev/null | head -5
+    python3 systems/dcc/judge.py --help 2>/dev/null | head -5
     if [ $? -eq 0 ]; then
         echo "✓ DCC Judge responds to --help"
     else
         echo "⚠ DCC Judge may have issues"
     fi
 else
-    echo "✗ dcc_judge.py not found"
+    echo "✗ systems/dcc/judge.py not found"
     exit 1
 fi
 
@@ -44,10 +47,10 @@ fi
 echo ""
 echo "3. Checking pre-generated characters..."
 CHARACTERS=(
-    "data/characters/dying_earth_noble.json"
-    "data/characters/dying_earth_thief.json"
-    "data/characters/dying_earth_wizard.json"
-    "data/characters/dying_earth_cleric.json"
+    "campaigns/dying_earth/characters/dying_earth_noble.json"
+    "campaigns/dying_earth/characters/dying_earth_thief.json"
+    "campaigns/dying_earth/characters/dying_earth_wizard.json"
+    "campaigns/dying_earth/characters/dying_earth_cleric.json"
 )
 
 ALL_CHARS_OK=true
@@ -77,9 +80,9 @@ fi
 # Check adventure directory
 echo ""
 echo "4. Checking adventure structure..."
-if [ -d "data/adventures" ]; then
+if [ -d "campaigns/dying_earth/adventures" ]; then
     echo "✓ Adventure directory exists"
-    ADV_COUNT=$(find data/adventures -name "*.txt" -o -name "*.json" -o -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+    ADV_COUNT=$(find campaigns/dying_earth/adventures -name "*.txt" -o -name "*.json" -o -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
     echo "  Found $ADV_COUNT adventure files"
 else
     echo "⚠ Adventure directory not found"
@@ -105,7 +108,7 @@ try:
     
     # Test 1: Check character loading
     print("Test 1: Loading character...")
-    with open("data/characters/dying_earth_noble.json", "r") as f:
+    with open("campaigns/dying_earth/characters/dying_earth_noble.json", "r") as f:
         char_data = json.load(f)
     print(f"  ✓ Loaded {char_data.get('name', 'Unknown')}")
     print(f"  ✓ Class: {char_data.get('class', 'Unknown')}")
@@ -166,8 +169,8 @@ else
     echo ""
     echo "Check:"
     echo "1. Python3 installation"
-    echo "2. DCC Judge file (dcc_judge.py)"
-    echo "3. Character JSON files in data/characters/"
+    echo "2. DCC Judge file (systems/dcc/judge.py)"
+    echo "3. Character JSON files in campaigns/dying_earth/characters/"
     echo "4. System dependencies"
 fi
 

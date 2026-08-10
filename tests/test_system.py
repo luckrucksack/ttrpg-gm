@@ -6,7 +6,7 @@ Quick test of system components.
 import sys
 sys.path.insert(0, '.')
 
-from agents.dice_roller import DiceRoller
+from gm_core.dice import DiceRoller
 
 print("Testing Dice Roller...")
 roller = DiceRoller()
@@ -23,6 +23,6 @@ print(check["details"])
 print("\n✅ Basic components working!")
 print("\nNext steps:")
 print("1. Edit .env with your API keys")
-print("2. Add adventure PDFs to data/adventures/")
+print("2. Add adventure PDFs to campaigns/dying_earth/adventures/")
 print("3. Run: python main.py --import <pdf_path> <adventure_name>")
 print("4. Run: python main.py <adventure_name>")

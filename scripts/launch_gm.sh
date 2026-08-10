@@ -1,6 +1,8 @@
 #!/bin/bash
 # One-click launcher for AI TTRPG GM System
 
+# Legacy menu (Starfinder-era campaigns). Active campaign is selected via
+# DATA_DIR in .env — see campaigns/README.md.
 echo "🚀 Launching AI TTRPG GM System..."
 echo "=================================="
 
@@ -30,7 +32,7 @@ read -p "Select (1-6): " choice
 
 case $choice in
     1)
-        python3 play_dashboard.py
+        python3 scripts/play_dashboard.py
         ;;
     2)
         python3 main.py crystal_chamber
@@ -42,7 +44,7 @@ case $choice in
         python3 main.py apostae_station
         ;;
     5)
-        python3 test_system.py
+        python3 tests/test_system.py
         ;;
     6)
         echo "👋 Goodbye!"
