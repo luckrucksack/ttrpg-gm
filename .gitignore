@@ -1,0 +1,22 @@
+# Secrets — never commit
+.env
+*.env
+
+# Licensed commercial content (DriveThruRPG adventure PDFs) — never distribute
+adventures/
+characters/
+adventure_log/
+data/
+
+# Runtime
+venv/
+logs/
+__pycache__/
+*.pyc
+.DS_Store
+.history
+
+# Local memory-store scratch
+*.db
+*.db-shm
+*.db-wal
