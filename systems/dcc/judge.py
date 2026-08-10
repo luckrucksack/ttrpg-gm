@@ -13,17 +13,17 @@ from datetime import datetime
 import signal
 import threading
 
-# Add agents directory to path
-sys.path.insert(0, str(Path(__file__).parent / "agents"))
+# Bootstrap repo root so package imports resolve regardless of cwd
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from config import validate_config, SYSTEM_RULES
-from dice_roller import DCCDiceRoller  # Use the new DCC dice roller
-from agents.pdf_ingestor import PDFIngestor
-from agents.deepseek_client import DeepSeekClient
-from agents.prose_refiner import ProseRefiner
-from agents.state_manager import StateManager
-from agents.dcc_manager import DCCManager
-from agents.discord_bridge import DiscordBridge, run_discord_bridge
+from gm_core.config import validate_config, DATA_DIR
+from systems.dcc.dice import DCCDiceRoller  # DCC dice chain
+from gm_core.agents.pdf_ingestor import PDFIngestor
+from gm_core.agents.deepseek_client import DeepSeekClient
+from gm_core.agents.prose_refiner import ProseRefiner
+from gm_core.agents.state_manager import StateManager
+from gm_core.agents.discord_bridge import DiscordBridge, run_discord_bridge
+from systems.dcc.manager import DCCManager
 
 class DCCJudge:
     """DCC-specific AI Judge with all DCC mechanics integrated"""
@@ -41,7 +41,7 @@ class DCCJudge:
         self.pdf_ingestor = PDFIngestor()
         self.deepseek = DeepSeekClient()
         self.prose_refiner = ProseRefiner(self.deepseek)
-        self.state_manager = StateManager(Path(__file__).parent / "data")
+        self.state_manager = StateManager(DATA_DIR)
         
         # Initialize DCC-specific manager
         self.dcc_manager = DCCManager(self.state_manager)
@@ -110,7 +110,7 @@ class DCCJudge:
     
     async def _load_adventure(self, adventure_name: str) -> bool:
         """Load a DCC adventure"""
-        adventure_path = Path(__file__).parent / "data" / "adventures" / f"{adventure_name}.txt"
+        adventure_path = DATA_DIR / "adventures" / f"{adventure_name}.txt"
         
         if not adventure_path.exists():
             print(f"❌ Adventure file not found: {adventure_path}")
@@ -172,7 +172,7 @@ class DCCJudge:
     
     async def _load_party(self) -> bool:
         """Load party members for DCC adventure"""
-        party_path = Path(__file__).parent / "data" / "party_dcc.json"
+        party_path = DATA_DIR / "party_dcc.json"
         
         if party_path.exists():
             try:
@@ -184,7 +184,7 @@ class DCCJudge:
                 return False
         else:
             # Look for DCC characters in characters directory
-            chars_dir = Path(__file__).parent / "data" / "characters"
+            chars_dir = DATA_DIR / "characters"
             dcc_chars = []
             
             for char_file in chars_dir.glob("*.json"):
@@ -614,7 +614,7 @@ class DCCJudge:
     def create_dcc_character(self, character_data: Dict) -> Dict[str, Any]:
         """Create a new DCC character"""
         # Use the template as base
-        template_path = Path(__file__).parent / "data" / "characters" / "dcc_template.json"
+        template_path = DATA_DIR / "characters" / "dcc_template.json"
         
         try:
             with open(template_path, 'r') as f:
@@ -628,7 +628,7 @@ class DCCJudge:
             
             # Save character
             char_name_safe = character["name"].lower().replace(" ", "_")
-            char_path = Path(__file__).parent / "data" / "characters" / f"{char_name_safe}.json"
+            char_path = DATA_DIR / "characters" / f"{char_name_safe}.json"
             
             with open(char_path, 'w') as f:
                 json.dump(character, f, indent=2)
@@ -655,7 +655,7 @@ class DCCJudge:
     
     def _save_party(self):
         """Save current party to file"""
-        party_path = Path(__file__).parent / "data" / "party_dcc.json"
+        party_path = DATA_DIR / "party_dcc.json"
         
         party_data = {
             "system": "Dungeon Crawl Classics",
@@ -719,11 +719,11 @@ async def main():
     else:
         # Interactive mode
         print("\nAvailable commands:")
-        print("  python dcc_judge.py <adventure_name>  - Run adventure")
-        print("  python dcc_judge.py --status          - Show system status")
-        print("  python dcc_judge.py --test            - Run DCC mechanics tests")
-        print("\nExample adventures in data/adventures/:")
-        adventures_dir = Path(__file__).parent / "data" / "adventures"
+        print("  python systems/dcc/judge.py <adventure_name>  - Run adventure")
+        print("  python systems/dcc/judge.py --status          - Show system status")
+        print("  python systems/dcc/judge.py --test            - Run DCC mechanics tests")
+        print("\nExample adventures in campaigns/dying_earth/adventures/:")
+        adventures_dir = DATA_DIR / "adventures"
         if adventures_dir.exists():
             for adv_file in adventures_dir.glob("*.txt"):
                 print(f"  • {adv_file.stem}")

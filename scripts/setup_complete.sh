@@ -42,13 +42,13 @@ else
     echo "✅ Dependencies already installed"
 fi
 
-# Create necessary directories
+# Create necessary directories (campaign layer)
 echo "📁 Creating directory structure..."
-mkdir -p data/adventures data/world_state data/characters
+mkdir -p campaigns/dying_earth/adventures campaigns/dying_earth/world_state campaigns/dying_earth/characters
 
 # Test the system
 echo "🧪 Testing system components..."
-python3 test_system.py
+python3 tests/test_system.py
 
 echo ""
 echo "🎯 SETUP COMPLETE!"
@@ -66,9 +66,9 @@ echo "📊 Characters available:"
 python3 -c "
 import json
 import os
-for file in os.listdir('data/characters'):
+for file in os.listdir('campaigns/dying_earth/characters'):
     if file.endswith('.json'):
-        with open(f'data/characters/{file}', 'r') as f:
+        with open(f'campaigns/dying_earth/characters/{file}', 'r') as f:
             char = json.load(f)
         name = char.get('name', file)
         hp = char.get('hp', {}).get('current', '?')
@@ -76,8 +76,8 @@ for file in os.listdir('data/characters'):
 "
 echo ""
 echo "🚀 Next steps:"
-echo "1. Upload adventure PDFs to data/adventures/"
-echo "2. Import adventure: python main.py --import data/adventures/filename.pdf adventure_name"
+echo "1. Upload adventure PDFs to campaigns/dying_earth/adventures/"
+echo "2. Import adventure: python main.py --import campaigns/dying_earth/adventures/filename.pdf adventure_name"
 echo "3. Run adventure: python main.py adventure_name"
 echo ""
 echo "📱 For iPhone PDF uploads, use:"

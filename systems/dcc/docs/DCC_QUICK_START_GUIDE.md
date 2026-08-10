@@ -1,4 +1,9 @@
-# DCC Judge Quick-Start Guide
+# DCC Quick Start Guide
+
+> **PATH NOTE (2026-08-10):** Repo restructured. This doc is a March-era
+> snapshot; paths inside (dcc_judge.py, data/...) are stale. Current layout:
+> judge = `systems/dcc/judge.py`, campaign data = `campaigns/dying_earth/`.
+> See README.md and systems/README.md for the live map.
 
 **Created:** March 22, 2026, 4:35 AM  
 **System:** Dungeon Crawl Classics Judge  

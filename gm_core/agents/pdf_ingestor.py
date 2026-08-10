@@ -337,7 +337,7 @@ if __name__ == "__main__":
     ingestor = PDFIngestor()
     
     # Create a test directory if it doesn't exist
-    test_dir = Path("/Users/chriscoon/ttrpg_gm/data/adventures")
+    test_dir = Path(__file__).resolve().parent.parent / "campaigns" / "dying_earth" / "adventures"
     test_dir.mkdir(exist_ok=True)
     
     print("PDF Ingestor Test")

@@ -6,9 +6,9 @@ Demonstrates all DCC dice types and mechanics
 
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 
-from dice_roller import DCCDiceRoller, roll_d20, roll_d6, roll_percentage, roll_spell_check, roll_crit, roll_fumble
+from systems.dcc.dice import DCCDiceRoller, roll_d20, roll_d6, roll_percentage, roll_spell_check, roll_crit, roll_fumble
 
 def test_all_dice_types():
     """Test all DCC dice types"""
@@ -120,9 +120,12 @@ def test_batch_rolls():
     for i, (dice_type, count, modifier) in enumerate(batch):
         result = results[i]
         if dice_type == 'd%':
-            # Percentage roll returns tuple
-            roll, desc = result
-            print(f"  {count}{dice_type}: {roll}% - {desc}")
+            # Percentage roll returns a tuple (roll, desc); tolerate int too
+            if isinstance(result, tuple):
+                roll, desc = result
+                print(f"  {count}{dice_type}: {roll}% - {desc}")
+            else:
+                print(f"  {count}{dice_type}: {result}%")
         else:
             print(f"  {count}{dice_type}: {result}")
 

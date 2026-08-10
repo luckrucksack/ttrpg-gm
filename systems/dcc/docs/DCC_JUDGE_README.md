@@ -1,6 +1,11 @@
 # DCC JUDGE SYSTEM
 ## AI Judge for Dungeon Crawl Classics
 
+> **PATH NOTE (2026-08-10):** Repo restructured. This doc is a March-era
+> snapshot; paths inside (dcc_judge.py, data/...) are stale. Current layout:
+> judge = `systems/dcc/judge.py`, campaign data = `campaigns/dying_earth/`.
+> See README.md and systems/README.md for the live map.
+
 A specialized AI Judge system built on top of the existing TTRPG AI GM framework, adding all of DCC's unique mechanics.
 
 ## 🎯 What Makes DCC Unique

@@ -14,7 +14,7 @@ echo "================================================"
 echo ""
 
 # Configuration
-DCC_DIR="/Users/chriscoon/ttrpg_gm"
+DCC_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
 LOG_FILE="/tmp/dcc_health_check_$(date +%Y%m%d_%H%M%S).log"
 CHECK_RESULTS=()
 
@@ -83,7 +83,7 @@ echo ""
 echo "📋 2. CORE FILES"
 
 # Check DCC Judge main file
-if [ -f "$DCC_DIR/dcc_judge.py" ]; then
+if [ -f "$DCC_DIR/systems/dcc/judge.py" ]; then
     log_result "✅" "DCC Judge main file exists" "Core Files"
 else
     log_result "❌" "DCC Judge main file missing" "Core Files"
@@ -99,7 +99,7 @@ CHAR_FILES=(
 
 CHAR_COUNT=0
 for char in "${CHAR_FILES[@]}"; do
-    if [ -f "$DCC_DIR/data/characters/$char" ]; then
+    if [ -f "$DCC_DIR/campaigns/dying_earth/characters/$char" ]; then
         CHAR_COUNT=$((CHAR_COUNT + 1))
     fi
 done
@@ -173,8 +173,8 @@ echo ""
 echo "📋 5. ADVENTURE CONTENT"
 
 # Check adventure file
-if [ -f "$DCC_DIR/data/adventures/dcc_mechanics_test_adventure.md" ]; then
-    ADVENTURE_SIZE=$(wc -l < "$DCC_DIR/data/adventures/dcc_mechanics_test_adventure.md")
+if [ -f "$DCC_DIR/campaigns/dying_earth/adventures/dcc_mechanics_test_adventure.md" ]; then
+    ADVENTURE_SIZE=$(wc -l < "$DCC_DIR/campaigns/dying_earth/adventures/dcc_mechanics_test_adventure.md")
     if [ $ADVENTURE_SIZE -gt 100 ]; then
         log_result "✅" "Adventure file exists ($ADVENTURE_SIZE lines)" "Adventure"
     else
@@ -192,7 +192,7 @@ echo "📋 6. SYSTEM INTEGRATION"
 
 # Check if DCC Judge can be imported
 cd "$DCC_DIR" 2>/dev/null
-if python3 -c "import sys; sys.path.insert(0, '.'); exec(open('dcc_judge.py').read())" 2>/dev/null; then
+if python3 -c "import sys; sys.path.insert(0, '.'); exec(open('systems/dcc/judge.py').read())" 2>/dev/null; then
     log_result "✅" "DCC Judge Python code loads without errors" "Integration"
 else
     log_result "❌" "DCC Judge Python code has errors" "Integration"
@@ -201,8 +201,8 @@ fi
 # Check character JSON validity
 JSON_ERRORS=0
 for char in "${CHAR_FILES[@]}"; do
-    if [ -f "$DCC_DIR/data/characters/$char" ]; then
-        if ! python3 -m json.tool "$DCC_DIR/data/characters/$char" >/dev/null 2>&1; then
+    if [ -f "$DCC_DIR/campaigns/dying_earth/characters/$char" ]; then
+        if ! python3 -m json.tool "$DCC_DIR/campaigns/dying_earth/characters/$char" >/dev/null 2>&1; then
             JSON_ERRORS=$((JSON_ERRORS + 1))
         fi
     fi
@@ -223,7 +223,7 @@ echo "📋 7. PERFORMANCE"
 # Check response time (basic)
 START_TIME=$(date +%s%N)
 cd "$DCC_DIR" 2>/dev/null
-python3 -c "import sys; sys.path.insert(0, '.'); exec(open('dcc_judge.py').read())" --help 2>&1 >/dev/null
+python3 -c "import sys; sys.path.insert(0, '.'); exec(open('systems/dcc/judge.py').read())" --help 2>&1 >/dev/null
 END_TIME=$(date +%s%N)
 RESPONSE_MS=$(( (END_TIME - START_TIME) / 1000000 ))
 
@@ -266,8 +266,8 @@ fi
 # Check for sensitive data in JSON files
 SENSITIVE_DATA=0
 for char in "${CHAR_FILES[@]}"; do
-    if [ -f "$DCC_DIR/data/characters/$char" ]; then
-        if grep -q -i "password\|secret\|key\|token" "$DCC_DIR/data/characters/$char"; then
+    if [ -f "$DCC_DIR/campaigns/dying_earth/characters/$char" ]; then
+        if grep -q -i "password\\|secret\\|key\\|token" "$DCC_DIR/campaigns/dying_earth/characters/$char"; then
             SENSITIVE_DATA=$((SENSITIVE_DATA + 1))
         fi
     fi
