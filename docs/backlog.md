@@ -2,6 +2,12 @@
 
 Moved out of the default-profile inbox on 2026-08-10 (isolation policy: TTRPG is a separate product from the general Hermes architecture work). Tracks open items for the AI-DM / Foundry project. Work on these should run in **ttrpg-profile** sessions so memory capture routes to the ttrpg store.
 
+## Major Pivot — 2026-08-27
+
+Custom Python framework retired. New architecture: **Hermes Bot Mode** as the GM runtime, with Foundry VTT as the game surface and NPCs as isolated Hermes profile Bots. See **[`docs/ttrpg-gm-architecture-2026-08-27.md`](ttrpg-gm-architecture-2026-08-27.md)** for the full design.
+
+The old `gm_core/` runtime code and `main.py` are slated for removal once the new path is validated. Design knowledge (prompt architecture, prohibitions, DCC mechanics) survives into skills and docs.
+
 ## Ideas worth looking into
 
 - 2026-08-10 — **Verbatim AI-DM prohibition catalog** — Apple Notes TCC permission granted (595 notes readable). Extract exact prohibition wording from the canonicals (GM MASTER PROMPT 14.0, DM Master Prompt 2.7, SF2E 5.0 FINAL, Unified 6.0, GM Master Prompt Annex). Research brief: `docs/ai-dm-notes-research-brief.md`. Output artifacts → this repo (`docs/`).

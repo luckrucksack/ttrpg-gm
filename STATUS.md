@@ -1,8 +1,6 @@
 # STATUS — UNDER CONSTRUCTION
 
-**This repository is under active construction. The final architecture is
-NOT settled and is TBD based on what the Foundry VTT integration will
-require this codebase to look like.**
+**ARCHITECTURE RESOLVED 2026-08-27:** See [`docs/ttrpg-gm-architecture-2026-08-27.md`](docs/ttrpg-gm-architecture-2026-08-27.md) for the new design direction — Hermes Bot Mode replaces the custom Python runtime. The old layer boundaries below are retained as reference but no longer represent the target architecture.
 
 What this means in practice:
 

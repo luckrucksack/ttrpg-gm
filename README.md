@@ -2,10 +2,7 @@
 
 ## STATUS: UNDER CONSTRUCTION
 
-**Final architecture is TBD** and will be dictated by what the Foundry VTT
-integration requires this codebase to look like (module vs. bridge vs. port).
-The layer layout below is a first cut. Treat every path and import as
-provisional — probe before assuming. See STATUS.md.
+**FINAL ARCHITECTURE SETTLED 2026-08-27:** The custom Python AI-GM framework has been retired in favor of **Hermes Bot Mode** as the GM runtime. See **[`docs/ttrpg-gm-architecture-2026-08-27.md`](docs/ttrpg-gm-architecture-2026-08-27.md)** for the new design. The old `gm_core/` and `main.py` remain in the repo but are scheduled for removal once the Bot Mode path is validated. Design knowledge (prompt architecture, prohibitions, DCC mechanics) survives into skills and docs.
 
 ## What this is
 
