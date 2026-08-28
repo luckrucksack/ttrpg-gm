@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://luckrucksack.github.io/ttrpg-gm/ai-dm-prompt-architecture-2026-08-07/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>AI Dungeon Master — Prompt Architecture (extracted from Apple Notes) - TTRPG Game Master — Architecture & Design</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AI Dungeon Master \u2014 Prompt Architecture (extracted from Apple Notes)";
+        var mkdocs_page_input_path = "ai-dm-prompt-architecture-2026-08-07.md";
+        var mkdocs_page_url = "/ttrpg-gm/ai-dm-prompt-architecture-2026-08-07/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> TTRPG Game Master — Architecture & Design
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ttrpg-gm-architecture-2026-08-27/">AI Game Master — Hermes Bot Architecture</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">NPC Bots</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../npc-bots-design-sketch-2026-08-26/">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Prompt Architecture</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-what-the-corpus-is">1. What the corpus is</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-the-lineages-version-trees">2. The lineages (version trees)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#main-gm-lineage">Main GM lineage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dm-lineage">DM lineage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#system-adaptations-core-prompt-adapted-per-ruleset">System adaptations (core prompt adapted per ruleset)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#named-engines-standalone-subsystem-docs">Named engines (standalone subsystem docs)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#session-state-scaffolding">Session-state scaffolding</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#agentic-automation-specs">Agentic / automation specs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cross-platform-misc">Cross-platform &amp; misc</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-the-architectural-ideas-design-dna">3. The architectural ideas (design DNA)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-the-prohibitions-what-can-be-said-at-this-level">4. The prohibitions — what can be said at this level</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-gap-next-step">5. Gap &amp; next step</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Research</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-landscape-2026-08-06/">AI-DM Landscape for Foundry VTT — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../noodlr-vs-foundryai-2026-08-06/">Noodlr vs FoundryAI — Head-to-Head, 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../foundry-modules-review-2026-08-06/">Foundry Module Catalog Review — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vtt-landscape-2026-08-05/">VTT Landscape for the AI-DM — 2026-08-05</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-memory-backend-deep-dive-2026-08-13/">AI Dungeon Master — Long-Term Memory Backend Deep Dive</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-token-reduction-playbook-2026-08-13/">AI Dungeon Master — Token-Reduction Playbook</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../development-notes/">Development Notes — AI GM Project</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backlog/">TTRPG Project Backlog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-notes-research-brief/">Research brief: AI Dungeon Master notes in Apple Notes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dm-research-prompt/">Dm research prompt</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">TTRPG Game Master — Architecture & Design</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Prompt Architecture</li>
+      <li class="breadcrumb-item active">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/luckrucksack/ttrpg-gm/blob/main/docs/ai-dm-prompt-architecture-2026-08-07.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ai-dungeon-master-prompt-architecture-extracted-from-apple-notes">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)<a class="headerlink" href="#ai-dungeon-master-prompt-architecture-extracted-from-apple-notes" title="Permanent link">&para;</a></h1>
+<p>Date: 2026-08-07. Source: Apple Notes corpus (82 of 573 notes match AI-DM/GM/D&amp;D content; title-level inventory from memo cache — note bodies are TCC-protected, so this is architecture from titles, versioning, naming conventions, plus the accessible implementation docs in ~/ttrpg_gm/ and the 2026-08-06 landscape artifact).</p>
+<h2 id="1-what-the-corpus-is">1. What the corpus is<a class="headerlink" href="#1-what-the-corpus-is" title="Permanent link">&para;</a></h2>
+<p>The notes are an <strong>iteration ledger</strong>: dozens of full-rewrite prompt versions, kept side by side, spanning at least a year of development. It is not one prompt — it is a family tree of lineages, engines, and adaptations, plus the operational scaffolds around them.</p>
+<h2 id="2-the-lineages-version-trees">2. The lineages (version trees)<a class="headerlink" href="#2-the-lineages-version-trees" title="Permanent link">&para;</a></h2>
+<h3 id="main-gm-lineage">Main GM lineage<a class="headerlink" href="#main-gm-lineage" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GM PROMPT 1.0 → 1.1 → <strong>GM PROMPT 2.0</strong></li>
+<li>GM Master Prompt 2.8 → 3.0 → 3.5 → 5.0 → 7.0.0 → 7.3 → 7.3 (Revised)</li>
+<li>→ 9.0 → 9.3 → 10.0 "Affirmative Reality" / 10.1 → 11.0 → 12.0 → 13.0 → <strong>14.0</strong> (current top)</li>
+<li>Parallel: GM MASTER PROMPT B 1.0 (an alternate branch), ALT GM PROMPT 1.1, Alt AI GAME MASTER PROTOCOL</li>
+</ul>
+<h3 id="dm-lineage">DM lineage<a class="headerlink" href="#dm-lineage" title="Permanent link">&para;</a></h3>
+<ul>
+<li>DM PROMPT, DM Master Prompt 2.7, DM Advice</li>
+</ul>
+<h3 id="system-adaptations-core-prompt-adapted-per-ruleset">System adaptations (core prompt adapted per ruleset)<a class="headerlink" href="#system-adaptations-core-prompt-adapted-per-ruleset" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Starfinder 1.0 → 2.0 → SF2E Playtest 1.3 → SF2E 3.0 → 4.0 → 5.0 → <strong>5.0 COMPLETE (FINAL)</strong> + "SF2E Adaptation. New"</li>
+<li>DCC GAME MASTER PROMPT 1.1, DCC Judge; MCC Judge Master Prompt → v2</li>
+<li>GM Prompt For Published Modules 1.0</li>
+</ul>
+<h3 id="named-engines-standalone-subsystem-docs">Named engines (standalone subsystem docs)<a class="headerlink" href="#named-engines-standalone-subsystem-docs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Unified Master Prompt 6.0 — "The Anti-Formulaic Engine"</li>
+<li>FINAL ADVENTURE ENGINE v5.0</li>
+<li>AI-GM Drift Engine Mechanics</li>
+<li>The d20/d12 Dual-Axis System (2.0 → 3.0)</li>
+<li>GM-to-Novelizer Master Prompt v2.0 — "The Chronicle Protocol"</li>
+<li>GM MASTER PROMPT 10.0 — "Affirmative Reality"</li>
+<li>The Signal Scrambler (full module, GM-facing)</li>
+<li>Game Master Framework v2.20.25</li>
+<li>GM OS INITIALIZATION SEQUENCE</li>
+<li>GM Master Prompt Annex</li>
+</ul>
+<h3 id="session-state-scaffolding">Session-state scaffolding<a class="headerlink" href="#session-state-scaffolding" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GM refresher prompt, Reminder GM 2.4.2, Simplified GM 3.1.25, GM/Game Master Instructions</li>
+</ul>
+<h3 id="agentic-automation-specs">Agentic / automation specs<a class="headerlink" href="#agentic-automation-specs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Agentic AI TTRPG GM — Operational Specification for OpenClaw</li>
+<li>Agentic AI TTRG GM, OpenClaw instructions to build an AI Game Master via Discord</li>
+</ul>
+<h3 id="cross-platform-misc">Cross-platform &amp; misc<a class="headerlink" href="#cross-platform-misc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ChatGPT master prompt 1.0–6.0 (+ coding 1.0) — same architecture carried to other platforms</li>
+<li>Pi GM PROMPT, Author/GM prompt 1.5, Novelize the TTRPG experience</li>
+<li>Dungeon 1 → 1.1 → 1.2 (content experiments), D&amp;D Random Ideas, blank character sheet</li>
+</ul>
+<h2 id="3-the-architectural-ideas-design-dna">3. The architectural ideas (design DNA)<a class="headerlink" href="#3-the-architectural-ideas-design-dna" title="Permanent link">&para;</a></h2>
+<p><strong>Idea 1 — Versioned full-rewrite iteration.</strong> Every iteration is a complete numbered rewrite (X.Y), never a patch. Old versions are kept as archived notes — the corpus IS the changelog. Naming evolves at breakpoints (GM PROMPT → GM Master Prompt → GM MASTER PROMPT; 7.x → 9.x → 10.x jumps), marking "this version is a different animal."</p>
+<p><strong>Idea 2 — The master prompt is an operating system.</strong> The prompt is structured like a boot sequence: GM OS INITIALIZATION SEQUENCE, then layered sections — visible in "Section 1: CORE IDENTITY &amp; AUTHORITY" — with an <strong>Annex</strong> carrying supplementary material so the master prompt itself stays lean. Identity layer → authority layer → mechanics → behavior → annex.</p>
+<p><strong>Idea 3 — Named engines, one per failure mode.</strong> The most distinctive move: instead of one big prompt, the design decomposes into named subsystems, each fighting one observed failure:
+- Anti-Formulaic Engine — kills repetitive/patterned play
+- Drift Engine — kills persona/state drift over long sessions
+- Affirmative Reality — kills world incoherence/contradiction
+- d20/d12 Dual-Axis — two probability axes (dice + narrative) kept separate
+- Adventure Engine / Chronicle Protocol — mode switches: module-driven play vs. novelization
+- Signal Scrambler — anti-meta/anti-leak (module)</p>
+<p><strong>Idea 4 — The prohibitions layer (the crown jewel).</strong> A dedicated, explicit layer of specific, imperative bans ("never X / do not Y"), the opposite of soft guidance. The user's rule, stated plainly: they must stay specific. Every LLM that touches them tries to genericize them ("avoid railroading" instead of the exact banned behavior) — that genericization is exactly what must not happen. Each prohibition is failure-driven: its wording encodes the specific observed failure it was added to kill, so weakening the wording resurrects the failure. They survive every iteration untouched.</p>
+<p><strong>Idea 5 — One core, many adaptations.</strong> The same master-prompt architecture is adapted per ruleset (SF2E 1.0→5.0 FINAL, DCC Judge, MCC Judge, Published Modules) rather than forked into unrelated prompts. "Adaptation" is an explicit, repeatable operation with its own versioning.</p>
+<p><strong>Idea 6 — Role separation.</strong> Different roles get different authority sections: GM vs DM vs Judge (DCC/MCC) vs Novelizer/Author. The role defines the identity/authority section; the rest of the architecture carries over.</p>
+<p><strong>Idea 7 — Session-state prompts as drift control.</strong> Refresher/Reminder/Simplified prompts exist to re-prime a long-running session cheaply. This pairs with the Drift Engine: lightweight re-injection of the essential rules mid-campaign instead of re-sending the whole master prompt.</p>
+<p><strong>Idea 8 — The architecture generalizes to agents.</strong> The same DNA shows up as an "Operational Specification" for OpenClaw — prompt becomes agent spec with tool use over Discord. And it matches the ttrpg_gm implementation, where the prohibitions are enforced in code:
+- Local dice only — the model can request rolls, never roll (a prohibition made physical)
+- Two-stage refinement — raw AI output never reaches players (prohibition made physical)
+- Arbitration loop: Listen → Assemble → Call → Arbitrate → Refine → Deliver
+- Structured directives ([REQUEST_ROLL], [UPDATE_STATE], [UPDATE_CHARACTER], [MOVE_SCENE]) + !override/!resume</p>
+<h2 id="4-the-prohibitions-what-can-be-said-at-this-level">4. The prohibitions — what can be said at this level<a class="headerlink" href="#4-the-prohibitions-what-can-be-said-at-this-level" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Form: imperative, specific, sectioned — not advisory.</li>
+<li>Provenance: each ban traces to a real observed failure; wording preserves the failure, not the principle.</li>
+<li>Stability: prohibitions are the most stable part of the corpus across 14 major versions.</li>
+<li>Defense: the named engines (Anti-Formulaic, Drift, Affirmative Reality) are prohibitions promoted to first-class subsystems because they were load-bearing.</li>
+<li>The implementation (ttrpg_gm) proves the same prohibitions work in code: model never rolls dice, never talks raw, never bypasses arbitration.</li>
+</ul>
+<h2 id="5-gap-next-step">5. Gap &amp; next step<a class="headerlink" href="#5-gap-next-step" title="Permanent link">&para;</a></h2>
+<p>Note bodies are behind macOS TCC (memo/AppleScript hang; container read blocked). This artifact is title-level + implementation-level. If the user wants the <strong>verbatim prohibition catalog</strong> (exact wording of every ban, sourced per version), the unlock is one System Settings action: Privacy &amp; Security → Automation → allow the terminal/memo to control Notes (or Full Disk Access for the terminal). Then the canonicals to extract are: GM MASTER PROMPT 14.0, DM Master Prompt 2.7, SF2E 5.0 COMPLETE (FINAL), Unified 6.0 Anti-Formulaic, GM Master Prompt Annex.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../npc-bots-design-sketch-2026-08-26/" class="btn btn-neutral float-left" title="NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ai-dm-landscape-2026-08-06/" class="btn btn-neutral float-right" title="AI-DM Landscape for Foundry VTT — 2026-08-06">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/luckrucksack/ttrpg-gm" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../npc-bots-design-sketch-2026-08-26/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ai-dm-landscape-2026-08-06/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

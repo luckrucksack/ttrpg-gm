@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://luckrucksack.github.io/ttrpg-gm/npc-bots-design-sketch-2026-08-26/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters - TTRPG Game Master — Architecture & Design</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters";
+        var mkdocs_page_input_path = "npc-bots-design-sketch-2026-08-26.md";
+        var mkdocs_page_url = "/ttrpg-gm/npc-bots-design-sketch-2026-08-26/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> TTRPG Game Master — Architecture & Design
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ttrpg-gm-architecture-2026-08-27/">AI Game Master — Hermes Bot Architecture</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">NPC Bots</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#core-idea">Core Idea</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-it-would-work-at-the-table">How It Would Work at the Table</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#key-design-decisions-collected">Key Design Decisions Collected</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-trippy-part-emergent-behavior">The Trippy Part (Emergent Behavior)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-questions-for-next-pass">Open Questions for Next Pass</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#architecture-options-from-earlier-discussion">Architecture Options (from earlier discussion)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-files">Related Files</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Prompt Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-prompt-architecture-2026-08-07/">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Research</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-landscape-2026-08-06/">AI-DM Landscape for Foundry VTT — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../noodlr-vs-foundryai-2026-08-06/">Noodlr vs FoundryAI — Head-to-Head, 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../foundry-modules-review-2026-08-06/">Foundry Module Catalog Review — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vtt-landscape-2026-08-05/">VTT Landscape for the AI-DM — 2026-08-05</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-memory-backend-deep-dive-2026-08-13/">AI Dungeon Master — Long-Term Memory Backend Deep Dive</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-token-reduction-playbook-2026-08-13/">AI Dungeon Master — Token-Reduction Playbook</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../development-notes/">Development Notes — AI GM Project</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backlog/">TTRPG Project Backlog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-notes-research-brief/">Research brief: AI Dungeon Master notes in Apple Notes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dm-research-prompt/">Dm research prompt</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">TTRPG Game Master — Architecture & Design</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">NPC Bots</li>
+      <li class="breadcrumb-item active">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/luckrucksack/ttrpg-gm/blob/main/docs/npc-bots-design-sketch-2026-08-26.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="npc-bots-hermes-bot-mode-as-ttrpg-non-player-characters">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters<a class="headerlink" href="#npc-bots-hermes-bot-mode-as-ttrpg-non-player-characters" title="Permanent link">&para;</a></h1>
+<p><strong>Date:</strong> 2026-08-26
+<strong>Context:</strong> Triggered by reading about Hermes Bot Mode (desktop app feature where each Hermes profile is a named Bot with persistent chat, memory, skills, and routines). Realization that an NPC is already a person with knowledge, personality, relationships, and memory who only acts when engaged — the exact shape of a dormant Hermes Bot.</p>
+<h2 id="core-idea">Core Idea<a class="headerlink" href="#core-idea" title="Permanent link">&para;</a></h2>
+<p>Each significant NPC is a dedicated Hermes Bot — an isolated profile with its own:
+- Memory (session history from every interaction with the party)
+- Skills (domain knowledge — town rumors, economy, faction relationships)
+- Personality prompt (voice, mannerisms, knowledge boundaries)
+- Recurring routines (cron jobs that advance the NPC's agenda between sessions)
+- Strict information isolation (must NOT know things the NPC shouldn't know)</p>
+<h2 id="how-it-would-work-at-the-table">How It Would Work at the Table<a class="headerlink" href="#how-it-would-work-at-the-table" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Player says "I go see Moses the blacksmith about that sword"</li>
+<li>GM Bot (the orchestrator) identifies the target NPC</li>
+<li>GM Bot sends a brief to Moses Bot's Bot Chat: "Party arrives, reference prior interaction from 3 sessions ago, they want to discuss a custom sword order"</li>
+<li>Moses Bot responds in-character, with its own memory of the party's previous interactions, debts, and reputation</li>
+<li>GM Bot relays the response to Foundry VTT / the player channel</li>
+</ol>
+<h2 id="key-design-decisions-collected">Key Design Decisions Collected<a class="headerlink" href="#key-design-decisions-collected" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Cost discipline:</strong> NPC Bots use a cheap model (ox-alpha) for routine conversation. Only the GM Bot escalates to the expensive model for game-critical decisions. NPC bots are idle (zero cost) until activated.</li>
+<li><strong>Orchestration protocol:</strong> GM Bot is the traffic cop — it decides when to delegate to an NPC Bot vs answer inline. Casual small talk (weather, directions) handled inline. Plot-relevant conversations get the full NPC Bot treatment.</li>
+<li><strong>No shared memory:</strong> Each NPC Bot has its own isolated memory store (profile isolation). A merchant Bot cannot recall the secret door in the duke's castle. This is enforced by the profile boundary, not by trust.</li>
+<li><strong>Memory compaction:</strong> NPC Bots accumulate interaction history. Need a periodic summarization routine to compact long-running NPC memory without losing important relationship data.</li>
+<li><strong>Dormant NPCs cost nothing:</strong> A Bot is just a config file + session DB when idle. No daemon, no context, no tokens burned.</li>
+</ul>
+<h2 id="the-trippy-part-emergent-behavior">The Trippy Part (Emergent Behavior)<a class="headerlink" href="#the-trippy-part-emergent-behavior" title="Permanent link">&para;</a></h2>
+<p>Bot-to-Bot DMs between NPCs means the game world has a subconscious layer:
+- The vizier Bot DMs the captain of the guard Bot: "Increase patrols at the east gate"
+- The merchant Bot messages the town crier Bot: "The party skipped town without paying"
+- The thieves' guild Bot coordinates its member NPCs autonomously
+- These interactions happen via cron routines between sessions, without the GM thinking about them
+- The GM Bot surfaces whatever becomes relevant next session</p>
+<p>This is distinct from existing TTRPG AI tools — nobody is using persistent agent instances as discrete NPCs with autonomous between-session routines and inter-NPC communication.</p>
+<h2 id="open-questions-for-next-pass">Open Questions for Next Pass<a class="headerlink" href="#open-questions-for-next-pass" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Cost model: what does 5 NPC bots + 1 villain bot cost per session on ox-alpha vs V4 Flash?</li>
+<li>Activation protocol: how does the GM Bot decide "this conversation is worth an NPC Bot turn" vs "I'll handle it inline"?</li>
+<li>NPC lifecycle: what happens when an NPC dies? Do we archive the Bot, delete it, or let it haunt from beyond?</li>
+<li>Bot-to-Bot latency: NPC DMs between sessions are fine (cron-driven, async), but in-session NPC-to-NPC interaction needs a fast path</li>
+<li>Foundry bridge: do NPC Bots drive Foundry tokens directly, or does all Foundry interaction go through the GM Bot?</li>
+<li>Campaign memory boundary: campaign world state lives in the ttrpg-gm repo. NPC Bots reference it via tools, not by loading it into their own memory. Keeps knowledge boundaries honest.</li>
+</ul>
+<h2 id="architecture-options-from-earlier-discussion">Architecture Options (from earlier discussion)<a class="headerlink" href="#architecture-options-from-earlier-discussion" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Option A — Single AI GM Bot.</strong> One Bot runs everything, talks to Foundry via MCP/plugins. Simple. Gets context-heavy.</li>
+<li><strong>Option B — Specialist Bots.</strong> GM Bot orchestrates, Rules Bot adjudicates mechanics, Narrator Bot writes prose, NPC Bots handle characters. Each focused, cheap.</li>
+<li><strong>Option C — Bot Mode as player portal only.</strong> AI GM stays headless (current model). Bot Mode is just the chat surface players talk to. Less ambitious, proven path.</li>
+</ul>
+<p>The NPC-as-Bot concept slots into Option B naturally but could also sit atop Option C.</p>
+<h2 id="related-files">Related Files<a class="headerlink" href="#related-files" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>docs/ai-dm-landscape-2026-08-06.md</code> — original AI DM landscape research</li>
+<li><code>docs/ai-dm-prompt-architecture-2026-08-07.md</code> — prompt architecture</li>
+<li><code>docs/noodlr-vs-foundryai-2026-08-06.md</code> — Foundry bridge decision research</li>
+<li><code>integrations/foundry/NOTES.md</code> — Foundry integration notes</li>
+<li><code>STATUS.md</code> — project status</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ttrpg-gm-architecture-2026-08-27/" class="btn btn-neutral float-left" title="AI Game Master — Hermes Bot Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ai-dm-prompt-architecture-2026-08-07/" class="btn btn-neutral float-right" title="AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/luckrucksack/ttrpg-gm" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../ttrpg-gm-architecture-2026-08-27/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ai-dm-prompt-architecture-2026-08-07/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

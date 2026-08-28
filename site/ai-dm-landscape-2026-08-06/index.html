@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://luckrucksack.github.io/ttrpg-gm/ai-dm-landscape-2026-08-06/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>AI-DM Landscape for Foundry VTT — 2026-08-06 - TTRPG Game Master — Architecture & Design</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AI-DM Landscape for Foundry VTT \u2014 2026-08-06";
+        var mkdocs_page_input_path = "ai-dm-landscape-2026-08-06.md";
+        var mkdocs_page_url = "/ttrpg-gm/ai-dm-landscape-2026-08-06/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> TTRPG Game Master — Architecture & Design
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ttrpg-gm-architecture-2026-08-27/">AI Game Master — Hermes Bot Architecture</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">NPC Bots</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../npc-bots-design-sketch-2026-08-26/">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Prompt Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-prompt-architecture-2026-08-07/">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Research</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">AI-DM Landscape for Foundry VTT — 2026-08-06</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#context">Context</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#category-a-ready-made-ai-dm-modules-install-and-go">Category A — Ready-made AI-DM modules (install-and-go)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#foundryai-derekhearstfoundryai">FoundryAI (derekhearst/FoundryAI)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#loremaster">Loremaster</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#familiar-familiarvttcom">Familiar (familiarvtt.com)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rpgx-ai-assistant">RPGX AI Assistant</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#phils-ai-assistant">Phil's AI Assistant</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#category-b-integration-foundation-build-on-rails">Category B — Integration foundation (build on rails)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#integrate-ai-sirniloc">Integrate AI (SirNiloc)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#category-c-open-source-ai-dm-contributionwheelhouse">Category C — Open-source AI-DM (contribution/wheelhouse)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#noodlr-gobsmacked1noodlr-mit-v04x-pre-10">Noodlr (gobsmacked1/noodlr) — MIT, v0.4.x pre-1.0</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ai-combat-assistant-pf2e-system-specific-skip-for-dcc">AI Combat Assistant (PF2e) — system-specific; skip for DCC.</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#category-d-custom-bridge-original-plan">Category D — Custom bridge (original plan)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fit-summary-vs-our-constraints">Fit summary vs our constraints</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-questions-for-chris">Open questions for Chris</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../noodlr-vs-foundryai-2026-08-06/">Noodlr vs FoundryAI — Head-to-Head, 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../foundry-modules-review-2026-08-06/">Foundry Module Catalog Review — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vtt-landscape-2026-08-05/">VTT Landscape for the AI-DM — 2026-08-05</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-memory-backend-deep-dive-2026-08-13/">AI Dungeon Master — Long-Term Memory Backend Deep Dive</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-token-reduction-playbook-2026-08-13/">AI Dungeon Master — Token-Reduction Playbook</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../development-notes/">Development Notes — AI GM Project</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backlog/">TTRPG Project Backlog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-notes-research-brief/">Research brief: AI Dungeon Master notes in Apple Notes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dm-research-prompt/">Dm research prompt</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">TTRPG Game Master — Architecture & Design</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Research</li>
+      <li class="breadcrumb-item active">AI-DM Landscape for Foundry VTT — 2026-08-06</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/luckrucksack/ttrpg-gm/blob/main/docs/ai-dm-landscape-2026-08-06.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ai-dm-landscape-for-foundry-vtt-2026-08-06">AI-DM Landscape for Foundry VTT — 2026-08-06<a class="headerlink" href="#ai-dm-landscape-for-foundry-vtt-2026-08-06" title="Permanent link">&para;</a></h1>
+<p>Status: research snapshot. Nothing installed. Decisions pending with Chris.</p>
+<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Foundry 14.365 running (launchd, :30000), DCC system installed, world not yet created.</li>
+<li>Foundry core has NO built-in AI. All "AI modules" are third-party.</li>
+<li>Chris has: native DeepSeek API key (OpenAI-compatible), an OpenRouter key (free-tier use), self-hosted TencentDB memory stack (ttrpg profile planned as campaign memory).</li>
+</ul>
+<h2 id="category-a-ready-made-ai-dm-modules-install-and-go">Category A — Ready-made AI-DM modules (install-and-go)<a class="headerlink" href="#category-a-ready-made-ai-dm-modules-install-and-go" title="Permanent link">&para;</a></h2>
+<h3 id="foundryai-derekhearstfoundryai">FoundryAI (derekhearst/FoundryAI)<a class="headerlink" href="#foundryai-derekhearstfoundryai" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The flagship popular module. Foundry v13+ (verified v14 compatible).</li>
+<li>Features: AI chat sidebar, RAG over journals/actors/scenes (in-browser IndexedDB, zero setup), 40+ tools (tokens, combat, audio, spell templates, search), actor roleplay sessions, session recaps, TTS, per-category tool toggles.</li>
+<li>Provider: OpenRouter only (any model incl. DeepSeek hosted there).</li>
+<li>Cost: free module; you pay OpenRouter token rates.</li>
+<li>Caveats: keys stored in world settings (readable by determined players); OpenRouter dependency; in-browser memory is per-browser, not shared.</li>
+</ul>
+<h3 id="loremaster">Loremaster<a class="headerlink" href="#loremaster" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Claude-only AI Game Master; narration, NPCs, game mechanics, PDF adventure upload, multi-player batching, canon/history.</li>
+<li>Requires connection to Loremaster proxy (loremastervtt.com) — subscription service, provider-locked. Weak fit for cost-conscious/sovereignty setup.</li>
+</ul>
+<h3 id="familiar-familiarvttcom">Familiar (familiarvtt.com)<a class="headerlink" href="#familiar-familiarvttcom" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SaaS AI DM for Foundry; 28 providers (Claude/ChatGPT/Gemini...); 14-day free trial.</li>
+<li>D&amp;D 5e ONLY — wrong fit for DCC. Subscription. Out.</li>
+</ul>
+<h3 id="rpgx-ai-assistant">RPGX AI Assistant<a class="headerlink" href="#rpgx-ai-assistant" title="Permanent link">&para;</a></h3>
+<ul>
+<li>100% local via Ollama (no API keys, no cloud). System-agnostic, Foundry v10+.</li>
+<li>Optional RAG via RPGX Proton (separate premium app).</li>
+<li>Local-only quality ceiling on a MacBook Air; zero-leak, zero-cost. CC BY-NC 4.0.</li>
+</ul>
+<h3 id="phils-ai-assistant">Phil's AI Assistant<a class="headerlink" href="#phils-ai-assistant" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"Prompt engineer" bridge: reads actors/journals, builds a prompt, you paste into a free web AI. Manual, clunky, zero cost.</li>
+</ul>
+<h2 id="category-b-integration-foundation-build-on-rails">Category B — Integration foundation (build on rails)<a class="headerlink" href="#category-b-integration-foundation-build-on-rails" title="Permanent link">&para;</a></h2>
+<h3 id="integrate-ai-sirniloc">Integrate AI (SirNiloc)<a class="headerlink" href="#integrate-ai-sirniloc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Developer module: common plumbing for modules to reach local/remote AI APIs.</li>
+<li>The base layer if we build a custom module rather than adopt a full AI-DM.</li>
+</ul>
+<h2 id="category-c-open-source-ai-dm-contributionwheelhouse">Category C — Open-source AI-DM (contribution/wheelhouse)<a class="headerlink" href="#category-c-open-source-ai-dm-contributionwheelhouse" title="Permanent link">&para;</a></h2>
+<h3 id="noodlr-gobsmacked1noodlr-mit-v04x-pre-10">Noodlr (gobsmacked1/noodlr) — MIT, v0.4.x pre-1.0<a class="headerlink" href="#noodlr-gobsmacked1noodlr-mit-v04x-pre-10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Thesis: LLMs lack (1) reliable memory, (2) authoritative game state, (3) restraint — the module supplies all three. Nearly identical to our original AI-DM Bridge plan.</li>
+<li>Game-system-agnostic: zero hardcoded rules; feed it your books (DCC works).</li>
+<li>Memory: real vector/RAG — in-browser (zero setup) OR standalone <code>noodlr-memory</code> service (server-side embeddings, PDF ingestion, shared across GM machines).</li>
+<li>State: Foundry is source of truth — real <code>{{roll}}</code> macros, combat tracker rebuilt from Foundry each turn, no model-rolled dice.</li>
+<li>Providers: OpenRouter OR any hand-entered OpenAI-compatible base URL — native DeepSeek API qualifies directly.</li>
+<li>GM/player bot split with privilege enforcement at access layer (secrets never reach player clients), audit-logged remembers, retract-able memory records, GM-ONLY replies.</li>
+<li>API surface for macros/modules (game.modules.get("noodlr").api...).</li>
+<li>Caveats: pre-1.0 (rough edges, settings will move); keys in world settings (use credit-capped key).</li>
+</ul>
+<h3 id="ai-combat-assistant-pf2e-system-specific-skip-for-dcc">AI Combat Assistant (PF2e) — system-specific; skip for DCC.<a class="headerlink" href="#ai-combat-assistant-pf2e-system-specific-skip-for-dcc" title="Permanent link">&para;</a></h3>
+<h2 id="category-d-custom-bridge-original-plan">Category D — Custom bridge (original plan)<a class="headerlink" href="#category-d-custom-bridge-original-plan" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Build our own module + local WebSocket/JSON endpoint + ttrpg TencentDB as memory.</li>
+<li>Absolute control, full DCC + campaign tailoring, no provider lock.</li>
+<li>Heavy: module dev, socket auth, RAG plumbing — weeks of iteration.</li>
+<li>Noodlr's memory service + API now covers most of this rationale; custom only if we need something neither ready-made option offers.</li>
+</ul>
+<h2 id="fit-summary-vs-our-constraints">Fit summary vs our constraints<a class="headerlink" href="#fit-summary-vs-our-constraints" title="Permanent link">&para;</a></h2>
+<ul>
+<li>DCC system: Noodlr, FoundryAI, RPGX all system-agnostic. Familiar/Loremaster out or weak.</li>
+<li>Cost: all free modules; token costs via existing keys (DeepSeek native or OpenRouter). SaaS out.</li>
+<li>Sovereignty: Noodlr (self-host memory, OpenAI-compatible endpoint) and RPGX (fully local) strongest; FoundryAI middle (OpenRouter + browser memory).</li>
+<li>Contribution angle: Noodlr MIT + pre-1.0 = real upstream contribution potential (matches Chris's GitHub enthusiasm).</li>
+<li>Maturity: FoundryAI most polished; Noodlr most architecturally aligned with our plans; RPGX simplest/local.</li>
+</ul>
+<h2 id="open-questions-for-chris">Open questions for Chris<a class="headerlink" href="#open-questions-for-chris" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Ready-made (FoundryAI / Noodlr / RPGX) vs custom bridge vs hybrid (Noodlr + TencentDB memory)?</li>
+<li>Provider: native DeepSeek (OpenAI-compatible) or OpenRouter or both?</li>
+<li>Where should campaign memory live long-term (Noodlr memory service, in-browser, ttrpg TencentDB)?</li>
+<li>Which game system first: DCC strictly, or keep agnostic?</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ai-dm-prompt-architecture-2026-08-07/" class="btn btn-neutral float-left" title="AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../noodlr-vs-foundryai-2026-08-06/" class="btn btn-neutral float-right" title="Noodlr vs FoundryAI — Head-to-Head, 2026-08-06">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/luckrucksack/ttrpg-gm" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../ai-dm-prompt-architecture-2026-08-07/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../noodlr-vs-foundryai-2026-08-06/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

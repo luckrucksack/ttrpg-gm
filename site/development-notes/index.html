@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://luckrucksack.github.io/ttrpg-gm/development-notes/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Development Notes — AI GM Project - TTRPG Game Master — Architecture & Design</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Development Notes \u2014 AI GM Project";
+        var mkdocs_page_input_path = "development-notes.md";
+        var mkdocs_page_url = "/ttrpg-gm/development-notes/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> TTRPG Game Master — Architecture & Design
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ttrpg-gm-architecture-2026-08-27/">AI Game Master — Hermes Bot Architecture</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">NPC Bots</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../npc-bots-design-sketch-2026-08-26/">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Prompt Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-prompt-architecture-2026-08-07/">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Research</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-landscape-2026-08-06/">AI-DM Landscape for Foundry VTT — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../noodlr-vs-foundryai-2026-08-06/">Noodlr vs FoundryAI — Head-to-Head, 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../foundry-modules-review-2026-08-06/">Foundry Module Catalog Review — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vtt-landscape-2026-08-05/">VTT Landscape for the AI-DM — 2026-08-05</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-memory-backend-deep-dive-2026-08-13/">AI Dungeon Master — Long-Term Memory Backend Deep Dive</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-token-reduction-playbook-2026-08-13/">AI Dungeon Master — Token-Reduction Playbook</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Development Notes — AI GM Project</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#2026-08-14-character-development-via-enneagrammbti-questionnaire">2026-08-14 — Character development via Enneagram/MBTI questionnaire</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-idea">The idea</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-two-failure-modes-observed-and-their-root-causes">The two failure modes observed (and their root causes)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#execution-blanks-filled-how-to-build-this-properly-on-the-hermes-orchestrator">Execution blanks filled — how to build this properly on the Hermes orchestrator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#status">Status</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backlog/">TTRPG Project Backlog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-notes-research-brief/">Research brief: AI Dungeon Master notes in Apple Notes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dm-research-prompt/">Dm research prompt</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">TTRPG Game Master — Architecture & Design</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Development</li>
+      <li class="breadcrumb-item active">Development Notes — AI GM Project</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/luckrucksack/ttrpg-gm/blob/main/docs/development-notes.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="development-notes-ai-gm-project">Development Notes — AI GM Project<a class="headerlink" href="#development-notes-ai-gm-project" title="Permanent link">&para;</a></h1>
+<p>Running log of ideas, problems, and decisions. Latest entry first. Companion to <code>backlog.md</code> (tracking) — this file holds the <em>why</em> and the <em>how</em>.</p>
+<hr />
+<h2 id="2026-08-14-character-development-via-enneagrammbti-questionnaire">2026-08-14 — Character development via Enneagram/MBTI questionnaire<a class="headerlink" href="#2026-08-14-character-development-via-enneagrammbti-questionnaire" title="Permanent link">&para;</a></h2>
+<p><strong>Source:</strong> Chris, from a conversation with a friend. "I did it ad hoc, but for my AI GM I came up with a set of questions sourced from the Enneagram and Myers-Briggs personality assessments for the GM to use to flesh out the characters and NPCs interactions. That was a long time ago."</p>
+<h3 id="the-idea">The idea<a class="headerlink" href="#the-idea" title="Permanent link">&para;</a></h3>
+<p>A structured questionnaire (Enneagram + MBTI sourced) the GM runs to flesh out characters and NPCs — their personalities, motivations, and how they interact. Built ad hoc years ago, back in the pure-chatbot era, so everything lived inside the GM master prompt.</p>
+<h3 id="the-two-failure-modes-observed-and-their-root-causes">The two failure modes observed (and their root causes)<a class="headerlink" href="#the-two-failure-modes-observed-and-their-root-causes" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Clichéd type-fitting</strong> — the AI assigned characteristics that were clichés of a given personality type.
+   Root cause: <em>stereotype collapse</em>. Type labels (ENFJ, Type 2, etc.) are strongly associated with a small descriptor set in the model's training distribution; when asked to "flesh out a character of this type," the model anchors on the prototype instead of the individual. The type label becomes a stereotype shortcut.</li>
+<li><strong>Limited trait vocabulary</strong> — it always grabbed from a small numerical set of characteristics within that set.
+   Root cause: <em>no diversity pressure in free generation</em>. Asked to generate from nothing, the model returns the highest-probability tokens — the same ~10–15 descriptors per type, every time. Nothing in a single chat prompt forces spread.</li>
+</ol>
+<p>Plus the meta-problem that made the fix impossible in the old era:</p>
+<ol>
+<li><strong>Prompt overload / parts canceling out</strong> — the master prompt carried personality, world, mechanics, and prohibitions together; sections fought each other, and the inference-time cognitive load exceeded what the model could reliably hold.
+   Root cause: attention dilution + instruction competition inside one giant context. This is exactly what the prohibitions layer (see <code>ai-dm-prompt-architecture-2026-08-07.md</code>) fought symptom-by-symptom — the structural fix is modularization, which Hermes gives us for free.</li>
+</ol>
+<h3 id="execution-blanks-filled-how-to-build-this-properly-on-the-hermes-orchestrator">Execution blanks filled — how to build this properly on the Hermes orchestrator<a class="headerlink" href="#execution-blanks-filled-how-to-build-this-properly-on-the-hermes-orchestrator" title="Permanent link">&para;</a></h3>
+<p><strong>1. Take the choice out of the model's hands (mechanize the randomness).</strong>
+The LLM must never select <em>which</em> traits to consider — that's the source of both failure modes.
+- The <strong>orchestrator</strong> picks the question subset per character: a seeded RNG samples N questions from the bank, stratified across dimensions (Enneagram core triad + wings, MBTI axes, values/fears/motivations, relational style).
+- The model only <strong>answers</strong> the questions asked; a deterministic assembler builds the profile from the answers. Diversity comes from the sampling layer, not the model's whim.
+- <strong>Per-campaign diversity counter</strong> in <code>state_manager</code>: every characteristic descriptor used gets counted; once a descriptor exceeds K uses (e.g. 2), it's deprioritized for the next character. A counter, not a prompt line.</p>
+<p><strong>2. Anti-cliché guardrails — the prohibitions layer, applied mechanically.</strong>
+- Per-type <strong>ban lists</strong>: the specific clichéd descriptors models reach for (e.g. "wise old mentor" traits for a Type 5), written as explicit prohibitions with exact wording — same doctrine as the GM master prompt prohibitions.
+- <strong>Tension rule</strong>: the assembler mechanically assigns 1–2 traits that <em>contradict</em> the type's stereotype (a lawful ENFJ who lies easily to protect others). Models are excellent at rationalizing imposed constraints and terrible at inventing diversity — so impose, don't ask.</p>
+<p><strong>3. Modular orchestration (solves prompt overload).</strong>
+One god-prompt → specialist agents, spawned on the fly, each with a small single-purpose prompt:
+- <code>psych-profiler</code> — questionnaire → profile (spawned only when a character/NPC needs creation)
+- <code>lore-keeper</code> — world/campaign memory (TencentDB, ttrpg :8421)
+- <code>rules-adjudicator</code> — mechanics and dice (local dice, no model-rolled)
+- <code>narrator</code> — scene prose
+- <code>foundry-sync</code> — state in/out of Foundry VTT</p>
+<p><strong>4. Cost control (multiple API calls concern).</strong>
+- <strong>Tiered routing</strong>: questionnaire answering + profile assembly + prose refinement run on cheap/free tiers (OpenRouter <code>:free</code> models, OAuth free tiers via Hermes proxy); only adjudication and scene direction run on the paid tier (V4 Flash default, V4 Pro for heavy scenes).
+- Independent NPC generations run <strong>in parallel</strong> (wall-clock win; cost is the sum — tiering is what keeps the sum acceptable).
+- Bounded contexts: the questionnaire is Q&amp;A, not essay — each answer is a few tokens; assembly is template + fill.
+- Config-level token savings already identified: <code>docs/ai-dm-token-reduction-playbook-2026-08-13.md</code>.</p>
+<p><strong>5. Foundry VTT bridge (the target).</strong>
+- <strong>Foundry is the source of truth</strong> for characters/NPCs (actors, journals) — no state living in prompts, no model-rolled dice (consistent with <code>ai-dm-landscape-2026-08-06.md</code>).
+- Flow: orchestrator detects a new PC/NPC → spawns <code>psych-profiler</code> → profile written to the Foundry actor (via <code>integrations/foundry/</code>, see NOTES.md) + campaign memory.
+- The questionnaire answers are stored per-character (journal/world_state) — the canonical record. Next session <strong>re-reads answers, never re-asks</strong>.
+- Long-term campaign memory: <strong>TencentDB Agent Memory in the ttrpg profile</strong> — decision locked 2026-08-13 (see <code>ai-dm-memory-backend-deep-dive-2026-08-13.md</code>; Hy-Memory rejected: single-maintainer adapter, no migration path, self-disclosed benchmarks).</p>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<p>Idea captured; nothing built yet — Chris is still learning/playing (slow, savory process; fine). Next concrete steps when he wants them:
+1. Question bank + sampling script (pure Python, no LLM needed for the bank).
+2. <code>psych-profiler</code> agent: small prompt + per-type ban lists + tension rule.
+3. Diversity counter wired into <code>state_manager</code>.
+4. Foundry actor write path in <code>integrations/foundry/</code>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ai-dm-token-reduction-playbook-2026-08-13/" class="btn btn-neutral float-left" title="AI Dungeon Master — Token-Reduction Playbook"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../backlog/" class="btn btn-neutral float-right" title="TTRPG Project Backlog">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/luckrucksack/ttrpg-gm" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../ai-dm-token-reduction-playbook-2026-08-13/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../backlog/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

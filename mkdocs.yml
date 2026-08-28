@@ -1,0 +1,37 @@
+site_name: TTRPG Game Master — Architecture & Design
+site_url: https://luckrucksack.github.io/ttrpg-gm/
+site_description: Design docs and architecture for an AI Game Master system using Hermes Bot Mode + Foundry VTT
+repo_url: https://github.com/luckrucksack/ttrpg-gm
+edit_uri: blob/main/docs/
+docs_dir: docs
+
+theme:
+  name: readthedocs
+  highlightjs: true
+
+nav:
+  - Home: index.md
+  - Architecture:
+    - ttrpg-gm-architecture-2026-08-27.md
+  - NPC Bots:
+    - npc-bots-design-sketch-2026-08-26.md
+  - Prompt Architecture:
+    - ai-dm-prompt-architecture-2026-08-07.md
+  - Research:
+    - ai-dm-landscape-2026-08-06.md
+    - noodlr-vs-foundryai-2026-08-06.md
+    - foundry-modules-review-2026-08-06.md
+    - vtt-landscape-2026-08-05.md
+    - ai-dm-memory-backend-deep-dive-2026-08-13.md
+    - ai-dm-token-reduction-playbook-2026-08-13.md
+  - Development:
+    - development-notes.md
+    - backlog.md
+    - ai-dm-notes-research-brief.md
+    - dm-research-prompt.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite

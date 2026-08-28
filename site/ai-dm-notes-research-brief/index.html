@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://luckrucksack.github.io/ttrpg-gm/ai-dm-notes-research-brief/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Research brief: AI Dungeon Master notes in Apple Notes - TTRPG Game Master — Architecture & Design</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Research brief: AI Dungeon Master notes in Apple Notes";
+        var mkdocs_page_input_path = "ai-dm-notes-research-brief.md";
+        var mkdocs_page_url = "/ttrpg-gm/ai-dm-notes-research-brief/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> TTRPG Game Master — Architecture & Design
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ttrpg-gm-architecture-2026-08-27/">AI Game Master — Hermes Bot Architecture</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">NPC Bots</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../npc-bots-design-sketch-2026-08-26/">NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Prompt Architecture</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-prompt-architecture-2026-08-07/">AI Dungeon Master — Prompt Architecture (extracted from Apple Notes)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Research</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-landscape-2026-08-06/">AI-DM Landscape for Foundry VTT — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../noodlr-vs-foundryai-2026-08-06/">Noodlr vs FoundryAI — Head-to-Head, 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../foundry-modules-review-2026-08-06/">Foundry Module Catalog Review — 2026-08-06</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../vtt-landscape-2026-08-05/">VTT Landscape for the AI-DM — 2026-08-05</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-memory-backend-deep-dive-2026-08-13/">AI Dungeon Master — Long-Term Memory Backend Deep Dive</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-dm-token-reduction-playbook-2026-08-13/">AI Dungeon Master — Token-Reduction Playbook</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../development-notes/">Development Notes — AI GM Project</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backlog/">TTRPG Project Backlog</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Research brief: AI Dungeon Master notes in Apple Notes</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#phase-1-inventory">Phase 1 — Inventory</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#phase-2-extraction">Phase 2 — Extraction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#phase-3-repetition-lineage">Phase 3 — Repetition &amp; lineage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#phase-4-prohibitions-the-crown-jewels">Phase 4 — Prohibitions (the crown jewels)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#phase-5-deliverable">Phase 5 — Deliverable</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#search-terms">Search terms</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dm-research-prompt/">Dm research prompt</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">TTRPG Game Master — Architecture & Design</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Development</li>
+      <li class="breadcrumb-item active">Research brief: AI Dungeon Master notes in Apple Notes</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/luckrucksack/ttrpg-gm/blob/main/docs/ai-dm-notes-research-brief.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="research-brief-ai-dungeon-master-notes-in-apple-notes">Research brief: AI Dungeon Master notes in Apple Notes<a class="headerlink" href="#research-brief-ai-dungeon-master-notes-in-apple-notes" title="Permanent link">&para;</a></h1>
+<p><strong>Goal:</strong> Find every note about AI Dungeon Masters / AI GMs, then synthesize a deduplicated picture of the DM and GM master prompts — with the prohibitions preserved in full, specific detail.</p>
+<h2 id="phase-1-inventory">Phase 1 — Inventory<a class="headerlink" href="#phase-1-inventory" title="Permanent link">&para;</a></h2>
+<ul>
+<li>List every matching note: title, folder, modified date, and its role (draft / iteration N / canonical / fragment / test run).</li>
+<li>Separate master-prompt notes from supporting material (behavior notes, failure fixes, test logs).</li>
+</ul>
+<h2 id="phase-2-extraction">Phase 2 — Extraction<a class="headerlink" href="#phase-2-extraction" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Pull the full text of every distinct master prompt version, tagged with note title + date so the iteration lineage is traceable.</li>
+<li>Preserve verbatim. Do NOT clean, shorten, or "improve" — the iterations are deliberate and the final versions work.</li>
+</ul>
+<h2 id="phase-3-repetition-lineage">Phase 3 — Repetition &amp; lineage<a class="headerlink" href="#phase-3-repetition-lineage" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Map what changed between versions and what stayed constant. Identify the canonical/final versions (the ones that "ended up working pretty well").</li>
+</ul>
+<h2 id="phase-4-prohibitions-the-crown-jewels">Phase 4 — Prohibitions (the crown jewels)<a class="headerlink" href="#phase-4-prohibitions-the-crown-jewels" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Extract EVERY prohibition across all notes, verbatim where possible, with source note.</li>
+<li>Group by theme but keep exact wording — these were added because of observed failures and must stay specific.</li>
+<li>Flag anywhere a later iteration weakened or removed a prohibition.</li>
+</ul>
+<h2 id="phase-5-deliverable">Phase 5 — Deliverable<a class="headerlink" href="#phase-5-deliverable" title="Permanent link">&para;</a></h2>
+<ul>
+<li>One research artifact in ~/workspace/: inventory, canonical DM prompt, canonical GM prompt, full prohibition catalog, iteration notes.</li>
+<li>Chat summary: what was found, where the canonicals live, and the prohibitions at a high level.</li>
+</ul>
+<h2 id="search-terms">Search terms<a class="headerlink" href="#search-terms" title="Permanent link">&para;</a></h2>
+<p>"AI DM", "AI Dungeon Master", "DM prompt", "GM prompt", "master prompt", "dungeon master", "DM", "GM", "prohibition", "prompt", "D&amp;D", "TTRPG"</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../backlog/" class="btn btn-neutral float-left" title="TTRPG Project Backlog"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../dm-research-prompt/" class="btn btn-neutral float-right" title="Dm research prompt">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/luckrucksack/ttrpg-gm" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../backlog/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../dm-research-prompt/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
