@@ -2,17 +2,19 @@
 .env
 *.env
 
-# Campaign layer — everything under campaigns/ is data, never code
+# Campaign layer — data, never code
 # (licensed PDFs, character sheets, world state, adventure logs).
 # Only the layout README is tracked.
 campaigns/*
 !campaigns/README.md
 
-# Runtime
+# No Python runtime needed (Hermes Bot Mode replaces it)
 venv/
 logs/
 __pycache__/
 *.pyc
+
+# OS
 .DS_Store
 .history
 

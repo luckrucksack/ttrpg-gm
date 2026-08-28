@@ -1,19 +1,13 @@
-# STATUS — UNDER CONSTRUCTION
+# STATUS — ARCHITECTURE REBOOT
 
-**ARCHITECTURE RESOLVED 2026-08-27:** See [`docs/ttrpg-gm-architecture-2026-08-27.md`](docs/ttrpg-gm-architecture-2026-08-27.md) for the new design direction — Hermes Bot Mode replaces the custom Python runtime. The old layer boundaries below are retained as reference but no longer represent the target architecture.
+**ARCHITECTURE RESOLVED 2026-08-27:** The custom Python AI-GM framework has been retired in favor of **Hermes Bot Mode** as the GM runtime, with Foundry VTT handling all game mechanics. The Python code (40 files, ~5,300 lines) has been deleted from the repo.
 
-What this means in practice:
+See [`docs/ttrpg-gm-architecture-2026-08-27.md`](docs/ttrpg-gm-architecture-2026-08-27.md) for the new architecture.
 
-- The layer boundaries below (`gm_core` / `systems` / `campaigns` /
-  `integrations`) are a first cut, not a contract. They were drawn to make
-  the system game-system-agnostic and campaign-separated, but the Foundry
-  wiring (module vs. bridge vs. port) will likely reshape them.
-- `integrations/foundry/` is a placeholder. Nothing there is implemented.
-- The prompt-architecture layer (`gm_core/prompts/`) is currently pointers
-  into `docs/`; the verbatim prohibition catalog extraction is a backlog
-  item (see `docs/backlog.md`).
-- Treat every path and import in this repo as provisional. Probe before
-  assuming; prefer `gm_core` and `systems` contracts over hardcoded paths.
+What this means:
+- The old layer boundaries (gm_core / systems / campaigns / integrations) no longer apply
+- The repo now holds only docs/ and integrations/reference — no executable code
+- The design knowledge (prompt architecture, NPC Bot concept, research) survives in docs/
+- The actual build now happens as Hermes skills, profiles, and Foundry bridge configuration
 
-Last restructured: 2026-08-10 (layer split; DCC moved under systems/dcc/;
-campaign data moved under campaigns/; core stripped of game rules).
+Last restructured: 2026-08-27 (full Python framework removed; architecture reset to doc-only)
