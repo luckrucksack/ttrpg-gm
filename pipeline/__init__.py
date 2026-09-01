@@ -1,0 +1,1 @@
+# Pipeline: PDF adventure ingestion for Foundry VTT

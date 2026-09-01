@@ -1,37 +1,41 @@
-site_name: TTRPG Game Master — Architecture & Design
+site_name: TTRPG Game Master — AI Game Master System
+site_description: Open-source AI-powered published adventure runner for Foundry VTT
 site_url: https://luckrucksack.github.io/ttrpg-gm/
-site_description: Design docs and architecture for an AI Game Master system using Hermes Bot Mode + Foundry VTT
 repo_url: https://github.com/luckrucksack/ttrpg-gm
-edit_uri: blob/main/docs/
-docs_dir: docs
-
-theme:
-  name: readthedocs
-  highlightjs: true
 
 nav:
   - Home: index.md
   - Architecture:
-    - ttrpg-gm-architecture-2026-08-27.md
-  - NPC Bots:
-    - npc-bots-design-sketch-2026-08-26.md
-  - Prompt Architecture:
-    - ai-dm-prompt-architecture-2026-08-07.md
+    - Current (2026-09-01): ttrpg-gm-architecture-2026-09-01.md
+    - Previous (2026-08-27): ttrpg-gm-architecture-2026-08-27.md
+  - Design:
+    - NPC Bots: npc-bots-design-sketch-2026-08-26.md
+    - Prompt Architecture: ai-dm-prompt-architecture-2026-08-07.md
   - Research:
-    - ai-dm-landscape-2026-08-06.md
-    - noodlr-vs-foundryai-2026-08-06.md
-    - foundry-modules-review-2026-08-06.md
-    - vtt-landscape-2026-08-05.md
-    - ai-dm-memory-backend-deep-dive-2026-08-13.md
-    - ai-dm-token-reduction-playbook-2026-08-13.md
-  - Development:
-    - development-notes.md
-    - backlog.md
-    - ai-dm-notes-research-brief.md
-    - dm-research-prompt.md
+    - AI DM Landscape: ai-dm-landscape-2026-08-06.md
+    - Foundry Modules Review: foundry-modules-review-2026-08-06.md
+    - VTT Landscape: vtt-landscape-2026-08-05.md
+    - Memory Backend Deep Dive: ai-dm-memory-backend-deep-dive-2026-08-13.md
+    - Token Reduction: ai-dm-token-reduction-playbook-2026-08-13.md
+    - Noodlr vs FoundryAI: noodlr-vs-foundryai-2026-08-06.md
+  - Management:
+    - Backlog: backlog.md
+    - Status: ../STATUS.md
+    - Development Notes: development-notes.md
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
 
 markdown_extensions:
-  - toc:
-      permalink: true
   - admonition
   - codehilite
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/luckrucksack/ttrpg-gm
