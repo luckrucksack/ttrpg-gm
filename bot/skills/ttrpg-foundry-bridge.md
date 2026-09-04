@@ -1,3 +1,8 @@
+---
+name: ttrpg-foundry-bridge
+description: MCP tool reference for Foundry VTT operations — actor, journal, combat, state management via the foundryvtt-mcp server.
+---
+
 # TTRPG Foundry Bridge — MCP Tool Reference
 
 The GM Bot communicates with Foundry VTT via the native MCP client,

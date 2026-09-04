@@ -1,3 +1,8 @@
+---
+name: ttrpg-narrator
+description: GM prose style guide — voice, pacing, anti-cliché rules, NPC speech, scene framing, combat narration for the TTRPG Bot.
+---
+
 # TTRPG Narrator Skill — GM Prose Style Guide
 
 Use this when generating narrative prose for the AI-DM. This defines

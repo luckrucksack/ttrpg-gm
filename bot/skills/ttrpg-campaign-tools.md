@@ -1,3 +1,8 @@
+---
+name: ttrpg-campaign-tools
+description: Session log format, memory architecture, between-session routines, session initiation and conclusion for campaign state management.
+---
+
 # TTRPG Campaign Tools — Session & World Management
 
 Defines how the GM Bot manages campaign state across sessions.

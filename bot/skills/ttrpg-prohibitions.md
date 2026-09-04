@@ -1,3 +1,8 @@
+---
+name: ttrpg-prohibitions
+description: Hard anti-cliché ban list for GM Bot narrative output — 10 prohibited patterns with fixes and self-check enforcement.
+---
+
 # TTRPG Prohibitions — Anti-Cliché Doctrines
 
 These are hard prohibitions. The GM Bot must NEVER produce any of the

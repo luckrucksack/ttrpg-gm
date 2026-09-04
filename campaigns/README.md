@@ -1,9 +1,9 @@
-# campaigns/ — campaign layer
+# campaigns/ — campaign data layer
 
-Campaign data is **not part of the codebase**. Everything under this
-directory is gitignored (licensed PDFs, character sheets, world state,
-adventure logs) and never enters the repo or GitHub. This README is the
-only tracked file here — it documents the layout contract.
+Campaign data is **not part of the codebase**. Everything under this directory is
+gitignored (licensed PDFs, character sheets, world state, session logs) and never
+enters the repo or GitHub. This README is the only tracked file here — it
+documents the layout contract.
 
 ## Layout
 
@@ -16,29 +16,28 @@ campaigns/
 │   └── organized_pdfs/
 ├── <campaign_id>/          # one directory per campaign
 │   ├── adventures/         # licensed adventure PDFs / markdown (never commit)
-│   ├── world_state/        # game-state JSONs (ground truth at runtime)
-│   ├── characters/         # character sheet JSONs
-│   └── adventure_log/      # session logs
+│   └── source/             # any local module/JSON source material (never commit)
 ```
 
-## Runtime selection
+## How campaign data flows in this architecture
 
-The active campaign is chosen by the `DATA_DIR` env var (see
-`gm_core/config.py` and `.env.template`). The core never hardcodes a
-campaign path — it reads `DATA_DIR` and builds `world_state/`,
-`characters/`, `adventures/` under it.
+- **Foundry VTT** is the source of truth for world state at the table: actors,
+  scenes, combat, journals imported from adventures.
+- **TencentDB Agent Memory (:8421)** holds campaign narrative state: session
+  logs, NPC relationship state, plot threads.
+- This directory holds only the **source material** (licensed PDFs, purchased
+  modules, local notes) that feeds the ingestion pipeline:
 
-## Present campaigns
+```
+campaigns/<id>/adventures/foo.pdf  →  pipeline/ingest.py  →  pipeline/output/foo/
+                                                              → GM Bot imports via Foundry MCP
+```
 
-- `dying_earth/` — DCC campaign (Dying Earth); licensed DCC PDFs + DCC
-  character JSONs. This is the active campaign (`DATA_DIR=./campaigns/dying_earth`).
-- `starfinder/` — legacy Starfinder-era campaign (world states, party file,
-  characters). Retained for history; not active.
+Nothing under `campaigns/` is read at runtime by the bot or the pipeline except
+the file you point `ingest.py` at.
 
 ## Rules of the layer
 
 - Never commit anything under `campaigns/` except this README.
-- Never reference campaign files from `gm_core/` or `systems/` by path —
-  always via `DATA_DIR`-derived config values.
 - `_inbox/` is staging only: sort acquisitions into the right campaign,
   don't leave organized structure there.

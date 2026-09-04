@@ -15,13 +15,10 @@ TTRPG_PROFILE="${HOME}/.hermes/profiles/ttrpg"
 echo "=== TTRPG AI-GM Setup ==="
 echo ""
 
-# 1. Install MCP server
-if ! npx -y foundryvtt-mcp --version 2>/dev/null; then
-  echo "[1/4] Installing foundryvtt-mcp..."
-  npm install -g foundryvtt-mcp 2>/dev/null || true
-else
-  echo "[1/4] foundryvtt-mcp already available"
-fi
+# 1. MCP server: no install step needed — Hermes runs it via npx on demand
+#    (see bridge/README.md). A bare `npx -y foundryvtt-mcp --version` prompt is
+#    avoided here because MCP servers start a stdio session and ignore --version.
+echo "[1/4] Foundry MCP server: runs via npx through Hermes (no install step)"
 
 # 2. Test Foundry connectivity
 echo -n "[2/4] Testing Foundry connectivity..."
@@ -68,7 +65,7 @@ echo ""
 echo "1. Create 'mcp-api' user in Foundry (Assistant GM role)"
 echo "2. Add MCP config block to ~/.hermes/profiles/ttrpg/config.yaml"
 echo "3. Restart Hermes ttrpg profile: hermes -p ttrpg"
-echo "4. Verify MCP connection: python pipeline/import_foundry.py status"
+echo "4. Verify MCP connection: the GM Bot loads mcp_foundry_* tools on next start"
+echo "   (no script-side MCP check exists; see bridge/README.md)"
 echo ""
-echo "Your adventure PDFs go into campaigns/ dir."
-echo "Then: python pipeline/ingest.py campaigns/my-adventure.pdf"
+echo "5. Ingest an adventure: python -m pipeline.ingest campaigns/my-adventure.pdf"

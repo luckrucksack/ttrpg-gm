@@ -91,9 +91,15 @@ def llm_extract(markdown_text: str, adventure_name: str) -> dict:
     if not api_key:
         raise RuntimeError("No API key found — set OPENROUTER_API_KEY or OPENAI_API_KEY")
 
+    # Route to the provider matching the key that was actually set.
+    if _os.environ.get("OPENROUTER_API_KEY"):
+        base_url = "https://openrouter.ai/api/v1"
+    else:
+        base_url = "https://api.openai.com/v1"
+
     client = OpenAI(
         api_key=api_key,
-        base_url="https://openrouter.ai/api/v1",
+        base_url=base_url,
     )
 
     # Chunk if too big

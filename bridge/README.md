@@ -34,10 +34,9 @@ In Foundry VTT:
 
 ### 2. Configure the MCP server
 
-Install the package (one-time):
+The server is installed on demand via npx (no global install needed):
+
 ```bash
-npm install -g foundryvtt-mcp
-# or run via npx (no install):
 npx -y foundryvtt-mcp
 ```
 
@@ -64,7 +63,8 @@ and makes them available to the GM Bot.
 
 ## Available Tools
 
-From `laurigates/foundryvtt-mcp`:
+Verified against `foundryvtt-mcp` v1.5.x. Selected tools (full list at the
+[upstream repo](https://github.com/laurigates/foundryvtt-mcp)):
 
 | Tool | Purpose |
 |------|---------|
@@ -91,8 +91,18 @@ From `laurigates/foundryvtt-mcp`:
 | `search_world` | Full-text search all entities |
 | `get_world_summary` | Overview of world state |
 | `roll_dice` | Roll dice via Foundry |
+| `generate_npc` | NPC text (not written to world) |
+| `generate_loot` | Treasure text (not written to world) |
 
-MCP tool names are prefixed: `mcp_foundry_search_actors`, `mcp_foundry_roll_dice`, etc.
+Stubs present upstream — do NOT rely on their output: `lookup_rule`
+(placeholder), `diagnose_errors` (fixed "no errors" reply).
+
+Writes require `FOUNDRY_WRITE_ENABLED=true` **and** the connecting user to have
+GM/owner permission. There is **no `create_actor` tool** — actors are created
+in Foundry's UI, then referenced by the bot (see `pipeline/import_foundry.py`).
+
+MCP tool names are prefixed by Hermes: `mcp_foundry_search_actors`,
+`mcp_foundry_roll_dice`, etc.
 
 ## Extending
 
