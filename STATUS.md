@@ -1,13 +1,27 @@
-# STATUS — ARCHITECTURE REBOOT
+# STATUS
 
-**ARCHITECTURE RESOLVED 2026-08-27:** The custom Python AI-GM framework has been retired in favor of **Hermes Bot Mode** as the GM runtime, with Foundry VTT handling all game mechanics. The Python code (40 files, ~5,300 lines) has been deleted from the repo.
+**Current:** Architecture v2 (2026-09-01) — Hermes Bot Mode as the GM runtime, Foundry VTT as the mechanics engine, NPCs as isolated Hermes profiles. No game sessions played yet.
 
-See [`docs/ttrpg-gm-architecture-2026-08-27.md`](docs/ttrpg-gm-architecture-2026-08-27.md) for the new architecture.
+## What's in this repo
 
-What this means:
-- The old layer boundaries (gm_core / systems / campaigns / integrations) no longer apply
-- The repo now holds only docs/ and integrations/reference — no executable code
-- The design knowledge (prompt architecture, NPC Bot concept, research) survives in docs/
-- The actual build now happens as Hermes skills, profiles, and Foundry bridge configuration
+- `pipeline/` — PDF adventure ingestion (`ingest.py` = MarkItDown → LLM → JSON; `import_foundry.py` = JSON validation + import manifest for the GM Bot to execute via its MCP client)
+- `bridge/` — Foundry MCP server (foundryvtt-mcp) setup docs
+- `bot/` — GM Bot config docs, 4 skills, NPC Bot template
+- `docs/` — architecture and research docs (published to GitHub Pages by CI)
+- `scripts/setup.sh` — one-time setup helper
 
-Last restructured: 2026-08-27 (full Python framework removed; architecture reset to doc-only)
+## Verified state (2026-09-04)
+
+- `ingest.py` runs — needs `OPENROUTER_API_KEY` / `OPENAI_API_KEY` and MarkItDown installed
+- `import_foundry.py` is a manifest generator, not a direct importer — Foundry writes happen through the GM Bot's native MCP client (foundryvtt-mcp has **no `create_actor` tool**; actors and roll tables import manually — see `pipeline/import_foundry.py` header)
+- GitHub Pages CI: fixed 2026-09-04 (workflow was missing `mkdocs-material`); the deploy pipeline now builds with `--strict`
+- ttrpg profile configured: skills external_dirs, TencentDB memory (:8421), Foundry MCP server block (needs a real `mcp-api` password — currently `<your-password>`)
+
+## Not yet done
+
+- Foundry MCP API user not created; MCP connection unauthenticated
+- No adventure imported; zero sessions played
+- z.ai editing loop not wired
+- NPC profiles not created
+
+See `docs/backlog.md`.

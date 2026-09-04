@@ -18,9 +18,10 @@ nav:
     - Memory Backend Deep Dive: ai-dm-memory-backend-deep-dive-2026-08-13.md
     - Token Reduction: ai-dm-token-reduction-playbook-2026-08-13.md
     - Noodlr vs FoundryAI: noodlr-vs-foundryai-2026-08-06.md
+    - Notes Research Brief: ai-dm-notes-research-brief.md
+    - DM Research Prompt: dm-research-prompt.md
   - Management:
     - Backlog: backlog.md
-    - Status: ../STATUS.md
     - Development Notes: development-notes.md
 
 theme:

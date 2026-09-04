@@ -9,10 +9,26 @@ Foundry, coordinates NPC Bots, and maintains campaign memory.
 The ttrpg profile is already configured at
 `~/.hermes/profiles/ttrpg/` with:
 
-- **Provider**: OpenRouter
-- **Default model**: deepseek/deepseek-v4-flash
+- **Provider**: OpenRouter (key in profile `.env`)
+- **Default model**: `deepseek/deepseek-v4-flash` — routine GM work
+- **Heavy scenes** (complex adjudication, deep prose): switch to
+  `deepseek/deepseek-v4-pro` via `/model` for that session — see
+  Model Routing below
 - **Memory**: TencentDB Agent Memory (:8421)
 - **Skills**: loaded from this repo's `bot/skills/`
+
+## Model Routing
+
+| Job | Model |
+|-----|-------|
+| Routine GM work (narration, MCP ops, session flow) | deepseek-v4-flash (default) |
+| Heavy scenes (complex adjudication, long prose) | deepseek-v4-pro — switch with `/model` mid-session |
+| NPC Bots (isolated profiles) | ox-alpha (free tier) |
+| Editing loop (future) | z.ai GLM 5.2 (key stored, not wired) |
+
+Rule: default stays flash; promote to pro per-session only when the scene
+needs it. Cost is the constraint — see
+`docs/ai-dm-token-reduction-playbook-2026-08-13.md`.
 
 ## Required config additions
 

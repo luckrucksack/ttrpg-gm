@@ -1,186 +1,165 @@
 """
-pipeline/import_foundry.py — Import extracted adventure data into Foundry VTT.
+pipeline/import_foundry.py — Import plan generator for Foundry VTT.
 
-Connects to Foundry via the MCP server (laurigates/foundryvtt-mcp)
-and creates actors, journals, items, and roll tables from the
-pipeline's JSON output.
+HONEST SCOPE
+------------
+This script does NOT connect to Foundry directly, and it does NOT create
+documents by itself. Foundry writes happen through the GM Bot's native MCP
+client (the `foundryvtt-mcp` stdio server wired into the Hermes ttrpg
+profile). That server has no HTTP endpoint and no `create_actor` tool.
+
+What this script actually does:
+  1. Validates the pipeline's extracted JSON (actors, journals, items,
+     roll_tables).
+  2. Emits `manifest.json` — an ordered list of MCP tool calls the GM Bot
+     should execute, plus a list of entities that have NO MCP tool and must
+     be created manually in Foundry (actors, roll tables).
 
 Usage:
-    python -m pipeline.import_foundry import output/<adventure-name>/
-    python -m pipeline.import_foundry status   # check MCP server health
+    python -m pipeline.import_foundry plan output/<adventure-name>/ [--dry-run]
+    python -m pipeline.import_foundry status
+
+`status` only checks that the Foundry web server responds on :30000. It does
+not verify the MCP connection — that happens when the GM Bot loads its MCP
+tools (see bridge/README.md).
 """
 
 import json
 import sys
-import os
 from pathlib import Path
-from urllib import request, error
 
 
-MCP_TOOL_URL = os.environ.get("FOUNDRY_MCP_URL", "http://localhost:30000")
+# Tools that exist in foundryvtt-mcp 1.5.x (verified against upstream README).
+EXISTING_TOOLS = {
+    "create_journal_entry",  # GM-only by default; pass "visibility" for players
+    "create_actor_item",     # add inline item to an EXISTING actor
+}
+# Entity types with NO create tool in foundryvtt-mcp (verified upstream):
+#   - actors      → no create_actor tool; create in Foundry UI, or fork/extend MCP
+#   - roll_tables → no roll-table tool at all; create in Foundry UI
 
 
-def mcp_call(tool: str, args: dict = None) -> dict:
-    """Call an MCP tool on Foundry via HTTP (MCP JSON-RPC)."""
-    payload = {
-        "jsonrpc": "2.0",
-        "id": 1,
-        "method": "tools/call",
-        "params": {"name": tool, "arguments": args or {}},
-    }
-    req = request.Request(
-        MCP_TOOL_URL,
-        data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with request.urlopen(req, timeout=30) as resp:
-            return json.loads(resp.read().decode())
-    except error.URLError as e:
-        return {"error": str(e)}
-    except json.JSONDecodeError as e:
-        return {"error": f"JSON decode: {e}"}
-
-
-def import_actors(actors: list, dry_run: bool = False):
-    """Import actors into Foundry via MCP create_actor."""
-    imported = 0
-    for actor in actors:
-        name = actor.get("name", "Unnamed")
-        if dry_run:
-            print(f"  [dry] actor: {name}")
-            continue
-        # The MCP server exposes create_actor — call it
-        result = mcp_call("create_actor", {
-            "name": name,
-            "type": actor.get("type", "npc"),
-            "system": actor.get("stats", {}),
-        })
-        if "error" in result:
-            print(f"  ✗ actor: {name} — {result['error']}")
-        else:
-            imported += 1
-    return imported
-
-
-def import_journals(journals: list, dry_run: bool = False):
-    """Import journals into Foundry via MCP create_journal_entry."""
-    imported = 0
-    for entry in journals:
-        name = entry.get("name", "Journal Entry")
-        if dry_run:
-            print(f"  [dry] journal: {name}")
-            continue
-        # MCP tool: create_journal_entry
-        result = mcp_call("create_journal_entry", {
-            "name": name,
-            "content": entry.get("content", ""),
-        })
-        if "error" in result:
-            print(f"  ✗ journal: {name} — {result['error']}")
-        else:
-            imported += 1
-    return imported
-
-
-def import_items(items: list, dry_run: bool = False):
-    """Import items into Foundry via MCP create_actor_item."""
-    imported = 0
-    for item in items:
-        name = item.get("name", "Item")
-        if dry_run:
-            print(f"  [dry] item: {name}")
-            continue
-        result = mcp_call("create_actor_item", {
-            "name": name,
-            "type": item.get("type", "weapon"),
-            "system": item.get("stats", {}),
-        })
-        if "error" in result:
-            print(f"  ✗ item: {name} — {result['error']}")
-        else:
-            imported += 1
-    return imported
-
-
-def check_status() -> dict:
-    """Check MCP server health."""
-    # Try to list actors as a connectivity check
-    result = mcp_call("search_actors", {"query": ""})
-    return {
-        "status": "ok" if "error" not in result else "error",
-        "detail": result,
-    }
-
-
-# ── CLI ────────────────────────────────────────────────────────────────
-
-def cmd_import():
-    import_dir = sys.argv[2]
-    p = Path(import_dir)
-    if not p.is_dir():
-        print(f"Not a directory: {import_dir}", file=sys.stderr)
-        sys.exit(1)
-
-    dry_run = "--dry-run" in sys.argv
-    label = "DRY RUN" if dry_run else "IMPORT"
-
-    # Load extracted data
+def load_entities(import_dir: Path) -> dict:
+    """Load the four entity files; missing files become empty lists."""
     entities = {}
     for name in ("actors", "journals", "items", "roll_tables"):
-        f = p / f"{name}.json"
+        f = import_dir / f"{name}.json"
         if f.exists():
-            with open(f) as fp:
-                entities[name] = json.load(fp)
-            print(f"  loaded {len(entities[name])} {name}")
+            entities[name] = json.loads(f.read_text())
         else:
             entities[name] = []
-
-    print(f"\n{label} to Foundry VTT via MCP...")
-
-    counts = {}
-    if entities["actors"]:
-        counts["actors"] = import_actors(entities["actors"], dry_run)
-
-    if entities["journals"]:
-        counts["journals"] = import_journals(entities["journals"], dry_run)
-
-    if entities["items"]:
-        counts["items"] = import_items(entities["items"], dry_run)
-
-    if entities["roll_tables"]:
-        print("  [note] roll_tables import needs MCP extend — manual via Foundry UI for now")
-
-    if not dry_run:
-        print(f"\nImported: {json.dumps(counts)}")
-    else:
-        print("\nDry run complete. Run without --dry-run to import.")
+    return entities
 
 
-def cmd_status():
-    result = check_status()
-    if result["status"] == "ok":
-        print("MCP server: connected ✓")
-    else:
-        print(f"MCP server: {result}")
+def build_plan(entities: dict) -> dict:
+    """Map extracted entities to MCP tool calls the GM Bot can execute."""
+
+    calls = []
+    manual = []
+
+    # Journals → create_journal_entry (exists upstream)
+    for entry in entities["journals"]:
+        calls.append({
+            "tool": "create_journal_entry",
+            "arguments": {
+                "name": entry.get("name", "Journal Entry"),
+                "content": entry.get("content", ""),
+            },
+        })
+
+    # Items → create_actor_item (exists upstream, but requires an existing actor)
+    for item in entities["items"]:
+        calls.append({
+            "tool": "create_actor_item",
+            "arguments": {
+                "actor_id": "<RESOLVE IN FOUNDRY — actor must exist first>",
+                "name": item.get("name", "Item"),
+                "type": item.get("type", "weapon"),
+            },
+        })
+
+    # Actors → NO create tool upstream; manual or upstream extension
+    for actor in entities["actors"]:
+        manual.append({
+            "entity": "actor",
+            "name": actor.get("name", "Unnamed"),
+            "why": "foundryvtt-mcp has no create_actor tool — create in Foundry UI, "
+                   "or fork the MCP server to add one",
+        })
+
+    # Roll tables → NO tool upstream; manual
+    for table in entities["roll_tables"]:
+        manual.append({
+            "entity": "roll_table",
+            "name": table.get("name", "Unnamed Table"),
+            "why": "foundryvtt-mcp has no roll-table tool — create in Foundry UI",
+        })
+
+    return {
+        "generated_for": "GM Bot (Hermes ttrpg profile, native MCP client)",
+        "mcp_calls": calls,
+        "manual_only": manual,
+    }
 
 
 def main():
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    if not args or args[0] in ("-h", "--help"):
         print(__doc__)
-        sys.exit(1)
+        sys.exit(0)
 
-    command = sys.argv[1]
-    if command == "import":
-        cmd_import()
-    elif command == "status":
-        cmd_status()
-    elif command == "--help":
-        print(__doc__)
-    else:
-        print(f"Unknown command: {command}", file=sys.stderr)
-        sys.exit(1)
+    command = args[0]
+
+    if command == "status":
+        from urllib import request
+        try:
+            req = request.Request("http://localhost:30000", method="GET")
+            with request.urlopen(req, timeout=10) as resp:
+                print(f"Foundry web server: responding (HTTP {resp.status})")
+        except Exception as e:
+            print(f"Foundry web server: NOT responding ({e})")
+            print("This is NOT an MCP check. MCP connectivity is verified when the")
+            print("GM Bot loads its tools — see bridge/README.md.")
+        sys.exit(0)
+
+    if command == "plan":
+        if len(args) < 2:
+            print("Usage: python -m pipeline.import_foundry plan output/<name>/ [--dry-run]",
+                  file=sys.stderr)
+            sys.exit(1)
+        import_dir = Path(args[1])
+        if not import_dir.is_dir():
+            print(f"Not a directory: {import_dir}", file=sys.stderr)
+            sys.exit(1)
+
+        entities = load_entities(import_dir)
+        plan = build_plan(entities)
+
+        for name in ("actors", "journals", "items", "roll_tables"):
+            print(f"  loaded {len(entities[name])} {name}")
+
+        if len(args) > 2 and args[2] == "--dry-run":
+            print("\nMCP calls the GM Bot would execute:")
+            for call in plan["mcp_calls"]:
+                print(f"  → {call['tool']} {call['arguments'].get('name', '')!r}")
+            print("\nManual-only entities (no MCP tool available):")
+            for entry in plan["manual_only"]:
+                print(f"  → {entry['entity']}: {entry['name']!r} — {entry['why']}")
+            print("\nNo files written (--dry-run).")
+            sys.exit(0)
+
+        out = import_dir / "manifest.json"
+        with open(out, "w") as f:
+            json.dump(plan, f, indent=2)
+        print(f"\nWrote {out}")
+        print(f"  {len(plan['mcp_calls'])} MCP calls for the GM Bot to execute")
+        print(f"  {len(plan['manual_only'])} entities to create manually in Foundry")
+        print("\nNext: give the GM Bot this manifest; it executes mcp_foundry_* calls.")
+        sys.exit(0)
+
+    print(f"Unknown command: {command}", file=sys.stderr)
+    print(__doc__, file=sys.stderr)
+    sys.exit(1)
 
 
 if __name__ == "__main__":
