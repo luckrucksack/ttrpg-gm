@@ -1,8 +1,8 @@
 # Bridge: Foundry VTT MCP Connection
 
-This module connects the Hermes GM Bot to Foundry VTT via
+Connects the Hermes GM Bot to Foundry VTT via
 [laurigates/foundryvtt-mcp](https://github.com/laurigates/foundryvtt-mcp) — an
-open-source MCP server that exposes Foundry's internal API as tools.
+open-source MCP server that exposes Foundry's document API as tools.
 
 ## Architecture
 
@@ -11,7 +11,7 @@ GM Bot (Hermes ttrpg profile)
   ┃ native MCP client
   ┃
   ┃ foundryvtt-mcp (Node.js process, managed by Hermes)
-  ┃  ─ reads actors, journals, scenes
+  ┃  ─ reads actors, journals, compendia, scenes
   ┃  ─ creates/updates documents
   ┃  ─ manages combat, initiative, conditions
   ┃  ─ rolls dice via Foundry's engine
@@ -24,91 +24,123 @@ Foundry VTT (:30000)
 
 ### 1. Create a Foundry user for the MCP server
 
-In Foundry VTT:
-1. Go to **Configuration → User Management**
-2. Click **Create User**
-3. Username: `mcp-api`
-4. Password: generate a strong one
-5. Role: **Assistant GM** (needed to read world data and mutate game state)
-6. Save
+In Foundry VTT, with the world running:
 
-### 2. Configure the MCP server
+1. **Configuration → User Management → Create User**
+2. Username: `mcp-api`
+3. Password: the value of `MCP_FOUNDRY_PASSWORD` in the profile `.env`
+   (see step 3 — read it from there rather than inventing one)
+4. Role: **Assistant GM** (required to read world data and mutate game state)
+5. Save
 
-The server is installed on demand via npx (no global install needed):
+Foundry hashes the password server-side on create, so the same plaintext value
+works for the socket login.
+
+### 2. Confirm the server runs
 
 ```bash
-npx -y foundryvtt-mcp
+npx -y foundryvtt-mcp@1.5.2
 ```
 
-### 3. Wire into Hermes as native MCP server
+It speaks stdio MCP; a bare run with valid env vars stays attached and silent.
+That is success. It exits non-zero on a bad URL, bad credentials, or a stopped
+world.
 
-Add to `~/.hermes/profiles/ttrpg/config.yaml`:
+### 3. Wire into Hermes
+
+`~/.hermes/profiles/ttrpg/config.yaml`:
 
 ```yaml
 mcp_servers:
   foundry:
     command: "npx"
-    args: ["-y", "foundryvtt-mcp"]
+    args: ["-y", "foundryvtt-mcp@1.5.2"]
     env:
       FOUNDRY_URL: "http://localhost:30000"
       FOUNDRY_USERNAME: "mcp-api"
-      FOUNDRY_PASSWORD: "<your-password>"
+      FOUNDRY_PASSWORD: "${MCP_FOUNDRY_PASSWORD}"
       FOUNDRY_WRITE_ENABLED: "true"
     timeout: 120
     connect_timeout: 30
 ```
 
-Restart the ttrpg profile. On next load, Hermes discovers these MCP tools
-and makes them available to the GM Bot.
+The secret itself lives in `~/.hermes/profiles/ttrpg/.env` (mode 600):
+
+```
+MCP_FOUNDRY_PASSWORD=<generated at provisioning time>
+```
+
+Hermes expands `${VAR}` from the profile's secret scope at launch, so the
+password never appears in `config.yaml` or in git.
+
+> Gotcha: an **unset** variable is passed through literally. If auth fails with
+> a password that looks like `${...}`, the variable is missing from the `.env`
+> the profile loads.
+
+Pin the version (`@1.5.2`). `npx -y foundryvtt-mcp` floats to latest and a
+tool-signature change would silently break the skill's parameter names.
+
+### 4. Restart the ttrpg profile, then verify
+
+```bash
+bash bridge/check.sh
+```
+
+## Verifying the bridge
+
+`bridge/check.sh` proves all four links in one shot: Foundry reachable → service
+account exists → credentials authenticate → the MCP server registers tools. Run
+it after any Foundry or Hermes update. A bridge that is "configured" but not
+"authenticated" looks identical in `config.yaml`; this is the check that tells
+them apart.
 
 ## Available Tools
 
-Verified against `foundryvtt-mcp` v1.5.x. Selected tools (full list at the
-[upstream repo](https://github.com/laurigates/foundryvtt-mcp)):
+Verified against the installed `foundryvtt-mcp@1.5.2` (33 tools).
 
-| Tool | Purpose |
-|------|---------|
-| `search_actors` | Find characters/NPCs by name |
-| `get_actor_details` | Full character/npc sheet |
-| `search_items` | Find equipment, spells |
-| `get_scene_info` | Current scene details |
-| `search_journals` | Find notes and handouts |
-| `get_journal` | Retrieve a specific journal |
-| `get_users` | List online users |
-| `get_combat_state` | Combat and initiative |
-| `get_chat_messages` | Recent chat log |
-| `start_combat` | Begin encounter |
-| `next_turn` | Advance initiative |
-| `end_combat` | End encounter |
-| `set_initiative` | Set combatant turn order |
-| `move_token` | Move token on scene |
-| `apply_status_effect` | Apply/remove conditions |
-| `update_actor_attributes` | Update HP, stats |
-| `create_actor_item` | Add item to actor |
-| `update_actor_item` | Modify actor item |
-| `delete_actor_item` | Remove actor item |
-| `create_journal_entry` | Create journal entry |
-| `search_world` | Full-text search all entities |
-| `get_world_summary` | Overview of world state |
-| `roll_dice` | Roll dice via Foundry |
-| `generate_npc` | NPC text (not written to world) |
-| `generate_loot` | Treasure text (not written to world) |
+Read / query:
+- `roll_dice` — roll a formula through Foundry's dice engine
+- `search_actors`, `get_actor_details` — find and inspect actors
+- `search_items` — find items by name/type/rarity
+- `search_compendium` — search installed compendium packs (adventure content)
+- `search_journals`, `get_journal` — find and read journal entries
+- `search_world` — one search across all collections
+- `get_scene_info`, `get_world_summary`, `get_users`, `get_chat_messages`
+- `refresh_world_data` — force a re-fetch after a Foundry restart
+- `generate_npc`, `generate_loot` — dnd5e-shaped text generators, no world writes
 
-Stubs present upstream — do NOT rely on their output: `lookup_rule`
-(placeholder), `diagnose_errors` (fixed "no errors" reply).
+Write (require `FOUNDRY_WRITE_ENABLED=true` **and** Assistant GM+ permission):
+- `update_actor_attributes` — patch `actor.system` fields by dot-path
+- `create_actor_item`, `update_actor_item`, `delete_actor_item`
+- `create_journal_entry` — GM-only visibility unless `visibility` is passed
+- `start_combat`, `next_turn`, `end_combat`, `set_initiative`
+- `move_token`, `apply_status_effect`
 
-Writes require `FOUNDRY_WRITE_ENABLED=true` **and** the connecting user to have
-GM/owner permission. There is **no `create_actor` tool** — actors are created
-in Foundry's UI, then referenced by the bot (see `pipeline/import_foundry.py`).
+Not usable as documented by upstream:
+- `lookup_rule` — stub, returns a templated placeholder, consults no rules source
+- `diagnose_errors` — stub, always reports "no errors detected"
+- `get_recent_logs`, `search_logs`, `get_system_health`, `get_health_status` —
+  require the third-party REST API module, which is **not installed** in this
+  world (world.json lists zero modules)
 
-MCP tool names are prefixed by Hermes: `mcp_foundry_search_actors`,
-`mcp_foundry_roll_dice`, etc.
+There is **no `create_actor` tool**. Actors are created in Foundry's UI or
+imported, then referenced by the bot (see `pipeline/import_foundry.py`).
+
+Hermes prefixes every tool: `mcp_foundry_search_actors`, `mcp_foundry_roll_dice`, …
+
+## Failure modes (verified)
+
+- **Foundry down or credentials wrong ⇒ the MCP server exits.** It does not
+  start in a degraded state; Hermes ends up with *no* `mcp_foundry_*` tools at
+  all. Any GM logic that assumes tools exist must check first.
+- **Foundry restart ⇒ stale cache.** Reads are cached and follow live document
+  changes, but a restart can leave the cache cold. Call `refresh_world_data()`.
+- **Auth is a socket login, not an API key.** The username must exist in the
+  *running world*; a user in a different world does nothing.
 
 ## Extending
 
-If the MCP server lacks a tool we need (e.g., roll table CRUD, NPC auto-pilot,
-campaign memory management), the repo can be forked and extended.
-
-The bridge is designed to be replaced transparently — all GM Bot code talks
-to Foundry through these tool abstractions, not direct HTTP calls. Swap the
-backend by changing the MCP server.
+If the MCP server lacks a tool we need (roll table CRUD, NPC auto-pilot,
+campaign memory management), fork and extend. The bridge is designed to be
+swapped transparently: GM Bot logic talks to Foundry only through these tool
+abstractions, so the backend can be replaced by changing the MCP server.

@@ -9,8 +9,9 @@ Foundry, coordinates NPC Bots, and maintains campaign memory.
 The ttrpg profile is already configured at
 `~/.hermes/profiles/ttrpg/` with:
 
-- **Provider**: OpenRouter (key in profile `.env`)
-- **Default model**: `deepseek/deepseek-v4-flash` — routine GM work
+- **Provider**: DeepSeek (native API; key in profile `.env`)
+- **Default model**: `deepseek-v4.1-flash-expires-on-0910` — routine GM work.
+  Falls back to `deepseek-v4-flash` when the experimental ID expires (2026-09-10)
 - **Heavy scenes** (complex adjudication, deep prose): switch to
   `deepseek/deepseek-v4-pro` via `/model` for that session — see
   Model Routing below
@@ -39,11 +40,11 @@ Add to `~/.hermes/profiles/ttrpg/config.yaml`:
 mcp_servers:
   foundry:
     command: "npx"
-    args: ["-y", "foundryvtt-mcp"]
+    args: ["-y", "foundryvtt-mcp@1.5.2"]   # pin: tool names/params are version-specific
     env:
       FOUNDRY_URL: "http://localhost:30000"
       FOUNDRY_USERNAME: "mcp-api"
-      FOUNDRY_PASSWORD: "<your-password>"
+      FOUNDRY_PASSWORD: "${MCP_FOUNDRY_PASSWORD}"   # expanded from the profile .env
       FOUNDRY_WRITE_ENABLED: "true"
     timeout: 120
     connect_timeout: 30
