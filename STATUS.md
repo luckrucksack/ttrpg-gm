@@ -12,7 +12,8 @@
 
 ## Verified state (2026-09-09)
 
-- **Foundry bridge is LIVE and verified end to end.** `bash bridge/check.sh` passes all three gates: Foundry `:30000` answers → `mcp-api` credentials authenticate → the MCP server registers all **33 `mcp_foundry_*` tools**. Server admin key restored (`Config/admin.txt` copied back from `admin.txt.bak`; the `.bak` is kept).
+- **Foundry bridge is LIVE and verified end to end.** `bash bridge/check.sh` passes all three gates: Foundry `:30000` answers → `mcp-api` credentials authenticate → the MCP server registers all **33 `mcp_foundry_*` tools**. Verified again through Hermes itself: `hermes mcp test foundry --profile ttrpg` returns the same tool list, from any cwd (`cwd` is pinned in the profile config).
+- **Launch-cwd trap fixed.** The MCP server loads `.env` from its working directory via `dotenv`; the repo `.env` carried `LOG_LEVEL=INFO`, which failed the server's lowercase enum and killed it with an opaque "Connection closed". Value corrected to `info` and `cwd: .../bridge` pinned.
 - `mcp-api` service account created in the `deltagreen` world (role 3, Assistant GM). Its password lives only in `~/.hermes/profiles/ttrpg/.env` as `MCP_FOUNDRY_PASSWORD`; `config.yaml` references it as `${MCP_FOUNDRY_PASSWORD}`.
 - `foundryvtt-mcp` **pinned to v1.5.2** in the ttrpg profile — tool names and parameter shapes are version-specific.
 - `bot/skills/ttrpg-foundry-bridge.md` rewritten against the real v1.5.2 schemas. The previous version had **9 wrong parameter names and 1 nonexistent tool**, and omitted `search_compendium` (the tool that reaches purchased adventure content).

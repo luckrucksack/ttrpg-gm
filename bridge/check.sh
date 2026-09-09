@@ -61,10 +61,12 @@ FOUNDRY_URL="$FOUNDRY_URL" \
 FOUNDRY_USERNAME="$FOUNDRY_USERNAME" \
 MCP_PACKAGE="$MCP_PACKAGE" \
 ENV_FILE="$ENV_FILE" \
+BRIDGE_CWD="$HERE" \
 python3 - "$@" <<'PY'
-import json, os, re, subprocess, sys, select, time
+import json, os, re, subprocess, sys, select, tempfile, time
 
 url = os.environ["FOUNDRY_URL"]
+bridge_cwd = os.environ["BRIDGE_CWD"]
 user = os.environ["FOUNDRY_USERNAME"]
 pkg = os.environ["MCP_PACKAGE"]
 env_file = os.environ["ENV_FILE"]
@@ -88,11 +90,30 @@ env.update({
     "FOUNDRY_WRITE_ENABLED": "true",
 })
 
+# The server calls dotenv.config(), which reads .env from its *working
+# directory*. A stray .env there (e.g. LOG_LEVEL=INFO) kills it at startup
+# with an opaque "Connection closed", so pin cwd to the bridge dir --
+# exactly what mcp_servers.foundry does in the profile config.
+errlog = tempfile.NamedTemporaryFile("w+", prefix="bridge-check-", suffix=".log", delete=False)
+err_path = errlog.name
 proc = subprocess.Popen(
     ["npx", "-y", pkg],
-    stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-    text=True, bufsize=1, env=env,
+    stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=errlog,
+    text=True, bufsize=1, env=env, cwd=bridge_cwd,
 )
+
+def dump_stderr():
+    """Print the server's own error output -- the actual reason it died."""
+    try:
+        errlog.flush()
+        with open(err_path) as fh:
+            lines = [l.rstrip() for l in fh if l.strip()]
+    except OSError:
+        lines = []
+    if lines:
+        print("       --- server stderr (last 8) ---")
+        for line in lines[-8:]:
+            print(f"       {line}")
 
 def send(obj):
     proc.stdin.write(json.dumps(obj) + "\n")
@@ -127,9 +148,10 @@ send({"jsonrpc": "2.0", "id": 1, "method": "initialize",
 init = read_until(lambda m: m.get("id") == 1)
 if not init or "result" not in init:
     print("  FAIL MCP server did not complete the initialize handshake")
-    print("       it exits immediately when Foundry is unreachable or the")
-    print("       credentials are wrong; check the user exists in the RUNNING world")
+    print("       it exits immediately when Foundry is unreachable, the")
+    print("       credentials are wrong, or its cwd holds a bad .env")
     proc.kill()
+    dump_stderr()
     sys.exit(1)
 
 send({"jsonrpc": "2.0", "method": "notifications/initialized"})
@@ -138,6 +160,7 @@ tl = read_until(lambda m: m.get("id") == 2)
 proc.kill()
 if not tl or "result" not in tl:
     print("  FAIL no tool list returned")
+    dump_stderr()
     sys.exit(1)
 
 tools = [t["name"] for t in tl["result"].get("tools", [])]

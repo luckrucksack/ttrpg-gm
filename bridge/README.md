@@ -130,6 +130,14 @@ Hermes prefixes every tool: `mcp_foundry_search_actors`, `mcp_foundry_roll_dice`
 
 ## Failure modes (verified)
 
+- **A stray `.env` in the server's working directory can kill it.** The server
+  calls `dotenv.config()`, which reads `.env` from its *cwd*. This repo's `.env`
+  had `LOG_LEVEL=INFO` (uppercase) and the server's schema accepts only
+  `debug|info|warn|error` — so launching with the repo as cwd died instantly
+  with an opaque `Connection closed`. Fixed twice over: the value is now
+  `info`, and `cwd: /Users/chriscoon/ttrpg_gm/bridge` is pinned in the profile
+  config so the server never inherits an arbitrary directory. `check.sh` pins
+  the same cwd and prints the server's stderr on failure.
 - **Foundry down or credentials wrong ⇒ the MCP server exits.** It does not
   start in a degraded state; Hermes ends up with *no* `mcp_foundry_*` tools at
   all. Any GM logic that assumes tools exist must check first.
