@@ -170,5 +170,4 @@ TencentDB Agent Memory on port :8421.
   prohibitions before it reaches the player
 - **NPC auto-pilot**: monster tactics during combat, NPC roleplay on
   autopilot during downtime
-- **Campaign memory consolidation**: cron-driven weekly summary compaction
 - **Published adventure marketplace scraper**: auto-detect new imports

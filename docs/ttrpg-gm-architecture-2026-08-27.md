@@ -62,7 +62,6 @@ The Python code was ~5,300 lines across ~35 files, with zero actual game session
 │  Structured types: character profiles, location descriptions,│
 │  plot threads, faction relationship graph, session logs,     │
 │  NPC knowledge boundaries                                    │
-│  Cron: weekly consolidation (existing, works)                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -82,7 +81,6 @@ The Python code was ~5,300 lines across ~35 files, with zero actual game session
 
 - **Cron routines** advance NPC agendas: the vizier Bot DMs the guard captain Bot to increase patrols
 - **GM Bot** surfaces relevant changes next session: "While you slept, the East Gate guards have doubled"
-- **TencentDB consolidation cron** compacts session logs into durable scene blocks (weekly, existing)
 
 ## Skills the GM Bot Needs
 
