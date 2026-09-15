@@ -20,4 +20,4 @@ Design knowledge (prompt architecture, prohibitions, NPC Bot concept, Enneagram/
 ## Notes
 
 - Architecture extraction: `docs/ai-dm-prompt-architecture-2026-08-07.md` — the design DNA of the GM/DM prompt lineages (82 Notes, version trees, named engines, prohibitions layer).
-- The DM memory consolidation pipeline runs from this profile's cron (weekly Mon 10am): `~/.hermes/profiles/ttrpg/scripts/dm-consolidate.py` against `~/.memory-tencentdb/ttrpg-memory/vectors.db`.
+- The DM memory consolidation pipeline runs manually (session-end): `~/.hermes/profiles/ttrpg/scripts/dm-consolidate.py` against `~/.memory-tencentdb/ttrpg-memory/vectors.db`.
