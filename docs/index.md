@@ -8,13 +8,15 @@ published TTRPG adventures in Foundry VTT with a Hermes Agent Bot as the GM.
 [laurigates/foundryvtt-mcp](https://github.com/laurigates/foundryvtt-mcp) (bridge),
 Isolated Hermes Bot profiles (NPCs).
 
-**Status:** Architecture v2, pipeline built, awaiting first test session.
+**Status:** Architecture v3 (2026-09-25) — bridge + memory verified live; first adventure (Delta Green) being provisioned.
 
 ## Start Here
 
-- [Current Architecture](ttrpg-gm-architecture-2026-09-01.md) — the modular
-  system: pipeline, bridge, bot, NPC template, campaign memory
-- [Previous Architecture (v1)](ttrpg-gm-architecture-2026-08-27.md) — the
+- [Current Architecture (v3)](ttrpg-gm-architecture-2026-09-25.md) — two
+  content paths, verified bridge and memory, operator interfaces
+- [Previous Architecture (v2)](ttrpg-gm-architecture-2026-09-01.md) — the
+  modular system: pipeline, bridge, bot, NPC template, campaign memory
+- [Origins (v1)](ttrpg-gm-architecture-2026-08-27.md) — the
   original design that this system was built from
 - [NPC Bots Design](npc-bots-design-sketch-2026-08-26.md) — using isolated
   Hermes Bot profiles as persistent TTRPG NPCs

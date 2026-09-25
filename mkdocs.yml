@@ -6,8 +6,9 @@ repo_url: https://github.com/luckrucksack/ttrpg-gm
 nav:
   - Home: index.md
   - Architecture:
-    - Current (2026-09-01): ttrpg-gm-architecture-2026-09-01.md
-    - Previous (2026-08-27): ttrpg-gm-architecture-2026-08-27.md
+    - Current (2026-09-25): ttrpg-gm-architecture-2026-09-25.md
+    - Previous (2026-09-01): ttrpg-gm-architecture-2026-09-01.md
+    - Origins (2026-08-27): ttrpg-gm-architecture-2026-08-27.md
   - Design:
     - NPC Bots: npc-bots-design-sketch-2026-08-26.md
     - Prompt Architecture: ai-dm-prompt-architecture-2026-08-07.md

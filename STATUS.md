@@ -1,6 +1,6 @@
 # STATUS
 
-**Current:** Architecture v2 (2026-09-01) — Hermes Bot Mode as the GM runtime, Foundry VTT as the mechanics engine, NPCs as isolated Hermes profiles. No game sessions played yet.
+**Current:** Architecture v3 (2026-09-25) — see `docs/ttrpg-gm-architecture-2026-09-25.md`. Bridge and memory verified live; content intake defined (VTT modules primary, PDF secondary); Delta Green world being provisioned. No game sessions played yet.
 
 ## What's in this repo
 
@@ -24,6 +24,8 @@
 ## Not yet done
 
 - No adventure imported; zero sessions played
+- Foundry Local REST API module not installed (compendium search + diagnostics dark)
+- Delta Green module: key registered in profile env; redemption + install pending
 - ttrpg profile gateway is not running; config changes take effect on next start
 - z.ai editing loop not wired
 - NPC profiles not created
