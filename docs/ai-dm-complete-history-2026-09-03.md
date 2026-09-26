@@ -21,7 +21,7 @@ This is a complete chronological record of the AI-DM (AI Game Master) project �
 - TencentDB Agent Memory as long-term memory backend (Hy-Memory rejected — maturity / single-maintainer risk, not cost; it was MIT/free)
 - Cost-pragmatic: flips providers within hours of price hikes
 - Games: Dungeon Crawl Classics (DCC) installed, system-agnostic design
-- Campaign: Dying Earth (Vance) + Starfinder seeded in gitignored campaigns/
+- Campaign: Dying Earth (Vance) — published DCC modules in gitignored campaigns/
 - Discord server: "Eberron Campaign" with channels, roles, Avrae bot
 
 ### Pre-History (before AI recording started — July 2026)

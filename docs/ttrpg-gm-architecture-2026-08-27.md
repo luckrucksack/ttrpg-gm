@@ -201,8 +201,6 @@ Entry shim that imported and called gm_core.runtime.main(). Minimal, but represe
 
 Included bash launchers (launch_gm.sh, setup.sh, setup_complete.sh), a Python play dashboard (play_dashboard.py), and a PDF download workflow document. All tied to the old Python runtime execution model.
 
-
-
 ---
 
 ## Foundry Bridge — Three Options (TBD)
