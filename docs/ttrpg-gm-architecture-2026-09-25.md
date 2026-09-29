@@ -93,8 +93,8 @@ Concept: each significant NPC as an isolated Hermes profile with its own memory 
 
 ## Open items
 
-- Embedding provider for the ttrpg memory store (semantic recall).
-- Same PATH guard for the default/ssdi profile memory envs.
+- ~~Embedding provider for the ttrpg memory store (semantic recall).~~ **Resolved 2026-09-25.** The store ran on the *default* store's config (its own `TDAI_GATEWAY_CONFIG` was a literal unexpanded `$HOME` path) and its spawn env carried no `OPENROUTER_API_KEY`, so it initialized with **no embedding service and wrote zero vectors** — 23 L1 / 6 L0 records, keyword-only recall. Fixed with a per-store `tdai-gateway.yaml` (free OpenRouter NVIDIA model, 2048d), an absolute `TDAI_GATEWAY_CONFIG`, and a spawn command that sources the profile `.env`. All 29 records re-embedded. Verified live: `embeddingService: true`, search `strategy: hybrid`.
+- ~~Same PATH guard for the default/ssdi profile memory envs.~~ **Done 2026-09-25** — both profiles' gateway spawn commands now export the Hermes node bin and source their own `.env`; ssdi's config path also pointed at the default store and now resolves to its own.
 - `bridge/check.sh` leaves a stray process per run — process-group kill on cleanup.
 
 ## Revision history
