@@ -239,8 +239,8 @@ path above. It applies *sometimes*; it is not the default intake.
 - [ ] Foundry Local REST API module → compendium search + diagnostics (blocked
       upstream; see `backlog.md` for the two options)
 - [ ] Narrative critique loop (z.ai)
-- [ ] NPC bots — maker + first NPC (Billy Ray Spivey) 2026-10-04; remaining:
-      free-model bake-off pick, first live end-to-end, per-NPC memory decision
+- [ ] NPC bots — maker + first NPC (Billy Ray Spivey) live 2026-10-04 (model: deepseek-flash, owner call); remaining:
+      first live GM→NPC round-trip, campaign-dir persona archive, per-NPC memory decision
 
 ## Open items
 

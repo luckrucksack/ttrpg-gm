@@ -7,22 +7,24 @@
 # Sources of truth (per NPC, under the gitignored campaign data layer):
 #   campaigns/<campaign_id>/npcs/<npc_slug>/dossier.md   the answered character sheet
 #   campaigns/<campaign_id>/npcs/<npc_slug>/soul.md      the bot's persona file (goes in as SOUL.md)
-#   campaigns/<campaign_id>/npcs/<npc_slug>/bot.yaml     metadata: title / description / model
+#   campaigns/<campaign_id>/npcs/<npc_slug>/bot.yaml     metadata: title / description / model / provider
 #
 # Result: an isolated Hermes profile  ~/.hermes/profiles/npc-<npc_slug>
-#   - minimal config; free OpenRouter model behind the swappable alias `npc-free`
+#   - minimal config; same model stack as the GM (default deepseek-flash; one-line swap)
 #   - SOUL.md + dossier.md copied into the profile
 #   - Bot Mode marker in profile.yaml; canonical "Bot Chat" session created
 #
-# Model policy: NPC bots run free OpenRouter models (owner constraint, 2026-10-01).
+# Model policy: NPCs run the same stack as the GM — default deepseek-flash on the
+# deepseek provider (owner call 2026-10-04; supersedes free-OpenRouter-for-NPCs).
+# bot.yaml may set `provider:` and `model:`; those defaults apply otherwise.
 # Bind = model.default, set to the RAW model id (no alias): an alias value that
 # starts with a provider-style vendor token (e.g. "qwen/") gets re-routed by the
 # CLI's provider auto-detection to that vendor's own provider (verified 2026-10-04).
 # Swap one line:  hermes -p npc-<slug> config set model.default <model-id>
 #
 # Notes:
-#   - .env is written by script (never by hand): only OPENROUTER_API_KEY, with a
-#     timestamped backup. The key value never gets printed.
+#   - .env is written by script (never by hand): only the provider's key
+#     (DEEPSEEK_API_KEY by default), with a timestamped backup. Values never print.
 #   - Bot Mode needs (a) a session titled exactly "Bot Chat" and (b) a
 #     `ui_meta: { hermes-bots: ... }` block in profile.yaml. This install already
 #     carries the marker on the ttrpg profile, so one marked profile marks the install.
@@ -58,12 +60,14 @@ done
 # --- metadata (single-line values; description folded to one line) ---
 title="$(sed -n 's/^title: *//p' "$src/bot.yaml" | head -1)"
 model="$(sed -n 's/^model: *//p' "$src/bot.yaml" | head -1)"
+provider="$(sed -n 's/^provider: *//p' "$src/bot.yaml" | head -1)"
+provider="${provider:-deepseek}"
 desc="$(awk '/^description:/{f=1;sub(/^description: */,"");if($0==">"||$0=="|"||$0==">-"||$0=="|-")next;print;next} f&&/^[A-Za-z_][A-Za-z0-9_]*:/{f=0} f{print}' "$src/bot.yaml" | tr '\n' ' ' | sed 's/  */ /g;s/^ *//;s/ *$//')"
 [ -n "$title" ] && [ -n "$model" ] || { echo "FATAL: bot.yaml needs title + model"; exit 1; }
 
 echo "== NPC bot: $profile — \"$title\""
 echo "   source: $src"
-echo "   model:  alias npc-free -> $model"
+echo "   model:  $model (provider: $provider)"
 
 if [ "$mode" != "--verify-only" ]; then
   # --- 1. profile skeleton (idempotent) ---
@@ -74,7 +78,7 @@ if [ "$mode" != "--verify-only" ]; then
   fi
 
   # --- 2. model + agent wiring ---
-  hermes -p "$profile" config set model.provider openrouter >/dev/null
+  hermes -p "$profile" config set model.provider "$provider" >/dev/null
   hermes -p "$profile" config set model.default "$model" >/dev/null
   hermes -p "$profile" config set agent.max_turns 10 >/dev/null
   hermes -p "$profile" config set agent.task_completion_guidance false >/dev/null
@@ -82,12 +86,17 @@ if [ "$mode" != "--verify-only" ]; then
   hermes -p "$profile" config set memory.memory_char_limit 500 >/dev/null
   hermes -p "$profile" config set memory.user_char_limit 500 >/dev/null
 
-  # --- 3. .env — only the OpenRouter key, scripted, with a backup ---
-  if ! grep -q '^OPENROUTER_API_KEY=.' "$home/.env" 2>/dev/null; then
+  # --- 3. .env — the provider's key, scripted, with a backup ---
+  case "$provider" in
+    deepseek)   keyvar="DEEPSEEK_API_KEY" ;;
+    openrouter) keyvar="OPENROUTER_API_KEY" ;;
+    *)          keyvar="" ;;
+  esac
+  if [ -n "$keyvar" ] && ! grep -q "^$keyvar=." "$home/.env" 2>/dev/null; then
     cp "$home/.env" "$home/.env.bak-$(date +%Y%m%d-%H%M%S)"
-    key="$(grep '^OPENROUTER_API_KEY=' "$GM_ENV" | head -1 | cut -d= -f2-)"
-    [ -n "$key" ] || { echo "FATAL: OPENROUTER_API_KEY not found in $GM_ENV"; exit 1; }
-    printf '\n# OpenRouter — free models for NPC bots (see bot/npc-maker/README.md)\nOPENROUTER_API_KEY=%s\n' "$key" >> "$home/.env"
+    key="$(grep "^$keyvar=" "$GM_ENV" | head -1 | cut -d= -f2-)"
+    [ -n "$key" ] || { echo "FATAL: $keyvar not found in $GM_ENV"; exit 1; }
+    printf '\n# %s — NPC model credential (see bot/npc-maker/README.md)\n%s=%s\n' "$keyvar" "$keyvar" "$key" >> "$home/.env"
     unset key
   fi
 
@@ -120,7 +129,7 @@ fi
 # --- 7. verify ---
 echo "== verify =="
 echo -n "model.default      : "; hermes -p "$profile" config get model.default 2>/dev/null
-grep -q '^OPENROUTER_API_KEY=.' "$home/.env" && echo "env                : OPENROUTER_API_KEY present"
+echo "env                : $(grep -o '^[A-Z_][A-Z0-9_]*=' "$home/.env" | sort -u | tr '\n' ' ')"
 grep -q 'hermes-bots:' "$home/profile.yaml" && echo "profile.yaml       : Bot Mode marker present"
 sqlite3 "$home/state.db" "SELECT 'bot chat           : '||id||' ('||message_count||' msgs)' FROM sessions WHERE title='Bot Chat' LIMIT 1;" 2>/dev/null || echo "bot chat           : (not created yet)"
 echo "== done: $profile =="

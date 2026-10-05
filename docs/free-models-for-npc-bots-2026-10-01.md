@@ -20,7 +20,7 @@ Space Bunny guide.
   **⚠ Its listing expires 2026-10-05** (the API's own `expiration_date` field).
   Audition it; do not wire it in long-term.
 - **Stealth listings rotate by design.** ox-alpha lasted about six weeks. Any NPC model
-  binding must be a one-line, swappable alias — never hardwired.
+  binding must be a one-line, swappable config (`model.default`) — never hardwired.
 
 ## The free list tonight — the ones worth knowing
 
@@ -69,8 +69,10 @@ curl -s https://openrouter.ai/api/v1/models | python3 -c \
 
 ## Recommendation
 
-1. **Binding:** implement the NPC model as a single profile alias (e.g. `npc-free`) so
-   swapping is one line. Stealth and `:free` listings rotate — see ox-alpha.
+1. **Binding:** keep the NPC model a one-line swap (`model.default`, raw id — never an
+   alias). Stealth and `:free` listings rotate — see ox-alpha. *(Superseded 2026-10-04
+   evening: NPCs consolidated onto the GM stack — `deepseek-flash`; this survey stands
+   as the cost-mode / fallback reference.)*
 2. **Bake-off when NPC #1 is built:** same SOUL + same scene brief through 3 candidates,
    judge voice in one sitting:
    - Space Bunny Alpha (while it lasts — until Oct 5) — the current RP leader
@@ -100,3 +102,9 @@ the interview room, the open door) while NPC bot #1 was built:
 - **Qwen3.8-27B `:free`** — a reasoning model: at a 500-token budget it spent everything thinking and emitted no content. With ~1.6k of headroom it produced a solid in-voice sample (one retry hit a free-tier 429 first — worth knowing for burst usage).
 - **Inkling / Inkling-small `:free`** — 403 for direct API calls: *"only available on agentic harnesses"* — OpenRouter gates these free endpoints to approved harness/app clients. Possibly reachable through Hermes itself; untested.
 - Raw samples: ttrpg profile scratch, `bakeoff/`. The binding is one line: `hermes -p npc-<slug> config set model.default <model-id>` — raw ids only (alias values with a provider-name vendor token get re-routed by provider auto-detection; see maker README). **Runtime-verified 2026-10-04:** qwen3.8-27B holds ~7–8s turns through the profile.
+
+**Policy update — 2026-10-04 (evening).** Owner call: NPC bots run the same model
+stack as the GM — `deepseek-flash` on the `deepseek` provider — superseding the
+free-model binding for NPCs. This survey and the bake-off above remain the
+reference for cost-mode swaps and fallbacks (the bind stays one line:
+`model.default`).

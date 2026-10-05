@@ -38,7 +38,7 @@ Campaign NPC data lives in the campaign data layer (gitignored by design, see
 campaigns/<campaign_id>/npcs/<npc-slug>/
 ├── dossier.md   # the answered character sheet (template: bot/npc-maker/dossier-template.md)
 ├── soul.md      # the bot's persona file — copied in as the profile's SOUL.md
-└── bot.yaml     # title / description / model
+└── bot.yaml     # title / description / model (+ optional provider)
 ```
 
 The repo holds the templates and the maker; the campaign holds the content.
@@ -59,14 +59,15 @@ What the script does, in order:
 
 1. Validates the three source files exist; reads `bot.yaml`.
 2. `hermes profile create npc-<slug> --no-skills` (minimal profile; idempotent).
-3. Wires the model: `model.provider openrouter`, `model.default` = the raw
-   model id from `bot.yaml`. Deliberately NOT an alias: a value whose vendor
-   token is a provider name — like `qwen/…` — gets re-routed by the CLI's
-   provider auto-detection when it arrives via an alias. Raw ids stay on the
-   configured provider (verified 2026-10-04). Plus small agent/memory limits.
-4. Writes the profile `.env` by script (never by hand): only
-   `OPENROUTER_API_KEY`, with a timestamped backup first. The key value is
-   never printed.
+3. Wires the model: `model.provider` + `model.default` from `bot.yaml` (defaults:
+   `deepseek` / `deepseek-flash` — same stack as the GM). Deliberately NOT an
+   alias: a value whose vendor token is a provider name — like `qwen/…` — gets
+   re-routed by the CLI's provider auto-detection when it arrives via an alias.
+   Raw ids stay on the configured provider (verified 2026-10-04). Plus small
+   agent/memory limits.
+4. Writes the profile `.env` by script (never by hand): only the provider's
+   key (`DEEPSEEK_API_KEY` by default; `OPENROUTER_API_KEY` for cost-mode
+   swaps), with a timestamped backup first. The key value is never printed.
 5. Copies `soul.md` → profile `SOUL.md` and `dossier.md` → profile `dossier.md`.
 6. Appends the Bot Mode marker (`ui_meta.hermes-bots.title`) to `profile.yaml`.
 7. Creates the canonical `Bot Chat` session.
@@ -74,16 +75,18 @@ What the script does, in order:
 
 ## Model policy
 
-- NPC bots run **free OpenRouter models** (owner constraint, 2026-10-01). The GM
-  stays on `deepseek-flash`.
+- NPCs run the **same model stack as the GM** — default `deepseek-flash` on the
+  `deepseek` provider (owner call, 2026-10-04; supersedes the earlier
+  free-OpenRouter-for-NPCs constraint). One provider, one credential story, no
+  free-tier rate roulette mid-scene.
 - The bind is **one line**: `hermes -p npc-<slug> config set model.default <model-id>`.
   Keep it a RAW model id, never an alias — an alias value starting with a
   provider vendor token (`qwen/…`) gets re-routed to that vendor's own provider
   by the CLI's auto-detection (observed 2026-10-04: alias → "Qwen CLI
   credentials not found"; the raw id routed to OpenRouter correctly).
-- Model survey + bake-off guidance:
-  `docs/free-models-for-npc-bots-2026-10-01.md`. Stealth/free listings rotate
-  (ox-alpha died; Space Bunny expires 2026-10-05) — never hardwire.
+- Cost-mode option (documented, not default): the free-model survey + bake-off
+  (`docs/free-models-for-npc-bots-2026-10-01.md`) remains the reference for
+  swapping an NPC to a $0 model if cost ever demands; the swap stays one line.
 
 ## Activation protocol (GM side)
 
@@ -151,8 +154,8 @@ decision, not an omission.
 
 ```bash
 hermes -p npc-<slug> config get model.default          # → the bound raw model id
-hermes -p npc-<slug> config get model.provider         # → openrouter
-grep -o '^[A-Z_]*=' ~/.hermes/profiles/npc-<slug>/.env # → only OPENROUTER_API_KEY
+hermes -p npc-<slug> config get model.provider         # → deepseek (or chosen provider)
+grep -o '^[A-Z_]*=' ~/.hermes/profiles/npc-<slug>/.env # → the provider key(s) present
 sqlite3 ~/.hermes/profiles/npc-<slug>/state.db \
   "SELECT id, title FROM sessions WHERE title='Bot Chat';"
 ```
@@ -163,8 +166,9 @@ character answers in voice.
 ## Status
 
 - **2026-10-04:** Maker built; first NPC bot live — **Billy Ray Spivey**
-  (profile `npc-billy-ray-spivey`). Verified end-to-end: ~7–8s turns on the
-  free OpenRouter tier, Bot Mode marker + canonical Bot Chat present, messaging
-  protocol injects with the live roster, first voice check in character.
-  Activation settled (`message_agent`, proven on-runtime). Bake-off samples
-  recorded for the binding pick; swap `model.default` (one line).
+  (profile `npc-billy-ray-spivey`), running `deepseek-flash` (owner call — same
+  stack as the GM; supersedes the free-model bind). Verified end-to-end: ~7s
+  turns, Bot Mode marker + canonical Bot Chat present, messaging protocol
+  injects with the live roster, first voice check in character. Activation
+  settled (`message_agent`, proven on-runtime). Free-model survey retained as
+  the cost-mode swap reference; swap = `model.default` (one line).

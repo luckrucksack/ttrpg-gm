@@ -23,7 +23,7 @@ The ttrpg profile is already configured at
 |-----|-------|
 | Routine GM work (narration, MCP ops, session flow) | `deepseek-flash` (default) |
 | Heavy scenes (complex adjudication, long prose) | deepseek-v4-pro — switch with `/model` mid-session |
-| NPC Bots (isolated profiles) | free OpenRouter model — see `docs/free-models-for-npc-bots-2026-10-01.md` (ox-alpha's free period ended) |
+| NPC Bots (isolated profiles) | `deepseek-flash` — same stack as the GM (owner call 2026-10-04); free-model survey kept for cost-mode swaps |
 | Editing loop (future) | z.ai GLM 5.2 (key stored, not wired) |
 
 Rule: default stays flash; promote to pro per-session only when the scene

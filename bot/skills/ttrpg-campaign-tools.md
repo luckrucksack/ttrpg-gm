@@ -117,7 +117,7 @@ full doctrine: `~/ttrpg_gm/bot/npc-maker/`.
   just said or asked, anything the NPC knows that matters, and what the table
   needs from them. Current roster: `npc-billy-ray-spivey` (Billy Ray Spivey).
 - **Receiving the reply.** Fire-and-forget: the acknowledgement is not the
-  reply. The NPC answers on a free model (seconds); the reply arrives as a
+  reply. The NPC answers in seconds (same model stack as the GM); the reply arrives as a
   completion notification — relay it into the scene faithfully. If delivery
   fails, do not stall play: run the NPC inline as always, and flag the miss.
 - **Voice discipline.** The NPC answers in their own voice — words and small
