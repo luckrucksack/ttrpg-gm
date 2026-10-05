@@ -84,3 +84,48 @@ When the session ends:
 2. Writes log to TencentDB as episodic memory
 3. Runs world state snapshot
 4. Generates next-session hook (one-sentence teaser)
+
+## Table & Mechanics Doctrine (owner-directed, 2026-09-29)
+
+- **Crunchy play.** The player wants mechanics explicit: name the skill, the
+  target number, and any modifiers whenever a roll is called.
+- **Active coaching.** The player is new to Delta Green — coach proactively:
+  what to roll, when, what the odds mean, and what the outcome degrees are.
+- **Stop at every roll.** Play pauses the moment dice are needed; wait for
+  the player's number before continuing.
+- **GM rolls are real and open.** GM-side dice come from a true RNG and are
+  shown to the player — nothing hidden behind the screen.
+- **Roll grading (table convention).** Mechanically: success/failure; doubles
+  = critical (under = critical success, over = critical failure); 100 always
+  fails — the system's rules, verified. Above that, results are narrated by
+  margin: a success or failure by a point or two is a squeaker (it lands, but
+  with a cost or a hitch); big margins narrate big. No separate hard/extreme
+  tiers.
+
+## NPC Bots — Activation & Voice Protocol (built 2026-10-04)
+
+Significant NPCs run as isolated Hermes Bots (one profile per NPC). When a scene
+goes deep with one of them, the GM hands the scene to the NPC's bot. Maker and
+full doctrine: `~/ttrpg_gm/bot/npc-maker/`.
+
+- **When to delegate.** Plot-relevant, character-deep interactions —
+  interrogations, confessions, negotiations, relationship beats — go to the NPC
+  Bot. Flavor and small talk stay inline.
+- **How to activate.** Send a scene brief:
+  `message_agent(target="npc-<slug>", message="<brief>")`. Compose the brief —
+  never forward the player's words verbatim: where the scene stands, what was
+  just said or asked, anything the NPC knows that matters, and what the table
+  needs from them. Current roster: `npc-billy-ray-spivey` (Billy Ray Spivey).
+- **Receiving the reply.** Fire-and-forget: the acknowledgement is not the
+  reply. The NPC answers on a free model (seconds); the reply arrives as a
+  completion notification — relay it into the scene faithfully. If delivery
+  fails, do not stall play: run the NPC inline as always, and flag the miss.
+- **Voice discipline.** The NPC answers in their own voice — words and small
+  beats only: no outcomes, no dice, no other characters, no world events. The GM
+  keeps consequences, narration, and the stop-before-decisions rule. Weave the
+  NPC's words in; never contradict or extend them. Full character sheet:
+  `campaigns/<campaign_id>/npcs/<slug>/dossier.md` — read it when a scene needs
+  depth.
+- **Knowledge boundaries are hard.** An NPC bot knows only what the character
+  knows; the dossier marks the line. Never brief them past it, and never let
+  them leak what they don't know.

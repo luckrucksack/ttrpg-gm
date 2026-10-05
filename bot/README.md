@@ -10,8 +10,7 @@ The ttrpg profile is already configured at
 `~/.hermes/profiles/ttrpg/` with:
 
 - **Provider**: DeepSeek (native API; key in profile `.env`)
-- **Default model**: `deepseek-v4.1-flash-expires-on-0910` — routine GM work.
-  Falls back to `deepseek-v4-flash` when the experimental ID expires (2026-09-10)
+- **Default model**: `deepseek-flash` (provider `deepseek`) — routine GM work
 - **Heavy scenes** (complex adjudication, deep prose): switch to
   `deepseek/deepseek-v4-pro` via `/model` for that session — see
   Model Routing below
@@ -22,9 +21,9 @@ The ttrpg profile is already configured at
 
 | Job | Model |
 |-----|-------|
-| Routine GM work (narration, MCP ops, session flow) | deepseek-v4-flash (default) |
+| Routine GM work (narration, MCP ops, session flow) | `deepseek-flash` (default) |
 | Heavy scenes (complex adjudication, long prose) | deepseek-v4-pro — switch with `/model` mid-session |
-| NPC Bots (isolated profiles) | ox-alpha (free tier) |
+| NPC Bots (isolated profiles) | free OpenRouter model — see `docs/free-models-for-npc-bots-2026-10-01.md` (ox-alpha's free period ended) |
 | Editing loop (future) | z.ai GLM 5.2 (key stored, not wired) |
 
 Rule: default stays flash; promote to pro per-session only when the scene
@@ -70,6 +69,13 @@ The GM Bot itself has a defined voice — it narrates in third-person,
 uses present tense, and adheres to the narrator skill's style guide.
 It does NOT roleplay as NPCs directly (that's what NPC Bots are for).
 It describes what NPCs do and say, then delegates deep interaction.
+
+## NPC Bots
+
+Significant NPCs run as their own Bots (isolated Hermes profiles) that this GM
+Bot messages via Bot Mode's bot-to-bot DM (`message_agent`). The maker, the
+dossier standard, and the activation/voice protocol live in
+[`npc-maker/README.md`](npc-maker/README.md).
 
 ## Session Mode
 

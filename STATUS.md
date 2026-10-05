@@ -1,6 +1,10 @@
 # STATUS
 
-**Current:** Architecture v3 (2026-09-25) — see `docs/ttrpg-gm-architecture-2026-09-25.md`. Bridge and memory verified live **again 2026-09-25** (see ledger below); content intake defined (VTT modules primary, PDF secondary); Delta Green world being provisioned. No game sessions played yet. **Hard blocker: Foundry has zero add-on modules installed** — the Delta Green adventure is purchased but not redeemable/installed yet.
+**Current:** Architecture v4 (2026-09-29) — see `docs/ttrpg-gm-architecture-2026-09-29.md`. Basic architecture (layers, ownership, session lifecycle, operational knowledge) re-verified against the live runtime **2026-09-29**: bridge green (33 tools), world `deltagreen` active, memory store healthy with embeddings on.
+
+**Update 2026-10-04 — NPC bots: maker built, first bot live.** `bot/npc-maker/` now exists (dossier standard, SOUL scaffold, `make-npc.sh`, activation/voice protocol). First NPC bot: **Billy Ray Spivey** — profile `npc-billy-ray-spivey`, verified end-to-end (free OpenRouter model via `model.default`, Bot Mode marker, canonical Bot Chat, `message_agent` + live roster proven; first voice check in character, ~7s turns). GM doctrine updated (`ttrpg-campaign-tools.md` → NPC Bots section). Old `bot/npc-template/` retired. Remaining: free-model pick from the bake-off, campaign-layer persona archive, first live scene.
+
+**Update 2026-09-29 — world provisioned, first session starting.** Delta Green world `deltagreen` is live and playable: `delta-green-convergence` module installed, Agent Wizard module installed + active, and the player's Agent **Musky Jouse** is built and finished (Federal Agent; stats/skills applied). The earlier "zero add-on modules / adventure not installed" blocker is resolved — mechanics log in `docs/foundry-live-session-2026-09-28.md`. Bridge re-verified live 2026-09-29 (`hermes mcp test foundry --profile ttrpg` → connected, tools discovered).
 
 ## What's in this repo
 
@@ -25,8 +29,8 @@
 
 ## Not yet done
 
-- No adventure imported; zero sessions played
-- **No Foundry add-on modules are installed at all** (`Library/Application Support/FoundryVTT/Data/modules` contains only `README.txt`) — so neither the Delta Green adventure module nor the Foundry Local REST API module is present. Nothing has been activated since 2026-08-29 (`Config/license.json` → `version 11.293`, `time 2026-08-29T23:21Z`).
+- 2026-09-29: adventure module now installed; first session starting (was: no adventure imported, zero sessions played)
+- 2026-09-29: add-on modules installed + active (`delta-green-convergence`, `delta-green-agent-wizard`) — earlier "zero modules installed" blocker resolved. Foundry Local REST API module still not installed.
 - Foundry Local REST API module not installed (compendium search + diagnostics dark)
 - Delta Green module: content activation key appears registered in the profile env, but redemption + install are still pending — **suspect labeling**: the key sits in a var named `FOUNDRY_LICENSE_KEY` (with the 2026-08-05 VTT license demoted to `FOUNDRY_LICENSE_KEY_PREV`), which makes the two hard to tell apart. Worth relabeling before the next redeem attempt.
 - ttrpg profile gateway is not running; config changes take effect on next start

@@ -4,16 +4,17 @@ An open-source AI Game Master system that runs published TTRPG adventures
 in Foundry VTT with a Hermes Agent Bot as the GM.
 
 **What it does:**
-- Import a published adventure (buy premium or convert a PDF)
+- Import a published adventure (buy the VTT module, or convert a PDF)
 - Talk to a GM Bot that narrates, runs combat, voices NPCs
-- Self-hosted core (Foundry, Hermes, memory); model calls via OpenRouter
-  (~$0.20–0.60 per active session hour — see the token-reduction playbook)
+- Self-hosted core (Foundry, Hermes, memory); model calls through the
+  DeepSeek API (~$0.20–0.60 per active session hour — see the
+  token-reduction playbook)
 
 **Architecture:**
-- **GM Bot** — Hermes Bot Mode agent (deepseek-v4-flash via OpenRouter; v4-pro for heavy scenes)
+- **GM Bot** — Hermes agent profile (deepseek-flash) with skill + doctrine files
 - **Foundry VTT** — game mechanics, maps, actors, combat engine
-- **NPC Bots** — isolated Hermes profiles for key NPCs (ox-alpha free tier)
-- **Pipeline** — PDF → MarkItDown → LLM → Foundry JSON import
+- **NPC Bots** — isolated Hermes profiles, one per NPC — first bot live: Billy Ray Spivey (`bot/npc-maker/`)
+- **Pipeline** — PDF → MarkItDown → LLM → Foundry JSON import (secondary path)
 - **Bridge** — MCP server (laurigates/foundryvtt-mcp, MIT) connects bot to Foundry
 - **Memory** — TencentDB Agent Memory for campaign persistence
 
