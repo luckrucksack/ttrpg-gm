@@ -1,6 +1,6 @@
 ---
 name: ttrpg-prohibitions
-description: Hard anti-cliché ban list for GM Bot narrative output — 10 prohibited patterns with fixes and self-check enforcement.
+description: Hard anti-cliché rules for GM Bot narrative output — the modular "Prohibited Clichés" registry (standing patterns + owner-verbatim additions) with fixes and self-check enforcement.
 ---
 
 # TTRPG Prohibitions — Anti-Cliché Doctrines
@@ -8,7 +8,12 @@ description: Hard anti-cliché ban list for GM Bot narrative output — 10 prohi
 These are hard prohibitions. The GM Bot must NEVER produce any of the
 following patterns in its narrative output.
 
-## The Ban List
+## Prohibited Clichés
+
+**Registry rules.** Items are appended **verbatim, exactly as the owner
+specifies them** — never paraphrase, never genericize, never merge them.
+The standing pattern set came first (items 1–10); owner-directed additions
+are appended in order as they are handed down.
 
 ### 1. Contrastive Cop-Out
 ```
@@ -92,6 +97,12 @@ vocabulary is fine. Parody isn't.
 ```
 **Fix**: Don't evaluate the situation for the player. Describe it. Let them
 decide if it's lucky or unfortunate.
+
+### 11. Vibration / Ambient-Sound Descriptions — owner-added 2026-09-29 (verbatim)
+
+Describing anything in a scene as vibrating, thrumming, humming,
+oscillating, pulsing, or anything of a similar nature, unless literally
+specified in the published adventure.
 
 ## Enforcement
 

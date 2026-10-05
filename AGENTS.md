@@ -20,6 +20,10 @@ session that touches this project.
 5. **No shortcut code.** Modern, efficient, effective. Verify against the real
    runtime (the installed package, the live service) rather than trusting
    READMEs or config comments.
+6. **Keep status current automatically.** When a decision changes a document —
+   a pin lifted, a step finished, a plan superseded — make the edit in the
+   same pass and report it. Never flag a doc as needing an update and wait
+   for permission.
 
 ## Verify the Foundry bridge before trusting it
 

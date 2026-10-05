@@ -2,6 +2,9 @@
 
 **Version 3 — 2026-09-25** · Supersedes [v2 (2026-09-01)](ttrpg-gm-architecture-2026-09-01.md) and [v1 (2026-08-27)](ttrpg-gm-architecture-2026-08-27.md)
 
+> **Superseded 2026-09-29 by [v4](ttrpg-gm-architecture-2026-09-29.md).** Kept for
+> history; read v4 for current state.
+
 **What it is:** An AI Game Master that runs *published* TTRPG adventures end-to-end in Foundry VTT. A Hermes Agent Bot narrates, voices, paces, and decides; **Foundry VTT owns every rule, roll, token, and point of state**. Campaign memory records what happened, so the story persists between sessions.
 
 The bar: *take a bought adventure from "purchased" to "a full session played" with no human scripting the rules.*

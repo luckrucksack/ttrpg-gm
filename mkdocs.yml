@@ -6,7 +6,8 @@ repo_url: https://github.com/luckrucksack/ttrpg-gm
 nav:
   - Home: index.md
   - Architecture:
-    - Current (2026-09-25): ttrpg-gm-architecture-2026-09-25.md
+    - Current (2026-09-29): ttrpg-gm-architecture-2026-09-29.md
+    - Previous (2026-09-25): ttrpg-gm-architecture-2026-09-25.md
     - Previous (2026-09-01): ttrpg-gm-architecture-2026-09-01.md
     - Origins (2026-08-27): ttrpg-gm-architecture-2026-08-27.md
   - Design:
@@ -21,6 +22,7 @@ nav:
     - Noodlr vs FoundryAI: noodlr-vs-foundryai-2026-08-06.md
     - Notes Research Brief: ai-dm-notes-research-brief.md
     - DM Research Prompt: dm-research-prompt.md
+    - Free Models for NPC Bots (2026-10-01): free-models-for-npc-bots-2026-10-01.md
   - Management:
     - Backlog: backlog.md
     - Development Notes: development-notes.md

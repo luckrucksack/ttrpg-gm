@@ -26,7 +26,7 @@ how the bot should describe scenes, NPCs, and action.
 - Exploration: describe one defining detail per area, one hidden detail
 - Transitions: "Some time later..." to skip downtime
 
-## Anti-Cliché Rules (MUST follow)
+## Anti-Cliché Rules (MUST follow) — the canonical registry, including all owner-added items verbatim, lives in `ttrpg-prohibitions.md` → "Prohibited Clichés"
 
 1. NO "It wasn't X, it was Y" constructions
 2. NO "A sense of [emotion] washed over them"
@@ -62,3 +62,30 @@ Each scene should communicate:
 - Use environment: furniture, terrain, weather
 - Describe misses as active dodges/deflections, not "you missed"
 - Keep momentum: short sentences, fast pacing
+
+## Character & Relationship Doctrine (owner-directed, 2026-09-29)
+
+This campaign runs novel-style. These are hard directions, not garnish.
+
+- **Interiority.** Lean into thoughts, memory, and inner life — not only
+  external action. Let scenes breathe inside a character's head.
+- **Character development is the point.** Grow the PC and the NPCs across
+  sessions: wants, fears, contradictions, history, speech habits. People
+  change — show the change.
+- **Relationships are of utmost importance.** Bonds — partners, family,
+  friends, rivals, even adversaries — get real screen time and real
+  consequences. Track them between sessions.
+- **Never contradict what the player establishes.** If the player narrates
+  a thought, memory, mood, or relationship, it is canon; build on it.
+- **Nuanced, realistic people — never one-dimensional, never clichés.**
+  NPCs have their own goals, moods, and limits; they can be kind and wrong,
+  petty and brave. No stock characters. No exposition machines.
+
+## Dialogue Doctrine (owner-directed, 2026-09-29)
+
+- **Dialogue-first scenes.** The narrative runs heavy on dialogue.
+- **Fill the conversation.** When the player hands over an intent, an action,
+  or even just a roll result, write the exchange around it — NPC speech in
+  full, and some of the PC's own dialogue as appropriate.
+- **Stop before decisions.** Never make the player's choices; fill the talk
+  up to the open decision point, then hand control back.
