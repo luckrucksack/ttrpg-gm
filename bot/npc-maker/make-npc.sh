@@ -52,10 +52,14 @@ profile="npc-$slug"
 home="$HOME/.hermes/profiles/$profile"
 soulsrc="${soulsrc:-$src/soul.md}"
 
-for f in dossier.md bot.yaml; do
-  [ -f "$src/$f" ] || { echo "FATAL: missing $src/$f"; exit 1; }
-done
-[ -f "$soulsrc" ] || { echo "FATAL: missing SOUL source $soulsrc"; exit 1; }
+if [ "$mode" = "--verify-only" ]; then
+  [ -f "$src/bot.yaml" ] || { echo "FATAL: missing $src/bot.yaml"; exit 1; }
+else
+  for f in dossier.md bot.yaml; do
+    [ -f "$src/$f" ] || { echo "FATAL: missing $src/$f"; exit 1; }
+  done
+  [ -f "$soulsrc" ] || { echo "FATAL: missing SOUL source $soulsrc"; exit 1; }
+fi
 
 # --- metadata (single-line values; description folded to one line) ---
 title="$(sed -n 's/^title: *//p' "$src/bot.yaml" | head -1)"
