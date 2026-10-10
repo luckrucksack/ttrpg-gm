@@ -4,6 +4,8 @@
 
 **Update 2026-10-04 — NPC bots: maker built, first bot live.** `bot/npc-maker/` now exists (dossier standard, SOUL scaffold, `make-npc.sh`, activation/voice protocol). First NPC bot: **Billy Ray Spivey** — profile `npc-billy-ray-spivey`, verified end-to-end (`deepseek-flash` via `model.default` — same stack as the GM, owner call 2026-10-04; Bot Mode marker, canonical Bot Chat, `message_agent` + live roster proven; first voice check in character, ~7s turns). GM doctrine updated (`ttrpg-campaign-tools.md` → NPC Bots section). Old `bot/npc-template/` retired. Remaining: campaign-layer persona archive, first live scene.
 
+**Update 2026-10-09 — NPC bot base structure v2 (revamp, verified live).** All six bots (Billy + the five Convergence NPCs) refreshed to the v2 base: neutral `terminal.cwd` context isolation (no repo/GM context can load into a character prompt; stored-prompt audit clean), tool surface locked to `memory` only (`message_agent` stays Bot Mode-injected; NPC prompt ~66k → ~18k chars), memory limit 1000, maker `--smoke` live checks, and `repin-model.sh` for safe session model re-pins. Live-verified: one in-voice smoke turn per bot; full GM → NPC → GM round trip landed on the rail (stdout + `message_agent` reply paths both exercised end to end). Docs: `docs/npc-bot-base-structure-v2-2026-10-09.md`. Still pending: the six campaign-side `soul.md` canon writes (one watched approval sitting) + the owner's pass on the five new dossiers.
+
 **Update 2026-09-29 — world provisioned, first session starting.** Delta Green world `deltagreen` is live and playable: `delta-green-convergence` module installed, Agent Wizard module installed + active, and the player's Agent **Musky Jouse** is built and finished (Federal Agent; stats/skills applied). The earlier "zero add-on modules / adventure not installed" blocker is resolved — mechanics log in `docs/foundry-live-session-2026-09-28.md`. Bridge re-verified live 2026-09-29 (`hermes mcp test foundry --profile ttrpg` → connected, tools discovered).
 
 ## What's in this repo
@@ -31,11 +33,10 @@
 
 - 2026-09-29: adventure module now installed; first session starting (was: no adventure imported, zero sessions played)
 - 2026-09-29: add-on modules installed + active (`delta-green-convergence`, `delta-green-agent-wizard`) — earlier "zero modules installed" blocker resolved. Foundry Local REST API module still not installed.
+- Six campaign-side `soul.md` canon writes (queued, one watched approval sitting) + owner's pass on the five new dossiers
 - Foundry Local REST API module not installed (compendium search + diagnostics dark)
 - Delta Green module: content activation key appears registered in the profile env, but redemption + install are still pending — **suspect labeling**: the key sits in a var named `FOUNDRY_LICENSE_KEY` (with the 2026-08-05 VTT license demoted to `FOUNDRY_LICENSE_KEY_PREV`), which makes the two hard to tell apart. Worth relabeling before the next redeem attempt.
-- ttrpg profile gateway is not running; config changes take effect on next start
 - z.ai editing loop not wired
-- NPC profiles not created
 - Foundry UPnP is enabled (`options.json` → `upnp: true`), so Foundry may be requesting a router port mapping for `:30000`. Turn it off unless remote play is actually needed.
 
 See `docs/backlog.md`.

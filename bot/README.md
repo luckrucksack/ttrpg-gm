@@ -75,7 +75,9 @@ It describes what NPCs do and say, then delegates deep interaction.
 Significant NPCs run as their own Bots (isolated Hermes profiles) that this GM
 Bot messages via Bot Mode's bot-to-bot DM (`message_agent`). The maker, the
 dossier standard, and the activation/voice protocol live in
-[`npc-maker/README.md`](npc-maker/README.md).
+[`npc-maker/README.md`](npc-maker/README.md). Base structure v2 (2026-10-09) —
+context isolation, tool lockdown, memory stance, verification tooling — is
+defined in `docs/npc-bot-base-structure-v2-2026-10-09.md`.
 
 ## Session Mode
 

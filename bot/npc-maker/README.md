@@ -8,6 +8,9 @@ deserves a full person instead of a paragraph.
 
 Background: `docs/npc-bots-design-sketch-2026-08-26.md`. The activation
 mechanism was settled and proven on 2026-10-04 — see "Activation protocol."
+Base structure v2 (2026-10-09) — context isolation, tool lockdown, memory
+stance, verification tooling — is defined in
+`docs/npc-bot-base-structure-v2-2026-10-09.md`.
 
 > Supersedes `bot/npc-template/` (retired 2026-10-04). The old template's
 > `delegate_task` activation never worked: `delegate_task` spawns a generic
@@ -51,27 +54,42 @@ bash bot/npc-maker/make-npc.sh <campaign_id> <npc_slug>
 bash bot/npc-maker/make-npc.sh delta-green-convergence billy-ray-spivey
 # re-verify an existing bot without changing it:
 bash bot/npc-maker/make-npc.sh delta-green-convergence billy-ray-spivey --verify-only
+# re-verify + one live voice turn into the Bot Chat (evidence in logs/agent.log):
+bash bot/npc-maker/make-npc.sh delta-green-convergence billy-ray-spivey --verify-only --smoke
 # build from a draft persona file outside the campaign tree (while iterating):
 bash bot/npc-maker/make-npc.sh <campaign_id> <npc_slug> --soul-source ~/path/to/persona.md
 ```
 
 What the script does, in order:
 
-1. Validates the three source files exist; reads `bot.yaml`.
+1. Validates sources; reads `bot.yaml`. On a refresh (profile already exists),
+   a missing `soul.md` / `dossier.md` source is tolerated — the profile's
+   existing copy is kept and noted, so a bot can be re-verified and re-tuned
+   before its canon write lands.
 2. `hermes profile create npc-<slug> --no-skills` (minimal profile; idempotent).
 3. Wires the model: `model.provider` + `model.default` from `bot.yaml` (defaults:
    `deepseek` / `deepseek-flash` — same stack as the GM). Deliberately NOT an
    alias: a value whose vendor token is a provider name — like `qwen/…` — gets
    re-routed by the CLI's provider auto-detection when it arrives via an alias.
    Raw ids stay on the configured provider (verified 2026-10-04). Plus small
-   agent/memory limits.
-4. Writes the profile `.env` by script (never by hand): only the provider's
+   agent/memory limits (memory cap 1000 chars).
+4. Context isolation (v2): pins `terminal.cwd` to the profile's own empty
+   `workspace/` dir, so no project context (AGENTS.md, git snapshots) can load
+   into a character prompt from wherever a turn is launched.
+5. Tools policy (v2): disables every toolset except `memory`
+   (`NPC_KEEP_TOOLSETS` overrides). `message_agent` is Bot Mode-injected, not a
+   toolset — it survives the lockdown.
+6. Writes the profile `.env` by script (never by hand): only the provider's
    key (`DEEPSEEK_API_KEY` by default; `OPENROUTER_API_KEY` for cost-mode
    swaps), with a timestamped backup first. The key value is never printed.
-5. Copies `soul.md` → profile `SOUL.md` and `dossier.md` → profile `dossier.md`.
-6. Appends the Bot Mode marker (`ui_meta.hermes-bots.title`) to `profile.yaml`.
-7. Creates the canonical `Bot Chat` session.
-8. Prints a verification block (model, env, marker, chat).
+7. Copies `soul.md` → `SOUL.md` and `dossier.md` → `dossier.md` (skipping what
+   a refresh is keeping).
+8. Appends the Bot Mode marker (`ui_meta.hermes-bots.title`) to `profile.yaml`.
+9. Creates the canonical `Bot Chat` session (from the neutral workspace).
+10. Prints a verification block — model, provider, env keys, marker,
+    `terminal.cwd`, enabled toolsets, memory limits, persona/dossier, Bot Chat.
+11. `--smoke` (opt-in): one live voice turn into the Bot Chat + the
+    `agent.log` turn line as evidence.
 
 ## Model policy
 
@@ -87,16 +105,15 @@ What the script does, in order:
 - Cost-mode option (documented, not default): the free-model survey + bake-off
   (`docs/free-models-for-npc-bots-2026-10-01.md`) remains the reference for
   swapping an NPC to a $0 model if cost ever demands; the swap stays one line.
-- **Sessions remember their model.** After any switch, the canonical
-  `Bot Chat` keeps the OLD model as its session pin until its row is updated:
-  `sqlite3 ~/.hermes/profiles/npc-<slug>/state.db "UPDATE sessions SET
-  model='<raw-id>', billing_provider='<provider>', billing_base_url='<url>'
-  WHERE id='<bot-chat-id>';"` (timestamped backup first; mirror the billing
-  fields from a same-stack session). `-m` on the CLI is per-invocation only;
-  config readback and throwaway smokes will look fine while the pin stays
-  stale. Verify with a resumed Bot Chat turn plus the bot's
-  `logs/agent.log` (`conversation turn: … model=`) — the CLI's restore line
-  reports the pin, not necessarily the model that ran.
+- **Sessions remember their model.** After any switch, sessions keep the OLD
+  model as their stored pin until their rows are updated — run
+  `bash bot/npc-maker/repin-model.sh <npc_slug>`: it backs up `state.db`,
+  re-pins every session to the profile's current stack (model + billing
+  fields; base URL from the GM profile's known-good same-stack session), and
+  proves the effective model with one live resumed turn + the bot's
+  `logs/agent.log` (`conversation turn: … model=`). `-m` on the CLI is
+  per-invocation only; config readback alone proves nothing. Keep `bot.yaml`
+  in sync so maker rebuilds don't regress.
 
 ## Activation protocol (GM side)
 
@@ -143,19 +160,21 @@ and the `message_agent` tool, with a live teammate roster.
   (`bot/skills/ttrpg-prohibitions.md`); the SOUL scaffold carries the standing
   item so bots are briefed on it.
 
-## Memory (settled for v1 — deliberate)
+## Memory (three layers — settled 2026-10-09)
 
-An NPC bot's memory for now: its canonical Bot Chat (persistent, forever —
-`/new` becomes `/compact` there by design) plus its profile's built-in memory
-(small, capped at 500 chars via the maker). That covers "remembers every
-interaction with the party" for a played arc.
-
-Deliberately **not** wired yet: a per-NPC TencentDB store. The mechanism exists
-(`~/.hermes/scripts/memory-gateway-launch.sh <profile>` takes any profile; each
-store = a port + `tdai-gateway.yaml` + env block, mirroring `ttrpg-memory`), but
-each active NPC would add a gateway process. Settle that upgrade when a second
-NPC or a long-lived arc genuinely needs cross-session recall. This is a
-decision, not an omission.
+1. **The canonical Bot Chat** — the forever-chat; `/new` becomes `/compact`
+   there by design. The operative memory of play.
+2. **Built-in `MEMORY.md`** per profile — the memory toolset is the one tool
+   left enabled; the maker caps it at 1000 chars so a bot can keep compact,
+   durable notes.
+3. **Not default — per-NPC TencentDB store** for semantic recall when a long
+   arc genuinely needs it. The mechanism exists
+   (`~/.hermes/scripts/memory-gateway-launch.sh <profile>` takes any profile;
+   each store = a port + `tdai-gateway.yaml` + env block, mirroring
+   `ttrpg-memory`), but each active NPC would add a gateway process — dormant
+   bots cost $0 by design. Enable per NPC when needed; full stance in
+   `docs/npc-bot-base-structure-v2-2026-10-09.md`. This is a decision, not an
+   omission.
 
 ## Lifecycle
 
@@ -178,7 +197,9 @@ sqlite3 ~/.hermes/profiles/npc-<slug>/state.db \
 ```
 
 First-light check (optional): run one turn in the Bot Chat and confirm the
-character answers in voice.
+character answers in voice. Faster paths: `--verify-only` (read-only drift
+check across all of the above) and `--verify-only --smoke` (adds one live
+voice turn with evidence).
 
 ## Status
 
@@ -203,3 +224,11 @@ character answers in voice.
   pass; the six campaign-side `soul.md` canon writes (incl. Billy's backfill)
   are queued as one watched approval sitting — profiles were built from staged
   drafts via `--soul-source` until then.
+- **2026-10-09:** Base structure v2 (see
+  `docs/npc-bot-base-structure-v2-2026-10-09.md`). Context isolation
+  (`terminal.cwd` → per-bot empty `workspace/`; stored-prompt audit clean),
+  tools policy (`memory` only; `message_agent` stays Bot Mode-injected; NPC
+  prompt ~66k → ~18k chars), memory limit 1000 with the three-layer stance
+  settled, maker `--smoke` live verification, and `repin-model.sh` for safe
+  session model re-pins. Applied + live-verified across all six bots
+  (in-voice smokes; full GM → NPC → GM round trip landed on the rail).

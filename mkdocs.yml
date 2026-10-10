@@ -12,6 +12,7 @@ nav:
     - Origins (2026-08-27): ttrpg-gm-architecture-2026-08-27.md
   - Design:
     - NPC Bots: npc-bots-design-sketch-2026-08-26.md
+    - NPC Bot Base Structure v2 (2026-10-09): npc-bot-base-structure-v2-2026-10-09.md
     - Prompt Architecture: ai-dm-prompt-architecture-2026-08-07.md
   - Research:
     - AI DM Landscape: ai-dm-landscape-2026-08-06.md
@@ -23,6 +24,7 @@ nav:
     - Notes Research Brief: ai-dm-notes-research-brief.md
     - DM Research Prompt: dm-research-prompt.md
     - Free Models for NPC Bots (2026-10-01): free-models-for-npc-bots-2026-10-01.md
+    - AI NPC Agents Survey (2026-10-08): research-ai-npc-agents-landscape-2026-10.md
   - Management:
     - Backlog: backlog.md
     - Development Notes: development-notes.md
