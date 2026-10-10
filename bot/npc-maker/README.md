@@ -87,6 +87,16 @@ What the script does, in order:
 - Cost-mode option (documented, not default): the free-model survey + bake-off
   (`docs/free-models-for-npc-bots-2026-10-01.md`) remains the reference for
   swapping an NPC to a $0 model if cost ever demands; the swap stays one line.
+- **Sessions remember their model.** After any switch, the canonical
+  `Bot Chat` keeps the OLD model as its session pin until its row is updated:
+  `sqlite3 ~/.hermes/profiles/npc-<slug>/state.db "UPDATE sessions SET
+  model='<raw-id>', billing_provider='<provider>', billing_base_url='<url>'
+  WHERE id='<bot-chat-id>';"` (timestamped backup first; mirror the billing
+  fields from a same-stack session). `-m` on the CLI is per-invocation only;
+  config readback and throwaway smokes will look fine while the pin stays
+  stale. Verify with a resumed Bot Chat turn plus the bot's
+  `logs/agent.log` (`conversation turn: … model=`) — the CLI's restore line
+  reports the pin, not necessarily the model that ran.
 
 ## Activation protocol (GM side)
 
@@ -117,7 +127,14 @@ and the `message_agent` tool, with a live teammate roster.
   consequences, narration, and the stop-before-decisions rule.
 - The GM relays the reply faithfully: weave it into narration, compress around
   it, keep the novel register — but never contradict or extend what the NPC
-  actually said.
+  actually said. The relay is invisible: the fiction never mentions bots,
+  relays, or process (owner directive 2026-10-04).
+- **Bot-voice marker (owner-directed 2026-10-04; in force 2026-10-08).** A
+  relayed line carries a caret with no space immediately before its opening
+  quote — `^"Was it me, sir."` — the player-visible signal that the NPC's own
+  bot spoke it. Only bot-backed lines carry it; GM-invented voices (and inline
+  fallbacks) stay unmarked. The one deliberate exception to the invisible
+  relay.
 - The full character sheet is the GM's deep reference: read the campaign copy
   (`campaigns/<id>/npcs/<slug>/dossier.md`) or the profile copy
   (`~/.hermes/profiles/npc-<slug>/dossier.md`) when a scene needs depth.
@@ -172,3 +189,17 @@ character answers in voice.
   injects with the live roster, first voice check in character. Activation
   settled (`message_agent`, proven on-runtime). Free-model survey retained as
   the cost-mode swap reference; swap = `model.default` (one line).
+- **2026-10-08:** Bot-voice marker in force (decided 2026-10-04): a caret with
+  no space before the opening quote of a bot-spoken line (`^"…"`) — the
+  player-visible signal that an activated bot is speaking. Written into both GM
+  skills (`ttrpg-campaign-tools`, `ttrpg-narrator`) and the voice protocol
+  above.
+- **2026-10-08 (later):** Roster expanded for *Convergence* — five more bots
+  built end-to-end from the Literary Build standard: **Sheriff Dan Oakley**
+  (`npc-dan-oakley`), **Frank Carincola** (`npc-frank-carincola`), **Jane
+  Allen** (`npc-jane-allen`), **Angel Spivey** (`npc-angel-spivey`), **James
+  Derringer** (`npc-james-derringer`). Profiles verified + voice-checked
+  in-character (~3–4 s turns). Dossiers are first drafts pending the owner's
+  pass; the six campaign-side `soul.md` canon writes (incl. Billy's backfill)
+  are queued as one watched approval sitting — profiles were built from staged
+  drafts via `--soul-source` until then.

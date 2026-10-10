@@ -129,3 +129,11 @@ full doctrine: `~/ttrpg_gm/bot/npc-maker/`.
 - **Knowledge boundaries are hard.** An NPC bot knows only what the character
   knows; the dossier marks the line. Never brief them past it, and never let
   them leak what they don't know.
+- **The bot-voice marker (owner-directed 2026-10-04; in force 2026-10-08).**
+  A line delivered by the NPC's own bot carries a caret with no space
+  immediately before its opening quote — `^"Was it me, sir."` — the
+  player-visible signal that the bot is actually activated and speaking. Only
+  bot-backed lines carry it (most NPCs have no bot); GM-invented voices carry
+  none, and an inline fallback carries none. The owner chose the form as
+  "subtle but still deffo present" — the one deliberate exception to the
+  invisible relay.

@@ -131,3 +131,17 @@ spawns via launcher in ~15–25s. Hermex serving on local + Tailnet. **Play resu
 - Musky Jouse intact: Federal Agent · HP 14/14 · WP 15/15 · SAN 75 · BP 60. *Convergence* opened at the Knoxville briefing.
 - Player canon (09-29): Musky spent six months undercover inside the Mongols MC (eastern TN); girlfriend **Anu** (autumn leaves). Style doctrine set by owner: novel-like interiority, character development first, relationships paramount, nuanced non-cliché NPCs — written into `bot/skills/ttrpg-narrator.md` ("Character & Relationship Doctrine").
 - New directives (owner, 09-29): **"Prohibited Clichés" registry** created in `bot/skills/ttrpg-prohibitions.md` (standing set + owner-verbatim additions; item 1 = vibration/thrumming/humming/oscillating/pulsing descriptions, unless literal in the adventure). Crunchy mechanics + active coaching + stop-at-every-roll filed in `ttrpg-campaign-tools.md` ("Table & Mechanics Doctrine"); dialogue-first fill-in doctrine added to `ttrpg-narrator.md`.
+- **NPC bot loaded (2026-10-04 ~22:10):** Billy Ray Spivey bot activated for play — GM-side `Bot Chat` created (`20261004_221017_a2c202`); live round-trip proven (GM → `message_agent` → Billy's Bot Chat → in-voice reply, ~seconds). Also re-pinned his Bot Chat's stale qwen-era session model (row + billing → deepseek-flash; backup in his `backups/`), verified via live turns — `model=deepseek-flash`, `provider=deepseek`, ~2s. Deep Billy beats route through his bot; flavor stays inline. Mechanism: `ttrpg-npc-bots` skill + `bot/npc-maker/README.md`.
+
+## Update 2026-10-08 — NPC bot roster expanded (pre-Groversville)
+
+Five more Convergence NPC bots built end-to-end and voice-checked — plus Billy,
+the roster is six: **Sheriff Dan Oakley** (`npc-dan-oakley`), **Frank Carincola**
+(`npc-frank-carincola`), **Jane Allen** (`npc-jane-allen`), **Angel Spivey**
+(`npc-angel-spivey`), **James Derringer** (`npc-james-derringer`). Dossiers in
+`campaigns/delta-green-convergence/npcs/<slug>/dossier.md` (first drafts pending
+the owner's pass). Deep beats route through the NPC bots via the GM Bot Chat;
+flavor stays inline. **Bot-voice marker in force:** bot-spoken lines carry a
+caret before the opening quote in the relayed fiction (`^"…"`) — the owner's
+standing signal; doctrine in `bot/skills/ttrpg-campaign-tools.md` +
+`bot/npc-maker/README.md`.
