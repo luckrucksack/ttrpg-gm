@@ -2,7 +2,7 @@
 
 The GM Bot is a Hermes Bot running in the `ttrpg` profile.
 It's the primary orchestrator that talks to the player, manages
-Foundry, coordinates NPC Bots, and maintains campaign memory.
+Foundry (including the NPC dossiers), and maintains campaign memory.
 
 ## Profile
 
@@ -23,7 +23,6 @@ The ttrpg profile is already configured at
 |-----|-------|
 | Routine GM work (narration, MCP ops, session flow) | `deepseek-flash` (default) |
 | Heavy scenes (complex adjudication, long prose) | deepseek-v4-pro — switch with `/model` mid-session |
-| NPC Bots (isolated profiles) | `deepseek-flash` — same stack as the GM (owner call 2026-10-04); free-model survey kept for cost-mode swaps |
 | Editing loop (future) | z.ai GLM 5.2 (key stored, not wired) |
 
 Rule: default stays flash; promote to pro per-session only when the scene
@@ -35,16 +34,17 @@ needs it. Cost is the constraint — see
 Add to `~/.hermes/profiles/ttrpg/config.yaml`:
 
 ```yaml
-# MCP: Foundry bridge
+# MCP: Foundry bridge (vendored patched build — see bridge/vendor/setup.sh)
 mcp_servers:
   foundry:
-    command: "npx"
-    args: ["-y", "foundryvtt-mcp@1.5.2"]   # pin: tool names/params are version-specific
+    command: "/Users/chriscoon/.local/bin/node"
+    args: ["/Users/chriscoon/ttrpg_gm/bridge/vendor/foundryvtt-mcp/dist/index.js"]
     env:
       FOUNDRY_URL: "http://localhost:30000"
       FOUNDRY_USERNAME: "mcp-api"
       FOUNDRY_PASSWORD: "${MCP_FOUNDRY_PASSWORD}"   # expanded from the profile .env
       FOUNDRY_WRITE_ENABLED: "true"
+      FOUNDRY_JOURNAL_TEXT_LIMIT: "20000"
     timeout: 120
     connect_timeout: 30
 
@@ -67,17 +67,22 @@ skills:
 
 The GM Bot itself has a defined voice — it narrates in third-person,
 uses present tense, and adheres to the narrator skill's style guide.
-It does NOT roleplay as NPCs directly (that's what NPC Bots are for).
-It describes what NPCs do and say, then delegates deep interaction.
+It voices every NPC itself, working from that NPC's Foundry dossier; it
+never delegates a character to another agent.
 
-## NPC Bots
+## NPC Dossiers (Foundry)
 
-Significant NPCs run as their own Bots (isolated Hermes profiles) that this GM
-Bot messages via Bot Mode's bot-to-bot DM (`message_agent`). The maker, the
-dossier standard, and the activation/voice protocol live in
-[`npc-maker/README.md`](npc-maker/README.md). Base structure v2 (2026-10-09) —
-context isolation, tool lockdown, memory stance, verification tooling — is
-defined in `docs/npc-bot-base-structure-v2-2026-10-09.md`.
+Every significant NPC's character sheet lives in Foundry — a **GM-only journal**
+in the `deltagreen` world, one per NPC, which the GM Bot looks up
+(`search_journals` → `get_journal`) when that NPC takes a real part in a scene,
+and voices inline. There is no delegation, no NPC profile, and no repo-side
+copy: the journal is the only home. The authoring standard and blank sheet live
+in Foundry beside the dossiers (`NPC Dossier — Writing Standard (GM)`).
+
+The NPC bot system (one isolated Hermes profile per NPC, driven through Bot
+Mode's `message_agent`) and its maker were **retired 2026-10-11**; the retired
+base structure is kept as history in
+`docs/npc-bot-base-structure-v2-2026-10-09.md`.
 
 ## Session Mode
 

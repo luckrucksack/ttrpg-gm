@@ -1,5 +1,11 @@
 # NPC Bot Base Structure — v2 (2026-10-09)
 
+> **Superseded 2026-10-11 — kept as history.** The NPC bot system was retired by
+> owner call: there are no `npc-*` profiles any more, and no `message_agent`
+> delegation. Every NPC dossier now lives in Foundry as a GM-only journal that
+> the GM reads and voices from — see `bot/npc-dossiers/README.md` and
+> `bot/skills/ttrpg-campaign-tools.md`. Nothing in this document is operational.
+
 *The revamped base structure for NPC bots: what an NPC subagent is made of, how
 it is built, isolated, and verified. Companion to `bot/npc-maker/README.md`
 (the operational doctrine) and the landscape survey

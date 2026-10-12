@@ -19,6 +19,18 @@ FOUNDRY_URL="${FOUNDRY_URL:-http://localhost:30000}"
 FOUNDRY_USERNAME="${FOUNDRY_USERNAME:-mcp-api}"
 MCP_PACKAGE="${MCP_PACKAGE:-foundryvtt-mcp@1.5.2}"
 
+# Run the vendored patched build when it exists (bash bridge/vendor/setup.sh),
+# else fall back to the pinned npm package. MCP_CMD overrides both.
+if [ -z "${MCP_CMD:-}" ]; then
+  if [ -f "$HERE/vendor/foundryvtt-mcp/dist/index.js" ]; then
+    MCP_CMD="node $HERE/vendor/foundryvtt-mcp/dist/index.js"
+  else
+    MCP_CMD="npx -y $MCP_PACKAGE"
+  fi
+fi
+export MCP_CMD
+export FOUNDRY_JOURNAL_TEXT_LIMIT="${FOUNDRY_JOURNAL_TEXT_LIMIT:-20000}"
+
 # npx lives in a few common places depending on how node was installed.
 for d in "$HOME/.local/bin" /opt/homebrew/bin /usr/local/bin; do
   [ -d "$d" ] && PATH="$d:$PATH"
@@ -33,6 +45,7 @@ echo "Foundry MCP bridge check"
 echo "  url:      $FOUNDRY_URL"
 echo "  user:     $FOUNDRY_USERNAME"
 echo "  env file: $ENV_FILE"
+echo "  server:   $MCP_CMD"
 echo
 
 # --- 1. Foundry reachable -----------------------------------------------------
@@ -59,16 +72,15 @@ pass "MCP_FOUNDRY_PASSWORD present"
 # --- 3. Real launch: does the server register tools? --------------------------
 FOUNDRY_URL="$FOUNDRY_URL" \
 FOUNDRY_USERNAME="$FOUNDRY_USERNAME" \
-MCP_PACKAGE="$MCP_PACKAGE" \
 ENV_FILE="$ENV_FILE" \
 BRIDGE_CWD="$HERE" \
 python3 - "$@" <<'PY'
-import json, os, re, subprocess, sys, select, tempfile, time
+import json, os, re, shlex, subprocess, sys, select, tempfile, time
 
 url = os.environ["FOUNDRY_URL"]
 bridge_cwd = os.environ["BRIDGE_CWD"]
 user = os.environ["FOUNDRY_USERNAME"]
-pkg = os.environ["MCP_PACKAGE"]
+cmd = shlex.split(os.environ["MCP_CMD"])
 env_file = os.environ["ENV_FILE"]
 show_list = "--list" in sys.argv
 
@@ -97,7 +109,7 @@ env.update({
 errlog = tempfile.NamedTemporaryFile("w+", prefix="bridge-check-", suffix=".log", delete=False)
 err_path = errlog.name
 proc = subprocess.Popen(
-    ["npx", "-y", pkg],
+    cmd,
     stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=errlog,
     text=True, bufsize=1, env=env, cwd=bridge_cwd,
 )

@@ -36,15 +36,21 @@ In Foundry VTT, with the world running:
 Foundry hashes the password server-side on create, so the same plaintext value
 works for the socket login.
 
-### 2. Confirm the server runs
+### 2. Build the vendored server
+
+The GM runs a **vendored, patched** copy of the pinned package. Upstream
+hard-codes a 500-character limit on journal page text, which truncates long
+entries (the NPC dossiers) mid-sentence.
 
 ```bash
-npx -y foundryvtt-mcp@1.5.2
+bash bridge/vendor/setup.sh          # vendors foundryvtt-mcp@1.5.2 + applies the local patch
+node bridge/vendor/foundryvtt-mcp/dist/index.js    # bare run: attached and silent = success
 ```
 
-It speaks stdio MCP; a bare run with valid env vars stays attached and silent.
-That is success. It exits non-zero on a bad URL, bad credentials, or a stopped
-world.
+The vendored tree is gitignored; `setup.sh` rebuilds it from npm plus the patch
+and prints the delta. It speaks stdio MCP; a bare run with valid env vars stays
+attached and silent. That is success. It exits non-zero on a bad URL, bad
+credentials, or a stopped world.
 
 ### 3. Wire into Hermes
 
@@ -53,16 +59,19 @@ world.
 ```yaml
 mcp_servers:
   foundry:
-    command: "npx"
-    args: ["-y", "foundryvtt-mcp@1.5.2"]
+    command: /Users/chriscoon/.local/bin/node
+    args: [/Users/chriscoon/ttrpg_gm/bridge/vendor/foundryvtt-mcp/dist/index.js]
     env:
       FOUNDRY_URL: "http://localhost:30000"
       FOUNDRY_USERNAME: "mcp-api"
       FOUNDRY_PASSWORD: "${MCP_FOUNDRY_PASSWORD}"
       FOUNDRY_WRITE_ENABLED: "true"
+      FOUNDRY_JOURNAL_TEXT_LIMIT: "20000"   # the local patch reads this; stock builds ignore it
     timeout: 120
     connect_timeout: 30
 ```
+
+(Live values are set with `hermes -p ttrpg config set`; see `STATUS.md`.)
 
 The secret itself lives in `~/.hermes/profiles/ttrpg/.env` (mode 600):
 
@@ -77,8 +86,10 @@ password never appears in `config.yaml` or in git.
 > a password that looks like `${...}`, the variable is missing from the `.env`
 > the profile loads.
 
-Pin the version (`@1.5.2`). `npx -y foundryvtt-mcp` floats to latest and a
-tool-signature change would silently break the skill's parameter names.
+Pin the version (`1.5.2`, pinned in `vendor/setup.sh`). A float to latest can
+rename tool parameters silently. The pin is now a **vendor pin**: the patched
+build is generated from that exact version, so a version bump means re-running
+`setup.sh` and re-checking the delta.
 
 ### 4. Restart the ttrpg profile, then verify
 
@@ -96,7 +107,8 @@ them apart.
 
 ## Available Tools
 
-Verified against the installed `foundryvtt-mcp@1.5.2` (33 tools).
+Verified against the vendored `foundryvtt-mcp@1.5.2` + local patch (34 tools:
+33 upstream + `delete_journal_entry`).
 
 Read / query:
 - `roll_dice` — roll a formula through Foundry's dice engine
@@ -104,6 +116,8 @@ Read / query:
 - `search_items` — find items by name/type/rarity
 - `search_compendium` — search installed compendium packs (adventure content)
 - `search_journals`, `get_journal` — find and read journal entries
+  (`get_journal` page text is capped at `FOUNDRY_JOURNAL_TEXT_LIMIT`; the local
+  patch of upstream's hard-coded 500, set to 20000 in the profile env)
 - `search_world` — one search across all collections
 - `get_scene_info`, `get_world_summary`, `get_users`, `get_chat_messages`
 - `refresh_world_data` — force a re-fetch after a Foundry restart
@@ -113,6 +127,8 @@ Write (require `FOUNDRY_WRITE_ENABLED=true` **and** Assistant GM+ permission):
 - `update_actor_attributes` — patch `actor.system` fields by dot-path
 - `create_actor_item`, `update_actor_item`, `delete_actor_item`
 - `create_journal_entry` — GM-only visibility unless `visibility` is passed
+- `delete_journal_entry` — delete a journal by id (local patch; upstream ships
+  no update and no delete — an edit is delete + recreate)
 - `start_combat`, `next_turn`, `end_combat`, `set_initiative`
 - `move_token`, `apply_status_effect`
 
@@ -146,9 +162,18 @@ Hermes prefixes every tool: `mcp_foundry_search_actors`, `mcp_foundry_roll_dice`
 - **Auth is a socket login, not an API key.** The username must exist in the
   *running world*; a user in a different world does nothing.
 
-## Extending
+## Local patch — `bridge/vendor/`
 
-If the MCP server lacks a tool we need (roll table CRUD, NPC auto-pilot,
-campaign memory management), fork and extend. The bridge is designed to be
-swapped transparently: GM Bot logic talks to Foundry only through these tool
-abstractions, so the backend can be replaced by changing the MCP server.
+Upstream `foundryvtt-mcp` stops at 33 tools and hard-codes the journal page
+text limit at 500 characters. Rather than fork the project, `bridge/vendor/setup.sh`
+vendors the pinned npm package and applies a small, auditable delta (it prints
+`diff -u` against `dist.pristine/` every run):
+
+1. `get_journal` page text limit comes from `FOUNDRY_JOURNAL_TEXT_LIMIT`
+   (default 500, upstream behavior) and pages render readably — bullets, line
+   breaks, decoded entities — instead of run-together text.
+2. `delete_journal_entry` — the missing delete path (via the core
+   `modifyDocument` socket protocol, same as create).
+
+Bump the version → re-run `setup.sh` → `bash bridge/check.sh`. Anything else the
+bridge lacks gets patched the same way, not forked wholesale.

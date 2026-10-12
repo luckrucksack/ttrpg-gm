@@ -1,5 +1,8 @@
 # Free Models for NPC Bots — 2026-10-01
 
+> **Historical — the NPC bots were retired 2026-10-11.** Nothing here is
+> operational; kept for the model-survey data only.
+
 **Purpose.** Pick the free OpenRouter model(s) that run the **NPC bots**. The GM bot
 stays on `deepseek-flash` — free models are for NPCs only (owner constraint, 2026-10-01).
 

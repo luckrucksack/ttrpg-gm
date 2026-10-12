@@ -88,14 +88,23 @@ mcp_foundry_move_token(tokenId="...", x=1200, y=800)
 ```
 mcp_foundry_get_scene_info()              # active scene
 mcp_foundry_get_scene_info(sceneId="...")
+mcp_foundry_search_journals(query="...")  # matches names and page content
+mcp_foundry_get_journal(journalId="...")  # full page text (patched bridge)
 mcp_foundry_create_journal_entry(
     name="Session 1",
     pages=[{name: "Notes", content: "..."}]
 )
+mcp_foundry_delete_journal_entry(journalId="...")   # destructive, no undo
 ```
 
 `create_journal_entry` is **GM-only by default**; pass `visibility` to widen it.
 Each page is `{name, content}` where `content` is HTML or plain text.
+
+This bridge is a **vendored patched build** (`bridge/vendor/setup.sh`), so
+`get_journal` returns full pages (the stock server truncates every page to its
+first 500 characters) and `delete_journal_entry` exists (upstream has no journal
+update or delete — an edit means reading the entry, deleting it, and recreating
+it with the corrected text; never recreate without deleting first).
 
 ## Session flow
 
@@ -105,7 +114,7 @@ Each page is `{name, content}` where `content` is HTML or plain text.
 2. `mcp_foundry_get_actor_details(actorId)` — current stats and state
 3. Check campaign memory (TencentDB) for prior interactions
 4. Narrate the scene and NPC dialogue via the narrator skill
-5. Deep NPC interaction ⇒ delegate to the NPC Bot profile
+5. Significant NPC ⇒ look the sheet up (`mcp_foundry_search_journals` → `mcp_foundry_get_journal` on the NPC's dossier journal) and voice them from it
 
 ### Combat starts
 

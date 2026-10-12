@@ -1,5 +1,8 @@
 # NPC Bots: Hermes Bot Mode as TTRPG Non-Player Characters
 
+> **Historical — the pattern was retired 2026-10-11.** No `npc-*` profiles exist;
+> NPC sheets live in Foundry as GM-only journals (`bot/npc-dossiers/README.md`).
+
 **Date:** 2026-08-26
 **Context:** Triggered by reading about Hermes Bot Mode (desktop app feature where each Hermes profile is a named Bot with persistent chat, memory, skills, and routines). Realization that an NPC is already a person with knowledge, personality, relationships, and memory who only acts when engaged — the exact shape of a dormant Hermes Bot.
 

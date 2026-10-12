@@ -16,7 +16,6 @@ campaigns/
 │   └── organized_pdfs/
 ├── <campaign_id>/          # one directory per campaign
 │   ├── adventures/         # licensed adventure PDFs / markdown (never commit)
-│   ├── npcs/               # NPC bot sources — <npc-slug>/{dossier.md, soul.md, bot.yaml}
 │   └── source/             # any local module/JSON source material (never commit)
 ```
 
@@ -34,13 +33,13 @@ campaigns/<id>/adventures/foo.pdf  →  pipeline/ingest.py  →  pipeline/output
                                                               → GM Bot imports via Foundry MCP
 ```
 
-- **NPC bots** — `campaigns/<id>/npcs/<npc-slug>/` holds each NPC's dossier,
-  persona, and metadata; `bot/npc-maker/make-npc.sh` builds the Hermes profile
-  from them. Profiles are generated artifacts — these files stay the source.
+- **NPC dossiers** — live in the campaign's Foundry world as GM-only journals,
+  not here. There is exactly one copy: the journal the GM reads and voices the
+  character from. The authoring standard and blank sheet sit in the same world
+  (`NPC Dossier — Writing Standard (GM)`) — duplicate it to build a new NPC.
 
-Nothing under `campaigns/` is read at runtime by the bot or the pipeline except
-the file you point `ingest.py` at (and the NPC bot maker, which reads `npcs/` at
-build time only).
+Nothing under `campaigns/` is read at runtime by the GM or the pipeline except
+the file you point `ingest.py` at.
 
 ## Rules of the layer
 

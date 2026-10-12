@@ -13,7 +13,7 @@ in Foundry VTT with a Hermes Agent Bot as the GM.
 **Architecture:**
 - **GM Bot** — Hermes agent profile (deepseek-flash) with skill + doctrine files
 - **Foundry VTT** — game mechanics, maps, actors, combat engine
-- **NPC Bots** — isolated Hermes profiles, one per NPC — first bot live: Billy Ray Spivey (`bot/npc-maker/`)
+- **NPC dossiers** — each significant NPC's sheet lives in Foundry as a GM-only journal the GM reads on demand; single home, no repo copy
 - **Pipeline** — PDF → MarkItDown → LLM → Foundry JSON import (secondary path)
 - **Bridge** — MCP server (laurigates/foundryvtt-mcp, MIT) connects bot to Foundry
 - **Memory** — TencentDB Agent Memory for campaign persistence
@@ -39,7 +39,7 @@ hermes -p ttrpg
 ```
 pipeline/       PDF adventure ingestion (MarkItDown + LLM)
 bridge/         Foundry MCP connection setup
-bot/            GM Bot config + NPC Bot template + skills
+bot/            GM Bot config + NPC dossier standard + skills
 docs/           Architecture docs + MkDocs site (auto-published)
 ```
 

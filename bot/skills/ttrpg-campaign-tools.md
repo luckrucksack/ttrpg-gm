@@ -60,9 +60,9 @@ Run via cron in the ttrpg profile:
 1. **Session Log Compaction** — weekly. Compresses finished sessions
    into durable scene blocks in TencentDB. Removes redundant logs.
 
-2. **NPC Agenda Advancement** — weekly. For NPCs with cron routines,
-   advance their agendas one tick. If the NPC Bot detects the result
-   is significant for the party, flag it to the GM Bot.
+2. **NPC Agenda Advancement** — weekly. Advance offscreen NPC agendas one
+   tick, and append whatever the table will eventually notice to that NPC's
+   Foundry dossier journal.
 
 3. **World State Snapshot** — after each session. Save Foundry's world
    state to TencentDB as a reference snapshot.
@@ -102,38 +102,37 @@ When the session ends:
   with a cost or a hitch); big margins narrate big. No separate hard/extreme
   tiers.
 
-## NPC Bots — Activation & Voice Protocol (built 2026-10-04)
+## NPC Dossiers — Foundry (bots retired 2026-10-11; single home)
 
-Significant NPCs run as isolated Hermes Bots (one profile per NPC). When a scene
-goes deep with one of them, the GM hands the scene to the NPC's bot. Maker and
-full doctrine: `~/ttrpg_gm/bot/npc-maker/`.
+Every significant NPC's character sheet lives **in Foundry** — a GM-only journal
+in the `deltagreen` world, and the only copy anywhere. There is no delegation,
+no NPC profile, no repo-side duplicate: the GM looks the sheet up and voices the
+character itself.
 
-- **When to delegate.** Plot-relevant, character-deep interactions —
-  interrogations, confessions, negotiations, relationship beats — go to the NPC
-  Bot. Flavor and small talk stay inline.
-- **How to activate.** Send a scene brief:
-  `message_agent(target="npc-<slug>", message="<brief>")`. Compose the brief —
-  never forward the player's words verbatim: where the scene stands, what was
-  just said or asked, anything the NPC knows that matters, and what the table
-  needs from them. Current roster: `npc-billy-ray-spivey` (Billy Ray Spivey).
-- **Receiving the reply.** Fire-and-forget: the acknowledgement is not the
-  reply. The NPC answers in seconds (same model stack as the GM); the reply arrives as a
-  completion notification — relay it into the scene faithfully. If delivery
-  fails, do not stall play: run the NPC inline as always, and flag the miss.
-- **Voice discipline.** The NPC answers in their own voice — words and small
-  beats only: no outcomes, no dice, no other characters, no world events. The GM
-  keeps consequences, narration, and the stop-before-decisions rule. Weave the
-  NPC's words in; never contradict or extend them. Full character sheet:
-  `campaigns/<campaign_id>/npcs/<slug>/dossier.md` — read it when a scene needs
-  depth.
-- **Knowledge boundaries are hard.** An NPC bot knows only what the character
-  knows; the dossier marks the line. Never brief them past it, and never let
-  them leak what they don't know.
-- **The bot-voice marker (owner-directed 2026-10-04; in force 2026-10-08).**
-  A line delivered by the NPC's own bot carries a caret with no space
-  immediately before its opening quote — `^"Was it me, sir."` — the
-  player-visible signal that the bot is actually activated and speaking. Only
-  bot-backed lines carry it (most NPCs have no bot); GM-invented voices carry
-  none, and an inline fallback carries none. The owner chose the form as
-  "subtle but still deffo present" — the one deliberate exception to the
-  invisible relay.
+- **Where.** Journals named `<Name> — NPC Dossier (Convergence)`, visibility
+  GM-only, 11 pages each: *Brief & knowledge line*, sections 1–9, Appendix. The
+  authoring standard and blank sheet live beside them as `NPC Dossier — Writing
+  Standard (GM)` — duplicate that entry to build a new NPC.
+- **Look it up before voicing.** When an NPC is about to matter — an
+  interrogation, a confession, a negotiation, a relationship beat — search
+  first: `search_journals` with the NPC's name, then `get_journal` with the id
+  it returns. Never voice a significant NPC from a memory of the last scene
+  alone.
+- **What to read for.** Sections 7 (embodied behavior) and 8 (voice and
+  perception) drive the delivery — posture, hands, cadence, verbal habits.
+  Sections 1–6 carry the interiority the scene should press on; section 9
+  (arc) is what the GM plays toward, never scripts.
+- **Knowledge boundaries are hard.** The Brief page carries the knowledge line;
+  the Appendix splits *knows* / *fears but does not know* / *does not know*.
+  Nothing under "does not know" ever surfaces — not as a hint, not as
+  narration, not as a slip.
+- **GM-only means the player never sees it.** The journal is the GM's private
+  reference: never read it aloud, never quote it as text, never let the
+  fiction's framing acknowledge it. Only a line the player has already heard —
+  the Appendix's binding play canon — is quoted back when the table needs it.
+- **Keep it current — in the journal.** Play is canon: when a scene changes what
+  an NPC knows or has said, append the beat to the Appendix page in the same
+  sitting the scene ends. Edits happen in the journal UI; the bridge can create
+  journals but cannot modify or delete them.
+- **No bot-voice marker.** All NPC voice is the GM's, woven into the narration,
+  and nothing is marked.

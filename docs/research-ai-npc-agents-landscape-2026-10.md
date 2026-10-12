@@ -1,5 +1,8 @@
 # AI NPC Agents for TTRPGs — Landscape Survey (Oct 2026)
 
+> **Historical — the per-NPC agent pattern was retired 2026-10-11** in favour of
+> Foundry-hosted GM-only journals. The survey stands as research.
+
 *Who else is doing what we're doing: persistent per-NPC agents + an orchestrating GM agent, live in a VTT.*
 
 - **Survey date:** 2026-10-08 · **Method:** three parallel research passes (products/tools/VTT integrations; community/practitioner practice; academic + industry), ~40 searches; headline links spot-checked live. Vendor self-descriptions marked as such.

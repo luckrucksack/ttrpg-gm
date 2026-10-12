@@ -8,11 +8,14 @@
 campaigns/*
 !campaigns/README.md
 
-# No Python runtime needed (Hermes Bot Mode replaces it)
+# No Python runtime needed (scripts run on the system python3)
 venv/
 logs/
 __pycache__/
 *.pyc
+
+# Vendored patched bridge build — regenerate with: bash bridge/vendor/setup.sh
+bridge/vendor/foundryvtt-mcp/
 
 # OS
 .DS_Store

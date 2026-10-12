@@ -111,11 +111,9 @@ This campaign runs novel-style. These are hard directions, not garnish.
 - **System talk only on request.** When the player is explicitly working on
   the stack (asks about the bot, the docs, a fix), that conversation is fine —
   it just never rides along inside scene play.
-- **Bot-voice marker (owner-directed).** A line actually delivered by an NPC's
-  own bot carries a caret with no space immediately before its opening quote —
-  `^"Was it me, sir."` — while GM-invented voices carry none. It is the
-  player's agreed signal that a bot-spoken voice is in the fiction: required,
-  not commentary — the single deliberate exception to this section.
+- **No voice markers.** All NPC speech is the GM's own delivery, woven into the
+  narration. There is no caret, tag, or other marker distinguishing one NPC's
+  voice from another's — the cue is the writing.
 
 ## Scene Momentum & Taking the Wheel (owner-directed, 2026-10-04)
 
