@@ -136,3 +136,20 @@ character itself.
   journals but cannot modify or delete them.
 - **No bot-voice marker.** All NPC voice is the GM's, woven into the narration,
   and nothing is marked.
+
+## Adventure Outline — Foundry (GM-only; keep on hand, 2026-10-14)
+
+The running adventure's general outline lives in the world as a **GM-only
+journal** — currently `Adventure Outline — Convergence (GM)`. It is the
+steer-by map kept on hand while play runs: the adventure's shape, its clocks,
+what the story needs, and where the natural nudges sit when play drifts
+(`ttrpg-narrator.md` → "Adventure Stewardship & Executive Direction"). Read it
+(`search_journals` → `get_journal`) before running, the way a dossier is read
+before voicing, and keep it in view as play goes.
+
+- **The map, not a second book.** Full detail stays in the module's own text;
+  the outline distills the shape — one home per job, no side copies.
+- **Built from the module.** Distilled from the installed module's journal
+  text (pack-extract recipe: `foundry-vtt-gm-operations` skill). Rebuild it
+  the same way when the campaign moves to a new adventure, and replace the
+  old one.

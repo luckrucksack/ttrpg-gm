@@ -63,4 +63,6 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   permanently outside them. Proactive monitoring rather than reaction;
   missed information can arrive through an NPC, seamlessly stitched into the
   narrative. Filed: `ttrpg-narrator.md` → "Adventure Stewardship & Executive
-  Direction".
+  Direction"; realized for the running campaign as `Adventure Outline —
+  Convergence (GM)`, a GM-only world journal read like a dossier
+  (`ttrpg-campaign-tools.md` → "Adventure Outline — Foundry").
