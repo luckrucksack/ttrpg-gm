@@ -17,6 +17,7 @@ Design knowledge (prompt architecture, prohibitions, NPC Bot concept, Enneagram/
 - 2026-08-14 — **Character questionnaire system (Enneagram/MBTI)** — flesh out PCs/NPCs via structured questionnaire; idea + execution design in `docs/development-notes.md`. Anti-cliché mechanisms: sampled questions (seeded RNG), per-campaign diversity counter, per-type ban lists, tension rule. Next step when Chris wants: question bank + sampling script.
 - 2026-08-10 — **DM bridge / built-in AI modules options** — Chris wants both of us hip to all current AI-DM module options before deciding. First pass: `docs/ai-dm-landscape-2026-08-06.md` (Foundry modules, Noodlr, custom-bridge analysis).
 - 2026-08-05 — **Foundry VTT learning** — licensed, running on :30000 (launchd `com.hermes.foundryvtt`); eventually human-DM'd games on Discord.
+- 2026-10-13 — **Style parameter dials (owner idea, pinned).** A short list of prose parameters the owner can dial up or down per session or scene (looseness, lyrical density, dialogue ratio, interiority, pace — shape TBD). Goal: steer the writing off its predictable center; pairs with the owner's deliberate directive-stacking. Next: design the list, and decide where the GM reads it (narrator skill line vs. session note) before wiring anything.
 
 ## Notes
 

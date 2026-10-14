@@ -58,10 +58,14 @@ skills:
 
 | Skill | Purpose |
 |-------|---------|
+| `ttrpg-ai-gm` | The AI GM core — identity, doctrine index, owner feedback ledger; the entry point |
 | `ttrpg-narrator` | Prose style guide, tone, pacing, scene framing |
 | `ttrpg-prohibitions` | Anti-cliché ban list, self-check rules |
 | `ttrpg-foundry-bridge` | MCP tool reference for Foundry operations |
 | `ttrpg-campaign-tools` | Session log format, world state conventions |
+
+`ttrpg-ai-gm` is read first every session; it routes to the doctrine files
+and logs the owner's feedback as it comes.
 
 ## GM Bot Persona (SOUL.md)
 

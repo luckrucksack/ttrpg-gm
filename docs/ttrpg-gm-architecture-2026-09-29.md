@@ -72,15 +72,17 @@ can see it.
   `references/content-provisioning.md`, `references/session-orientation.md`) —
   the operational how-to: bridge verification, the tool inventory, the
   zero-tools failure ladder, orientation discipline.
-- Four campaign doctrine documents in this repo's `bot/skills/`:
-  `ttrpg-narrator.md` (voice, Character & Relationship Doctrine,
+- The doctrine set in this repo's `bot/skills/` — the AI GM core
+  (`ttrpg-ai-gm.md`: identity, doctrine index, owner feedback ledger — read
+  first) plus `ttrpg-narrator.md` (voice, Character & Relationship Doctrine,
   dialogue-first fill-in), `ttrpg-prohibitions.md` (the Prohibited Clichés
   registry, written from the owner's own notes), `ttrpg-campaign-tools.md`
   (Table & Mechanics Doctrine: crunchy mechanics, active coaching, stop at
   every roll, rolls shown openly from real RNG), `ttrpg-foundry-bridge.md`
   (v1.5.2-accurate tool reference).
   These are **living documents**: owner-dictated items are appended in place,
-  often verbatim.
+  often verbatim; owner GMing feedback lands in the owning file and the
+  core's ledger in the same pass.
 
 **3. Bridge — the enforcement seam.** `foundryvtt-mcp@1.5.2`, pinned (tool
 names and parameter shapes are version-specific; a float to latest can rename
@@ -221,8 +223,9 @@ path above. It applies *sometimes*; it is not the default intake.
   item creation. Details in
   [`foundry-live-session-2026-09-28.md`](foundry-live-session-2026-09-28.md).
 - **GM Bot skills in place**: profile skill `foundry-vtt-gm-operations` plus the
-  four campaign doctrine files, including the owner's Character & Relationship
-  Doctrine (2026-09-29) and the Prohibited Clichés registry.
+  AI GM doctrine set (core `ttrpg-ai-gm.md` + four doctrine files), including the
+  owner's Character & Relationship Doctrine (2026-09-29) and the Prohibited
+  Clichés registry.
 - **Docs site** builds `--strict` in CI and publishes to GitHub Pages.
 
 ## Roadmap

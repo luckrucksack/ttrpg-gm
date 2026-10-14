@@ -6,7 +6,7 @@ published TTRPG adventures in Foundry VTT with a Hermes Agent Bot as the GM.
 **System:** [Hermes Bot Mode](https://hermes-agent.nousresearch.com) (GM Bot),
 [Foundry VTT](https://foundryvtt.com) (game mechanics + maps),
 [laurigates/foundryvtt-mcp](https://github.com/laurigates/foundryvtt-mcp) (bridge),
-Isolated Hermes Bot profiles (NPCs).
+GM-only NPC dossiers in the Foundry world.
 
 **Status:** Architecture v4 (2026-09-29) — bridge, world, and memory verified
 live; first campaign underway.
@@ -21,8 +21,9 @@ live; first campaign underway.
   modular system: pipeline, bridge, bot, NPC template, campaign memory
 - [Origins (v1)](ttrpg-gm-architecture-2026-08-27.md) — the
   original design that this system was built from
-- [NPC Bots Design](npc-bots-design-sketch-2026-08-26.md) — using isolated
-  Hermes Bot profiles as persistent TTRPG NPCs
+- [NPC Bots Design (retired)](npc-bots-design-sketch-2026-08-26.md) — isolated
+  Hermes Bot profiles as persistent TTRPG NPCs; retired 2026-10-11, kept as
+  history
 - [Prompt Architecture](ai-dm-prompt-architecture-2026-08-07.md) — the
   prohibition layer and named engines from years of Apple Notes iteration
 
@@ -32,8 +33,8 @@ live; first campaign underway.
 |-------|------|
 | `pipeline/ingest.py` | PDF → MarkItDown → LLM extraction → Foundry JSON |
 | `bridge/` | MCP server setup for Foundry ↔ Hermes communication |
-| `bot/skills/` | 4 skills: narrator, prohibitions, foundry-bridge, campaign-tools |
-| `bot/npc-maker/` | Creates isolated NPC Bot profiles from campaign dossiers |
+| `bot/skills/` | The AI GM doctrine set — core (`ttrpg-ai-gm.md`) + narrator, prohibitions, campaign-tools, foundry-bridge |
+| NPC dossiers | GM-only journals in the Foundry world — single home, no repo copy |
 | `docs/` | MkDocs site (auto-published to GitHub Pages) |
 
 ## Project History

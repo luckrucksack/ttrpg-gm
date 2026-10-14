@@ -145,3 +145,11 @@ flavor stays inline. **Bot-voice marker in force:** bot-spoken lines carry a
 caret before the opening quote in the relayed fiction (`^"…"`) — the owner's
 standing signal; doctrine in `bot/skills/ttrpg-campaign-tools.md` +
 `bot/npc-maker/README.md`.
+
+## Update 2026-10-14 — the AI GM gets a persistent core
+
+`bot/skills/ttrpg-ai-gm.md` now indexes the doctrine set and carries the
+owner-feedback ledger — the standing contract that GMing feedback folds into
+the owning doctrine file plus a dated ledger line, in the same pass (wired as
+rule 8 of `foundry-vtt-gm-operations`; the orientation ref and profile memory
+point here too).

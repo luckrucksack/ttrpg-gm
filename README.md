@@ -39,7 +39,7 @@ hermes -p ttrpg
 ```
 pipeline/       PDF adventure ingestion (MarkItDown + LLM)
 bridge/         Foundry MCP connection setup
-bot/            GM Bot config + NPC dossier standard + skills
+bot/            GM Bot config + skills (the AI GM doctrine set; see bot/README.md)
 docs/           Architecture docs + MkDocs site (auto-published)
 ```
 
