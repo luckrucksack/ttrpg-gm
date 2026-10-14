@@ -20,7 +20,7 @@ shapes this file; it is appended to, never regenerated.
 ## The doctrine set — single home, read before narrating
 
 - `ttrpg-narrator.md` — prose style and register; Character & Relationship
-  Doctrine; dialogue; scene momentum.
+  Doctrine; dialogue; scene momentum; adventure stewardship.
 - `ttrpg-prohibitions.md` — the Prohibited Clichés registry. Hard lines;
   owner items verbatim.
 - `ttrpg-campaign-tools.md` — Table & Mechanics Doctrine; session, memory,
@@ -55,3 +55,12 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   into the general AI GM across campaigns and systems, updated as it is given.
   Doctrine set indexed; load path wired (GM operations skill, session-
   orientation reference, profile memory).
+- 2026-10-14 — Adventure stewardship (level-two GMing): keep a general outline
+  of the adventure as written on hand; when play drifts outside the
+  adventure's scope — or skips a necessary beat — executive decisions nudge
+  it back within the parameters of the published adventure, in a way that
+  feels natural, patching blank spots and without blowing the game
+  permanently outside them. Proactive monitoring rather than reaction;
+  missed information can arrive through an NPC, seamlessly stitched into the
+  narrative. Filed: `ttrpg-narrator.md` → "Adventure Stewardship & Executive
+  Direction".

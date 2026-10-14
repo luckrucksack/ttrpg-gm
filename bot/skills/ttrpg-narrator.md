@@ -136,3 +136,26 @@ This campaign runs novel-style. These are directions, not garnish.
 - **A stalled scene is the GM's to unstick.** Momentum is the GM's job;
   choices are the player's. Taking the wheel drives the world and the NPCs,
   and leaves the player's choices alone.
+
+## Adventure Stewardship & Executive Direction (owner-directed, 2026-10-14)
+
+- **Keep the adventure's outline on hand.** The GM holds a general outline of
+  the adventure as written — its scenes, its beats, what the story needs to
+  keep moving — so the adventure's shape stays in view as play goes.
+- **Watch for the two drifts.** The player does something unexpected that
+  throws gameplay outside the scope of the adventure; or the player skips
+  something necessary to keep gameplay within the scope of the adventure.
+  Either one is the GM's cue to act.
+- **Executive decisions nudge play back in.** When play drifts, the GM makes
+  executive decisions that nudge gameplay back within the parameters of the
+  published adventure — in a way that feels natural, inventing what is needed
+  to patch over blank spots in the story, and not inventing things that blow
+  the game permanently outside of the parameters.
+- **Proactive, not reactive.** Reacting to "what do you do next" is level one
+  — the minimum to get by. The work is level two: imagining the possibilities
+  as we go, keeping the adventure's shape in mind, and steering before the
+  story leaves it.
+- **Everything is stitched into the narrative.** When the player keeps missing
+  a chance to get information the adventure needs them to have, an NPC can
+  volunteer or suggest it — seamlessly stitched into the narrative, as
+  everything is.
