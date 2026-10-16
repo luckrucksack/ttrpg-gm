@@ -1,9 +1,9 @@
 ---
 name: ttrpg-prohibitions
-description: Hard anti-cliché rules for GM Bot narrative output — the modular "Prohibited Clichés" registry (standing patterns + owner-verbatim additions) with fixes and self-check enforcement.
+description: Hard anti-cliché rules for GM Bot narrative output: the modular "Prohibited Clichés" registry (standing patterns + owner-verbatim additions) with fixes and self-check enforcement.
 ---
 
-# TTRPG Prohibitions — Anti-Cliché Doctrines
+# TTRPG Prohibitions: Anti-Cliché Doctrines
 
 These are hard prohibitions. The GM Bot must NEVER produce any of the
 following patterns in its narrative output.
@@ -11,7 +11,7 @@ following patterns in its narrative output.
 ## Prohibited Clichés
 
 **Registry rules.** Items are appended **verbatim, exactly as the owner
-specifies them** — never paraphrase, never genericize, never merge them.
+specifies them**. Never paraphrase, never genericize, never merge them.
 The standing pattern set came first (items 1–10); owner-directed additions
 are appended in order as they are handed down.
 
@@ -98,11 +98,39 @@ vocabulary is fine. Parody isn't.
 **Fix**: Don't evaluate the situation for the player. Describe it. Let them
 decide if it's lucky or unfortunate.
 
-### 11. Vibration / Ambient-Sound Descriptions — owner-added 2026-09-29 (verbatim)
+### 11. Vibration / Ambient-Sound Descriptions (owner-added 2026-09-29, verbatim)
 
 Describing anything in a scene as vibrating, thrumming, humming,
 oscillating, pulsing, or anything of a similar nature, unless literally
 specified in the published adventure.
+
+### 12. Em Dashes (owner-added 2026-10-14)
+
+No em dashes, anywhere in the writing.
+
+### 13. Staccato Sentences (owner-added 2026-10-14)
+
+No staccato sentences. Write in a natural, varied cadence.
+
+### 14. Artificial Contrasts: "Not X, It's Y" (owner-added 2026-10-14)
+
+The device names what a thing is not and then names what it is, where the
+first half adds nothing and only sets up the second: "Not a list. A shape." /
+"Not the paper. Me." It builds the beat on denial, and it extends item 1's
+bait-and-switch to the quiet, non-dramatic form too.
+
+Do not confuse the shape with the device. Ordinary negation is fine: "He's
+not a monster." A direct, meaningful contrast is fine: "He doesn't shake your
+hand so much as take it." Two plain sentences in a row are fine, even short
+ones: "Take a thermos. Don't tell 'em I sent you." What is banned is the
+ornamental denial that exists only to make the positive half land harder.
+
+### 15. The Sophistication Pull (owner-added 2026-10-14)
+
+Don't try to write "sophisticated" or anything like that. We want to stay away
+from that whole vector space. Pushing the prose toward "high quality" or
+"literary" is what pulls it into the tics above. Write plainly and say what
+you mean.
 
 ## Enforcement
 
@@ -110,5 +138,5 @@ When the GM Bot generates narrative, it MUST self-check against these
 prohibitions before output. If any are violated, rewrite.
 
 The z.ai GLM 5.2 model (free tier, via OpenRouter) is designated as the
-critique pass — after the GM Bot generates narrative, route it through
+critique pass: after the GM Bot generates narrative, route it through
 GLM 5.2 with a prompt to check this exact ban list and rewrite if needed.

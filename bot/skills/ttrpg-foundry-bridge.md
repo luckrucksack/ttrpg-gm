@@ -1,9 +1,9 @@
 ---
 name: ttrpg-foundry-bridge
-description: MCP tool reference for Foundry VTT operations — actor, journal, compendium, combat, and state management via the foundryvtt-mcp server.
+description: MCP tool reference for Foundry VTT operations: actor, journal, compendium, combat, and state management via the foundryvtt-mcp server.
 ---
 
-# TTRPG Foundry Bridge — MCP Tool Reference
+# TTRPG Foundry Bridge: MCP Tool Reference
 
 The GM Bot talks to Foundry VTT through Hermes' native MCP client, which
 launches `laurigates/foundryvtt-mcp`. All Foundry tools are prefixed
@@ -11,9 +11,9 @@ launches `laurigates/foundryvtt-mcp`. All Foundry tools are prefixed
 
 Parameter names below are the **exact** input names from the installed server
 (verified against v1.5.2). Foundry rejects unknown or missing required
-parameters, so copy them verbatim — `actorId`, not `actor_id`.
+parameters, so copy them verbatim: `actorId`, not `actor_id`.
 
-## Availability check — do this first
+## Availability check: do this first
 
 The MCP server **exits at startup if Foundry is unreachable or the credentials
 are wrong**. There is no partial mode: either every `mcp_foundry_*` tool exists
@@ -48,7 +48,7 @@ mcp_foundry_update_actor_attributes(actorId="...", patch={"attributes.hp.value":
 
 - `get_actor_details` returns type, level, current/max HP, AC, and ability
   scores. It does **not** return biography text or the item list.
-- `patch` keys are **dot-paths relative to `actor.system`** — write
+- `patch` keys are **dot-paths relative to `actor.system`**: write
   `"attributes.hp.value"`, never `"system.attributes.hp.value"`. Values must be
   number, string, or boolean. Read the current shape with `get_actor_details`
   first.
@@ -103,22 +103,22 @@ Each page is `{name, content}` where `content` is HTML or plain text.
 This bridge is a **vendored patched build** (`bridge/vendor/setup.sh`), so
 `get_journal` returns full pages (the stock server truncates every page to its
 first 500 characters) and `delete_journal_entry` exists (upstream has no journal
-update or delete — an edit means reading the entry, deleting it, and recreating
+update or delete; an edit means reading the entry, deleting it, and recreating
 it with the corrected text; never recreate without deleting first).
 
 ## Session flow
 
 ### Player says "I go see the blacksmith"
 
-1. `mcp_foundry_search_actors(query="blacksmith")` — find the NPC
-2. `mcp_foundry_get_actor_details(actorId)` — current stats and state
+1. `mcp_foundry_search_actors(query="blacksmith")` to find the NPC
+2. `mcp_foundry_get_actor_details(actorId)` for current stats and state
 3. Check campaign memory (TencentDB) for prior interactions
 4. Narrate the scene and NPC dialogue via the narrator skill
 5. Significant NPC ⇒ look the sheet up (`mcp_foundry_search_journals` → `mcp_foundry_get_journal` on the NPC's dossier journal) and voice them from it
 
 ### Combat starts
 
-1. `mcp_foundry_start_combat()` — seeds combatants from the scene
+1. `mcp_foundry_start_combat()` (seeds combatants from the scene)
 2. `mcp_foundry_roll_dice(formula=...)` for initiative, then
    `set_initiative(combatantId, initiative)`
 3. Narrate the opening
@@ -133,12 +133,12 @@ it with the corrected text; never recreate without deleting first).
 - All `mcp_foundry_*` tools missing ⇒ bridge is down (see availability check).
   Narrative-only mode, and tell the user the bridge is offline.
 - `lookup_rule` and `diagnose_errors` are upstream stubs that return
-  placeholder text — never use them.
+  placeholder text; never use them.
 - `generate_npc` / `generate_loot` are dnd5e-shaped text generators that do not
   write to the world. Not used for this campaign.
 - Diagnostics tools (`get_recent_logs`, `search_logs`, `get_system_health`,
   `get_health_status`, `diagnose_errors`) require the third-party REST API
-  module, which is not installed — treat them as unavailable.
+  module, which is not installed; treat them as unavailable.
 - Log all Foundry interactions to campaign memory.
 
 ## Campaign Memory Integration
