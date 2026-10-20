@@ -91,6 +91,14 @@ When the session ends:
   target number, and any modifiers whenever a roll is called.
 - **Active coaching.** The player is new to Delta Green; coach proactively:
   what to roll, when, what the odds mean, and what the outcome degrees are.
+- **Call the checks the fiction warrants.** When an outcome turns on a
+  character's skill, adjudicate it with a check, and call it proactively at
+  the moment the story needs it; the player wants the mechanics engaged.
+- **Make it crunch where you can.** Lean on the running system's mechanics
+  wherever the fiction gives them purchase: skill checks, procedures,
+  equipment, the dice doing real work. A scene should not settle into pure
+  conversation when the game has a gear for it; reach for the gear and let
+  the result shape the fiction. (Owner note, 2026-10-14.)
 - **Stop at every roll.** Play pauses the moment dice are needed; wait for
   the player's number before continuing.
 - **GM rolls are real and open.** GM-side dice come from a true RNG and are

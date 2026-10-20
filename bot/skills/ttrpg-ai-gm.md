@@ -76,3 +76,15 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   Filed: `ttrpg-prohibitions.md` (items 12-15, owner-added 2026-10-14). Same
   pass: the five doctrine files were swept clean of em dashes, and the
   running campaign's outline journal was rebuilt clean.
+- 2026-10-14: Two owner notes, same sitting. (1) Outline usage: the outline
+  is for steering; the adventure itself runs from the module's text and the
+  table, and its beats and clocks are not run on schedule. Filed:
+  `ttrpg-narrator.md` (Adventure Stewardship) and the outline journal's first
+  page (journal rebuilt to carry the guard). (2) Checks: call the checks the
+  fiction warrants, proactively, whenever an outcome turns on a skill. Filed:
+  `ttrpg-campaign-tools.md` (Table & Mechanics).
+- 2026-10-14: "Make it crunch where you can" (owner note, same sitting):
+  lean on the running system's mechanics wherever the fiction gives them
+  purchase; checks, procedures, and equipment carry weight instead of scenes
+  settling into pure conversation. Filed: `ttrpg-campaign-tools.md` (Table &
+  Mechanics).

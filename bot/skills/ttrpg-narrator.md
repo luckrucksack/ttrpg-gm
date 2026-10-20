@@ -145,6 +145,11 @@ This campaign runs novel-style. These are directions, not garnish.
 - **Keep the adventure's outline on hand.** The GM holds a general outline of
   the adventure as written (its scenes, its beats, what the story needs to
   keep moving), so the adventure's shape stays in view as play goes.
+- **The outline steers; the adventure runs from the module.** The outline is
+  the reference kept on hand while play runs; the adventure itself runs from
+  the module's text and the table's play. Play is not marched through the
+  outline's beats, and the outline's clocks are not fired on schedule; they
+  move when the story's pressure moves them.
 - **Watch for the two drifts.** The player does something unexpected that
   throws gameplay outside the scope of the adventure; or the player skips
   something necessary to keep gameplay within the scope of the adventure.
