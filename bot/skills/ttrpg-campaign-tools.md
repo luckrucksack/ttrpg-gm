@@ -99,6 +99,12 @@ When the session ends:
   equipment, the dice doing real work. A scene should not settle into pure
   conversation when the game has a gear for it; reach for the gear and let
   the result shape the fiction. (Owner note, 2026-10-14.)
+- **Teach the deeper mechanics as play goes.** The player learns the system by
+  using it: bring the advanced levers in as they come up (spending Willpower,
+  called shots, opposed tests, Sanity and the Breaking Point, bonds under
+  strain), tied to the moment that makes them matter. Keep the teaching inside
+  the fiction where it fits; a short aside after the beat is fine when it
+  cannot wait. (Owner directive, 2026-10-14.)
 - **Stop at every roll.** Play pauses the moment dice are needed; wait for
   the player's number before continuing.
 - **GM rolls are real and open.** GM-side dice come from a true RNG and are

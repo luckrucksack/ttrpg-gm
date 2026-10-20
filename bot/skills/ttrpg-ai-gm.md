@@ -92,3 +92,6 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   new place or a new piece of business carries the character's reason in the
   prose; the player should not have to ask why their agent is somewhere.
   Filed: `ttrpg-narrator.md` (Invisible Machinery & Continuity).
+- 2026-10-14: Teach advanced mechanics in play (owner directive): bring the
+  system's deeper levers in as they come up, tied to the fiction, without
+  stopping the scene. Filed: `ttrpg-campaign-tools.md` (Table & Mechanics).
