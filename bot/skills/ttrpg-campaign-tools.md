@@ -168,3 +168,11 @@ before voicing, and keep it in view as play goes.
   text (pack-extract recipe: `foundry-vtt-gm-operations` skill). Rebuild it
   the same way when the campaign moves to a new adventure, and replace the
   old one.
+
+## Player Sheet Mirror: JSON (keep current)
+
+The active PC's sheet lives in Foundry, the source of truth, and is mirrored to
+a JSON file in the campaign folder: `campaigns/<campaign>/<pc>.json`. Keep the
+mirror current in the same pass as any change it records: HP, WP, SAN and
+Breaking Point, bond scores and damage, conditions, weapons, and gear. It is the
+readable copy for quick reference, and the copy the player keeps in his notes.
