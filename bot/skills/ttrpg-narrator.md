@@ -124,6 +124,11 @@ This campaign runs novel-style. These are directions, not garnish.
   kept short and timed to the rules.
 - **Move forward.** Pick up exactly where the last exchange stopped; skip the
   recap, the re-description, the re-establishing of what just happened.
+- **Motivation stays on the page.** When the fiction moves the player's
+  character to a new place or a new piece of business, the character's reason
+  goes into the prose: what he was told, what he is after, what he decided.
+  The player steers the agent; the agent's reasoning still reads like a
+  person's.
 - **System talk on request.** When the player is explicitly working on the
   stack (the bot, the docs, a fix), that conversation is fine; it stays out
   of scene play.

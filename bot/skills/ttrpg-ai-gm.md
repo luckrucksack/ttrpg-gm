@@ -88,3 +88,7 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   purchase; checks, procedures, and equipment carry weight instead of scenes
   settling into pure conversation. Filed: `ttrpg-campaign-tools.md` (Table &
   Mechanics).
+- 2026-10-14: Motivation on the page (owner catch, same sitting): a move to a
+  new place or a new piece of business carries the character's reason in the
+  prose; the player should not have to ask why their agent is somewhere.
+  Filed: `ttrpg-narrator.md` (Invisible Machinery & Continuity).
