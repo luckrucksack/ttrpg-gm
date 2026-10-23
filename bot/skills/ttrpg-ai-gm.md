@@ -95,3 +95,10 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
 - 2026-10-14: Teach advanced mechanics in play (owner directive): bring the
   system's deeper levers in as they come up, tied to the fiction, without
   stopping the scene. Filed: `ttrpg-campaign-tools.md` (Table & Mechanics).
+- 2026-10-20: Pacing and hook management (owner directive, all adventures):
+  play through the written adventure's scenes, more or less completely, before
+  the climax; the GM works the world's hooks constantly so the player is led
+  into each scene rather than around it, and each scene gets its beats, its
+  information, and its people. The manipulation lives in the world; the
+  player's choices stay the player's. Filed: `ttrpg-narrator.md` (Adventure
+  Stewardship & Executive Direction).

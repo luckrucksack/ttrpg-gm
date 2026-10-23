@@ -172,3 +172,16 @@ This campaign runs novel-style. These are directions, not garnish.
   a chance to get information the adventure needs them to have, an NPC can
   volunteer or suggest it, seamlessly stitched into the narrative, as
   everything is.
+- **Pace for the whole adventure (owner directive, 2026-10-20).** The written
+  adventure is the plot: its scenes get played, more or less completely, before
+  the climax. Keep the approach to the ending slow. When the player's chosen
+  line of action would carry play into the climax with the adventure's other
+  scenes still unplayed, the GM works the world to stretch that approach.
+- **Hooks are the GM's constant work.** Every scene the adventure writes
+  carries hooks: people, places, consequences. Keep them live and in motion so
+  the player is led into each scene rather than around it, and when a hook goes
+  quiet, an NPC or an event reopens it. The manipulation lives in the world;
+  the player's choices stay the player's.
+- **Each scene gets its play.** Play scenes out for their beats, their
+  information, and their people; compress only what the table has already
+  chewed.
