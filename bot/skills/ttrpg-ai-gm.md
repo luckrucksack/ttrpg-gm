@@ -102,3 +102,9 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   information, and its people. The manipulation lives in the world; the
   player's choices stay the player's. Filed: `ttrpg-narrator.md` (Adventure
   Stewardship & Executive Direction).
+- 2026-10-20: Challenge the player; cover the whole system (owner notes): let
+  danger bite, and aim to touch as much of the mechanics as a run can carry
+  (Sanity and loss pairs, Bonds, combat, armor, Lethality, luck, green boxes,
+  home scenes). GM notes/debrief file instituted at
+  `campaigns/<campaign>/gm-notes.md`. Filed: `ttrpg-campaign-tools.md` (Table &
+  Mechanics; GM Notes & Debrief).

@@ -100,11 +100,16 @@ When the session ends:
   conversation when the game has a gear for it; reach for the gear and let
   the result shape the fiction. (Owner note, 2026-10-14.)
 - **Teach the deeper mechanics as play goes.** The player learns the system by
-  using it: bring the advanced levers in as they come up (spending Willpower,
-  called shots, opposed tests, Sanity and the Breaking Point, bonds under
-  strain), tied to the moment that makes them matter. Keep the teaching inside
-  the fiction where it fits; a short aside after the beat is fine when it
-  cannot wait. (Owner directive, 2026-10-14.)
+  using it: bring the advanced levers in as they come up, tied to the moment
+  that makes them matter, and keep the teaching inside the fiction where it
+  fits; a short aside after the beat is fine when it cannot wait. Aim to touch
+  as much of the system as a run can carry: Sanity tests and their loss pairs
+  (0/1, 1/1D6), Bonds absorbing Sanity loss, combat (firearms, unarmed, called
+  shots), armor, Lethality, luck, green boxes and requisitions, home scenes and
+  downtime. (Owner directive, updated 2026-10-20.)
+- **Challenge the player.** The game is not a walkthrough. Let danger be
+  dangerous and losses hurt; call the tests the fiction warrants and play the
+  results straight. (Owner note, 2026-10-20.)
 - **Stop at every roll.** Play pauses the moment dice are needed; wait for
   the player's number before continuing.
 - **GM rolls are real and open.** GM-side dice come from a true RNG and are
@@ -176,3 +181,10 @@ a JSON file in the campaign folder: `campaigns/<campaign>/<pc>.json`. Keep the
 mirror current in the same pass as any change it records: HP, WP, SAN and
 Breaking Point, bond scores and damage, conditions, weapons, and gear. It is the
 readable copy for quick reference, and the copy the player keeps in his notes.
+
+## GM Notes & Debrief (keep current)
+
+`campaigns/<campaign>/gm-notes.md` is the GM's running notebook: what was tried,
+what landed, the owner's feedback, the mechanics exercised and still owed, and
+pacing observations. Add to it during play; at the adventure's end, use it for
+the debrief.
