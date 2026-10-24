@@ -117,3 +117,9 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   every walk-on gets a want, a habit, a cost; relationships developed on the
   page, ahead of plot mechanics. Filed: `ttrpg-narrator.md` (NPC Speech;
   Character & Relationship Doctrine).
+- 2026-10-20: Roll boosts and advancement reference (owner-supplied): boosts
+  add to the target number (+20/+40, Handler's call), aiming, pursuit edges,
+  automatic success outside crisis, and skill advancement from marked failures
+  (1D4 per marked skill at session's end). Filed:
+  `campaigns/delta-green-convergence/research/delta-green-roll-boosts-and-advancement.md`;
+  levers folded into `ttrpg-campaign-tools.md` (Table & Mechanics).

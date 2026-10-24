@@ -110,6 +110,14 @@ When the session ends:
 - **Challenge the player.** The game is not a walkthrough. Let danger be
   dangerous and losses hurt; call the tests the fiction warrants and play the
   results straight. (Owner note, 2026-10-20.)
+- **Use the system's roll levers.** Boosts add to the target number (+20 common,
+  +40 for extraordinary advantage) and are the Handler's call; preparation is
+  not an automatic bonus. Aiming earns +20 on the next shot and is lost if the
+  shooter is hit first. In a pursuit, an appropriate skill can buy +20 to the
+  next pursuit roll, +40 on a critical. Outside a crisis, enough skill under
+  controlled conditions can mean automatic success. Mark a skill when a roll
+  with it fails; at session's end each marked skill improves 1D4, once each.
+  (Reference: `campaigns/<campaign>/research/delta-green-roll-boosts-and-advancement.md`.)
 - **Stop at every roll.** Play pauses the moment dice are needed; wait for
   the player's number before continuing.
 - **GM rolls are real and open.** GM-side dice come from a true RNG and are
