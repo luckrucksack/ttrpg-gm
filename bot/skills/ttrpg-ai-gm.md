@@ -112,3 +112,8 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   and stop at them; the character's itinerary, engagements, and risks are the
   player's, and the GM does not narrate him into decisions. Filed:
   `ttrpg-narrator.md` (Dialogue Doctrine).
+- 2026-10-20: Dialogue and character (owner directive): profanity where the
+  character would use it; dialogue specific and alive, never perfunctory;
+  every walk-on gets a want, a habit, a cost; relationships developed on the
+  page, ahead of plot mechanics. Filed: `ttrpg-narrator.md` (NPC Speech;
+  Character & Relationship Doctrine).

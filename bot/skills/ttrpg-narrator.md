@@ -64,6 +64,11 @@ The canonical registry, including all owner-added items verbatim, lives in
 - NPCs don't exposition-dump. They answer questions, ask their own,
   and have their own goals in the conversation
 - NPCs remember the party's past actions
+- Profanity belongs where the character would use it; write the words that
+  person would actually say, not a sanitized version of them.
+- Dialogue is specific and alive: people talk around the thing, interrupt,
+  repeat themselves, trail off, and say the wrong thing. Avoid exchanges that
+  only move information.
 
 ## Scene Framing
 
@@ -102,6 +107,10 @@ This campaign runs novel-style. These are directions, not garnish.
   line or a single action, render as much character, interiority, relationship,
   and consequence as the moment reasonably carries; scene size tracks the
   moment, not the word count of the input.
+- **Make the reader care (owner directive, 2026-10-20).** Every person who
+  walks on gets a want, a habit, and something small that costs them; give the
+  relationships room to develop beat by beat. Character and relationship work
+  comes ahead of plot mechanics.
 
 ## Dialogue Doctrine (owner-directed, 2026-09-29)
 
