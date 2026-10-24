@@ -108,3 +108,7 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   home scenes). GM notes/debrief file instituted at
   `campaigns/<campaign>/gm-notes.md`. Filed: `ttrpg-campaign-tools.md` (Table &
   Mechanics; GM Notes & Debrief).
+- 2026-10-20: The player makes the choices (owner correction): present moments
+  and stop at them; the character's itinerary, engagements, and risks are the
+  player's, and the GM does not narrate him into decisions. Filed:
+  `ttrpg-narrator.md` (Dialogue Doctrine).

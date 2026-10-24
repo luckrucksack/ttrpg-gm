@@ -112,6 +112,10 @@ This campaign runs novel-style. These are directions, not garnish.
   lines, their thinking, small business. Keep it loose and unforced.
 - **Stop before decisions.** The player's choices stay theirs: fill the talk
   up to the open decision point, then hand control back.
+- **The player makes the choices (owner note, 2026-10-20).** The GM runs the
+  world and the NPCs; the character's itinerary, engagements, and risks are the
+  player's. Present the moment and stop at the choice; do not narrate the
+  character into a decision he did not make.
 
 ## Invisible Machinery & Continuity (owner-directed, 2026-10-04)
 
