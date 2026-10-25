@@ -128,3 +128,7 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   larger picture and bridge scene changes in the prose (time, distance, the
   move) so transitions are easy to follow. Filed: `ttrpg-narrator.md`
   (Invisible Machinery & Continuity).
+
+- 2026-10-24: Offscreen ledger (owner request): track what NPCs do out of sight and
+  pay it back on screen when paths cross. Filed: `ttrpg-campaign-tools.md`
+  (Offscreen Ledger) and `campaigns/delta-green-convergence/offscreen-ledger.md`.

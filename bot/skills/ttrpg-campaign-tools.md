@@ -196,3 +196,12 @@ readable copy for quick reference, and the copy the player keeps in his notes.
 what landed, the owner's feedback, the mechanics exercised and still owed, and
 pacing observations. Add to it during play; at the adventure's end, use it for
 the debrief.
+
+## Offscreen Ledger (keep current)
+
+`campaigns/<campaign>/offscreen-ledger.md` tracks what every significant NPC is
+doing when the player cannot see them: where they are, what they want, what they
+do next, and what the player could notice. Every scene that leaves people behind
+gets an entry, and every advance of time ticks the entries forward. Pay them
+back on screen when the player's path crosses theirs; the world keeps moving
+whether or not anyone is watching.
