@@ -123,3 +123,8 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   (1D4 per marked skill at session's end). Filed:
   `campaigns/delta-green-convergence/research/delta-green-roll-boosts-and-advancement.md`;
   levers folded into `ttrpg-campaign-tools.md` (Table & Mechanics).
+
+- 2026-10-24: Bridge the cut (owner note): before each scene, take stock of the
+  larger picture and bridge scene changes in the prose (time, distance, the
+  move) so transitions are easy to follow. Filed: `ttrpg-narrator.md`
+  (Invisible Machinery & Continuity).
