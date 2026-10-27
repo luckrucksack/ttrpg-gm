@@ -132,3 +132,5 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
 - 2026-10-24: Offscreen ledger (owner request): track what NPCs do out of sight and
   pay it back on screen when paths cross. Filed: `ttrpg-campaign-tools.md`
   (Offscreen Ledger) and `campaigns/delta-green-convergence/offscreen-ledger.md`.
+
+- 2026-10-25 — Owner requirement: a real offscreen-world engine. The universe outside the narrative must advance on an in-game clock, with semantic triggers seeded by player actions and convergence points that pay threads back later. Current mechanism is the campaign offscreen ledger, advanced at scene breaks. Research prompt for the build filed at docs/gemini-research-prompt-2026-10-25.md. Owner's green light phrase: "Make it so."

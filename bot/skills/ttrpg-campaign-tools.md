@@ -205,3 +205,8 @@ do next, and what the player could notice. Every scene that leaves people behind
 gets an entry, and every advance of time ticks the entries forward. Pay them
 back on screen when the player's path crosses theirs; the world keeps moving
 whether or not anyone is watching.
+
+
+## The offscreen world breathes (owner requirement, 2026-10-25)
+
+Everything offscreen must advance on in-game time, not only when the scene touches it. The offscreen ledger is the v0 mechanism: advance it at every scene break, timestamped to the fiction's clock. The target architecture the owner wants: hidden parallel timelines per faction and NPC, semantic triggers keyed to player actions, and convergence points where offscreen threads re-enter the visible narrative by cause and effect. In-game time decouples from wall time and runs at every granularity, from combat rounds to months between operations. Research prompt for the build: docs/gemini-research-prompt-2026-10-25.md.
