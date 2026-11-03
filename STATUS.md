@@ -26,7 +26,7 @@ next build is the offscreen world engine.
 ## Verified environment
 
 - Foundry VTT 14.365 on `:30000`, launchd service, world `deltagreen`, system
-  `deltagreen`.
+  `deltagreen` 2.0.1 (upgraded from 1.7.0 and migrated 2026-11-03).
 - Bridge: vendored patched `foundryvtt-mcp` (full journal reads, journal
   delete). `bash bridge/check.sh` is the gate. Tool count printed by the
   script.

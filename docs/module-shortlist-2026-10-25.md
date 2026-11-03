@@ -67,8 +67,8 @@ careful handling so it does not slide into period cliché.
 
 ## Prerequisites before the next campaign
 
-1. Update the DG system from 1.7.0 to 2.0.1, then verify the actor and items
-   migrated and the dossiers still open.
+1. Done 2026-11-03: DG system updated from 1.7.0 to 2.0.1; the world migrated
+   and the actor, items, skills, and dossiers verified. Core is 14.365.
 2. Build the first scene with its tokens, since the bridge cannot create scenes.
 3. Decide the solo-agent scaling for the chosen module: which NPCs become the
    standing allies, and which scenes assume a team of four.

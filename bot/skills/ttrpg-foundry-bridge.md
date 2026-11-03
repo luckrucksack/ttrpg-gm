@@ -157,3 +157,17 @@ Scene tools exist and work: `get_scene_info` (name, id, active flag, dimensions,
 Read the scene at the start of every scene, even in theater of the mind: it fixes distances, light, and layout and keeps narration honest. Record the scene id and dimensions in the session notes. When tokens are present, list them and convert pixel coordinates to grid squares before describing positions.
 
 State found in `deltagreen` on 2026-10-25: one scene, the default blank canvas `NUEDEFAULTSCENE0`, 3840 x 1920, no tokens, global light off. The Convergence module's maps were never placed into a scene, which is why map play never happened in that campaign. For the next campaign, set up the scene and tokens before session one.
+
+
+## Delta Green 2.0.1 data paths (verified 2026-11-03)
+
+The 2.0.1 actor schema keeps the stats at `system.health` ({min, value, max}),
+`system.wp`, `system.sanity` ({value, currentBreakingPoint, adaptations}), and
+`system.skills` (37 entries for an agent). The generic `get_actor_details` tool
+still reports Unknown for hit points and abilities because it looks for
+D&D-style `system.attributes`; read the actor document directly when the
+numbers matter. Musky verified after migration: health 14/14, WP 13/15, SAN 75,
+breaking point 60, 19 embedded items.
+
+System 2.0.1 requires Foundry core 14. Pre-upgrade backup lives at
+`~/ttrpg_gm/backups/foundry-deltagreen-pre-system-2.0.1-2026-10-25.tgz`.

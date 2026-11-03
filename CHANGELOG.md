@@ -3,6 +3,18 @@
 Chronological project history, newest first. Formerly STATUS.md. For the
 current state, see STATUS.md.
 
+**2026-11-03 — Foundry system upgrade to 2.0.1.**
+Installed Delta Green system 2.0.1 (was 1.7.0) and restarted the launchd
+service. The world `deltagreen` migrated cleanly to system 2.0.1: actors,
+items, scenes, journals, active effects all migrated; Musky verified at health
+14/14, WP 13/15, SAN 75, 19 embedded items, 37 skills. Bridge check passes with
+34 tools. Backups: `~/ttrpg_gm/backups/foundry-deltagreen-pre-system-2.0.1-2026-10-25.tgz`
+and the old system tree at `~/ttrpg_gm/backups/deltagreen-system-1.7.0/`.
+Foundry core is 14.365; the current release is 14.369, a minor gap left to the
+app's own updater. The restart surfaced a stale license signature caused by a
+machine hostname change; the EULA page was re-signed at the same version
+already on file, and license verification succeeds.
+
 **2026-10-25 — Convergence complete; the AI GM gets a Pre-Game Protocol.**
 Campaign `delta-green-convergence` played to the end (barn, depot, board,
 courthouse check, denouement). Doctrine added: `bot/skills/ttrpg-prep.md`
