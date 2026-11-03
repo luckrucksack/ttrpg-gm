@@ -9,7 +9,9 @@ plugins; messaging channels excluded). Verified: loads the six doctrine files
 from `~/ttrpg_gm/bot/skills`, sees 36 Foundry MCP tools, runs on
 `deepseek/deepseek-v4-flash`. Memory carried over and trimmed to the new
 campaign. Campaign folder `campaigns/extremophilia/` created with empty GM notes
-and ledger. Module purchase noted; redeem and install pending. Musky-continuity
+and ledger. Hermex could not load the new bot: the cloned profile had no
+`ui_meta.hermes-bots` roster block and no canonical "Bot Chat" session. Added
+the roster title and minted the Bot Chat; the bot now answers. Module purchase noted; redeem and install pending. Musky-continuity
 and Foundry-world decisions left open.
 
 **2026-11-03 — Foundry system upgrade to 2.0.1.**
