@@ -148,3 +148,12 @@ the source of truth for narrative history.
 
 Rule: on a conflict, **Foundry wins** for stats/state, **memory wins** for
 narrative details (NPC relationships, plot threads).
+
+
+## Scene and map awareness (verified 2026-10-25)
+
+Scene tools exist and work: `get_scene_info` (name, id, active flag, dimensions, global light, darkness), `move_token` (tokenId, x, y, sceneId), `start_combat`, `set_initiative`, `apply_status_effect`, `get_combat_state`, `end_combat`. There is no create-scene and no create-token tool. A map therefore has to exist in Foundry first, with its tokens placed; the GM can then read and move them.
+
+Read the scene at the start of every scene, even in theater of the mind: it fixes distances, light, and layout and keeps narration honest. Record the scene id and dimensions in the session notes. When tokens are present, list them and convert pixel coordinates to grid squares before describing positions.
+
+State found in `deltagreen` on 2026-10-25: one scene, the default blank canvas `NUEDEFAULTSCENE0`, 3840 x 1920, no tokens, global light off. The Convergence module's maps were never placed into a scene, which is why map play never happened in that campaign. For the next campaign, set up the scene and tokens before session one.

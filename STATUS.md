@@ -44,6 +44,7 @@ next build is the offscreen world engine.
 
 ## Pointers
 
+- Future work with triggers: `docs/FUTURE.md`
 - History: `CHANGELOG.md`
 - Reading order and gaps: `docs/REPO-MAP.md`
 - Conventions: `AGENTS.md`
