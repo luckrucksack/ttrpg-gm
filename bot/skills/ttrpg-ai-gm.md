@@ -141,3 +141,5 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
 - 2026-10-25 — Owner directive (2nd): every check names the skill and quotes the player's current sheet value from the mirror JSON. No recalled numbers.
 
 - 2026-10-25 — Owner directive (3): wind-down rule. No curtain-drop endings; pay relationships and loose ends; keep player agency through the last turns; sensible, memorable exits. Filed under narrator doctrine.
+
+- 2026-10-25 — Owner's setting theory (campaign-selection principle): modern, real-world settings (Delta Green, Convergence) produce better GM prose than fantasy and science fiction, because the model can draw on the whole non-fiction corpus of the real world instead of a narrow fiction-only distribution. Fantasy pulls "the smell of damp earth," science fiction pulls "the smell of ozone." Prefer real-world or historically grounded settings; when a fantasy or science-fiction module is chosen, add grounding constraints (a real period and material culture to model it on) and watch for the slop descriptors.
