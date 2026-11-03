@@ -14,6 +14,9 @@ done, delete the item.
 
 ## Semantic triggers
 
+- **When the Extremophilia module is installed.** Run the Pre-Game Protocol in
+  full, write the prep notes in `campaigns/extremophilia/`, start the clock and
+  the offscreen ledger, and settle the agent and Foundry-world decisions.
 - **When a new adventure is linked.** Run `bot/skills/ttrpg-prep.md` in full
   before the first scene. No exceptions, no partial reads.
 - **When a new campaign starts.** Create the campaign folder, the sheet mirror,

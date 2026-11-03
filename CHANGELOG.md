@@ -3,6 +3,15 @@
 Chronological project history, newest first. Formerly STATUS.md. For the
 current state, see STATUS.md.
 
+**2026-11-03 — Extremophilia bot profile.**
+Cloned the `ttrpg` profile into `extremophilia` (config, .env, SOUL, skills,
+plugins; messaging channels excluded). Verified: loads the six doctrine files
+from `~/ttrpg_gm/bot/skills`, sees 36 Foundry MCP tools, runs on
+`deepseek/deepseek-v4-flash`. Memory carried over and trimmed to the new
+campaign. Campaign folder `campaigns/extremophilia/` created with empty GM notes
+and ledger. Module purchase noted; redeem and install pending. Musky-continuity
+and Foundry-world decisions left open.
+
 **2026-11-03 — Foundry system upgrade to 2.0.1.**
 Installed Delta Green system 2.0.1 (was 1.7.0) and restarted the launchd
 service. The world `deltagreen` migrated cleanly to system 2.0.1: actors,

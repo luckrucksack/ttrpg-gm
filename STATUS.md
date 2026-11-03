@@ -10,6 +10,9 @@ next build is the offscreen world engine.
   holds the character, the dossiers, and the adventure outline journal.
   Campaign files (sheet mirror, GM notes, offscreen ledger, research) live in
   `campaigns/delta-green-convergence/` and are not tracked.
+- **GM bots:** `ttrpg` holds the Convergence history; `extremophilia` is a
+  cloned bot profile (deepseek flash, same doctrine via `skills.external_dirs`)
+  with its own permanent Bot Chat for the next campaign.
 - **GM doctrine:** six files in `bot/skills/`: core (`ttrpg-ai-gm.md`), prep,
   narrator, prohibitions, campaign tools, foundry bridge. All read before
   narrating.
