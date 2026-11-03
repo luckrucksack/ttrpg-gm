@@ -1,8 +1,8 @@
 # TTRPG Game Master — Architecture
 
-**Version 4 — 2026-09-29** · Supersedes [v3 (2026-09-25)](ttrpg-gm-architecture-2026-09-25.md);
-[v2 (2026-09-01)](ttrpg-gm-architecture-2026-09-01.md) and
-[v1 (2026-08-27)](ttrpg-gm-architecture-2026-08-27.md) are kept for history.
+**Version 4 — 2026-09-29** · Supersedes [v3 (2026-09-25)](archive/ttrpg-gm-architecture-2026-09-25.md);
+[v2 (2026-09-01)](archive/ttrpg-gm-architecture-2026-09-01.md) and
+[v1 (2026-08-27)](archive/ttrpg-gm-architecture-2026-08-27.md) are kept for history.
 
 **What it is:** an AI Game Master that runs *published* TTRPG adventures
 end-to-end in Foundry VTT. A Hermes Agent profile (the GM Bot) narrates, voices
@@ -266,8 +266,13 @@ path above. It applies *sometimes*; it is not the default intake.
   refreshed against the live runtime; session lifecycle and operational
   knowledge (auth, LevelDB, module activation, memory gateway spawn, WebUI env)
   recorded; roadmap and open items re-based.
-- [v3 (2026-09-25)](ttrpg-gm-architecture-2026-09-25.md) — two intake paths
+- [v3 (2026-09-25)](archive/ttrpg-gm-architecture-2026-09-25.md) — two intake paths
   clarified; browser/desktop operator surfaces; NPC bots pinned.
-- [v2 (2026-09-01)](ttrpg-gm-architecture-2026-09-01.md) — Hermes Bot Mode as
+- [v2 (2026-09-01)](archive/ttrpg-gm-architecture-2026-09-01.md) — Hermes Bot Mode as
   the GM runtime.
-- [v1 (2026-08-27)](ttrpg-gm-architecture-2026-08-27.md) — first modular design.
+- [v1 (2026-08-27)](archive/ttrpg-gm-architecture-2026-08-27.md) — first modular design.
+
+
+## Addendum, 2026-10-25 (after the Convergence campaign)
+
+The campaign completed. Two documents now sit beside this one. `bot/skills/ttrpg-prep.md` is the Pre-Game Protocol: every new GM instance reads the whole adventure, writes its own prep notes, starts the in-game clock and the offscreen ledger, and confirms the table contract before the first scene. `docs/architecture/offscreen-world-engine.md` carries the target design for the parallel world engine, including the staged Foundry orchestration goals. This file remains the system overview; those two govern how a session starts and how the world moves between sessions.

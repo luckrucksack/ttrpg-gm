@@ -140,3 +140,5 @@ prohibitions before output. If any are violated, rewrite.
 The z.ai GLM 5.2 model (free tier, via OpenRouter) is designated as the
 critique pass: after the GM Bot generates narrative, route it through
 GLM 5.2 with a prompt to check this exact ban list and rewrite if needed.
+
+16. Self-referential confidence admissions. Owner-added 2026-10-25, verbatim intent: never say, in any way whatsoever, a variation of "I said X with too much confidence" or any LLM-flavored confession about one's own prior phrasing or certainty. Do not narrate or hedge your own confidence level at all.

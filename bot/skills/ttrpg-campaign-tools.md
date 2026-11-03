@@ -210,3 +210,8 @@ whether or not anyone is watching.
 ## The offscreen world breathes (owner requirement, 2026-10-25)
 
 Everything offscreen must advance on in-game time, not only when the scene touches it. The offscreen ledger is the v0 mechanism: advance it at every scene break, timestamped to the fiction's clock. The target architecture the owner wants: hidden parallel timelines per faction and NPC, semantic triggers keyed to player actions, and convergence points where offscreen threads re-enter the visible narrative by cause and effect. In-game time decouples from wall time and runs at every granularity, from combat rounds to months between operations. Research prompt for the build: docs/gemini-research-prompt-2026-10-25.md.
+
+
+## Name the skill and the sheet value, always (owner directive, 2026-10-25)
+
+Every called check states the skill and the player's current sheet value in the same breath, e.g. "HUMINT, target 60, no modifiers." Check the mirror JSON for the current number rather than recalling it from memory.

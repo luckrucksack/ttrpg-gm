@@ -4,7 +4,7 @@ Moved out of the default-profile inbox on 2026-08-10 (isolation policy: TTRPG is
 
 ## Major Pivot — 2026-08-27
 
-Custom Python framework retired and **deleted from the repo** (40 files, ~5,300 lines). New architecture: **Hermes Bot Mode** as the GM runtime, with Foundry VTT handling ALL game mechanics and NPCs as isolated Hermes profile Bots. See **[`docs/ttrpg-gm-architecture-2026-08-27.md`](ttrpg-gm-architecture-2026-08-27.md)** for the full design, including a complete description of what was built and retired.
+Custom Python framework retired and **deleted from the repo** (40 files, ~5,300 lines). New architecture: **Hermes Bot Mode** as the GM runtime, with Foundry VTT handling ALL game mechanics and NPCs as isolated Hermes profile Bots. See **[`docs/ttrpg-gm-architecture-2026-08-27.md`](archive/ttrpg-gm-architecture-2026-08-27.md)** for the full design, including a complete description of what was built and retired.
 
 The old code covered: `gm_core/` (runtime loop, 5 agents, config, dice), `systems/dcc/` (DCC Judge, DCC manager, DCC dice chain, tests, full documentation), `systems/dnd5e/` (rules stub), `main.py`, `scripts/` (launchers), `requirements.txt`, `.env.template`, `examples/`, and `tests/`.
 

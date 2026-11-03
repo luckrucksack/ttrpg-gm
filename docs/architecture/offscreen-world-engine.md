@@ -26,3 +26,13 @@ See `docs/gemini-research-prompt-2026-10-25.md` for the full brief to Gemini Dee
 2. Prototype the clock/event table in Python.
 3. Integrate into the GM bot session start/end hooks.
 4. Migrate the offscreen ledger to the event table format.
+
+## Foundry orchestration goals (added 2026-10-25)
+
+The GM currently uses Foundry through the CLI bridge: journals, actors, searches, dice. It does not drive the canvas. The staged goal:
+
+**Phase 1, now.** Read the map and scene state, not just the text. Scene name, grid, token ids and coordinates, walls and doors where available. Use it to keep spatial truth consistent even in theater of the mind, and to frame distances and layouts accurately in prose.
+
+**Phase 2, map-lite.** Set up the scene before play: place tokens, set the active scene, control vision and fog through the bridge where the API allows it. Verify with a screenshot. No per-turn canvas work.
+
+**Phase 3, live orchestration.** The GM drives the on-screen environment as it narrates: token moves, fog reveal, lighting, handouts. Eventually voice in, voice out. This needs a computer-use agent and a cheaper model for the mechanical steps, because clicking is token-expensive and slow today. Do not start this until the offscreen engine is running and the cheap-model path is proven.

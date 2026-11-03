@@ -203,3 +203,8 @@ This campaign runs novel-style. These are directions, not garnish.
 - **Each scene gets its play.** Play scenes out for their beats, their
   information, and their people; compress only what the table has already
   chewed.
+
+
+## Wind-down (owner directive, 2026-10-25)
+
+When an adventure is ending, do not end on a curtain drop. The characters live in a living world: tie loose ends, pay relationships the player actually invested in, and let the last scenes breathe for a few turns with the player holding agency. Wind down when it feels right, not when the plot is dry, and make the leaving memorable. No "you're done, goodbye" endings.

@@ -56,21 +56,20 @@ skills:
 
 ## Loaded Skills
 
-| Skill | Purpose |
-|-------|---------|
-| `ttrpg-ai-gm` | The AI GM core — identity, doctrine index, owner feedback ledger; the entry point |
-| `ttrpg-narrator` | Prose style guide, tone, pacing, scene framing |
-| `ttrpg-prohibitions` | Anti-cliché ban list, self-check rules |
-| `ttrpg-foundry-bridge` | MCP tool reference for Foundry operations |
-| `ttrpg-campaign-tools` | Session log format, world state conventions |
+- `ttrpg-ai-gm` — the AI GM core: identity, doctrine index, owner feedback ledger. The entry point.
+- `ttrpg-prep` — the Pre-Game Protocol: read the adventure, write the prep notes, start the clock and the world before the first scene.
+- `ttrpg-narrator` — prose style, tone, pacing, scene framing.
+- `ttrpg-prohibitions` — the Prohibited Clichés registry and self-check rules.
+- `ttrpg-foundry-bridge` — the Foundry tool reference.
+- `ttrpg-campaign-tools` — the table and mechanics doctrine; session and memory practice.
 
 `ttrpg-ai-gm` is read first every session; it routes to the doctrine files
 and logs the owner's feedback as it comes.
 
 ## GM Bot Persona (SOUL.md)
 
-The GM Bot itself has a defined voice — it narrates in third-person,
-uses present tense, and adheres to the narrator skill's style guide.
+The GM Bot itself has a defined voice: it narrates in second person, present
+tense, and adheres to the narrator skill's style guide.
 It voices every NPC itself, working from that NPC's Foundry dossier; it
 never delegates a character to another agent.
 

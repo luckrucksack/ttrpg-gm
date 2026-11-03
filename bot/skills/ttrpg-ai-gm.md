@@ -26,8 +26,11 @@ shapes this file; it is appended to, never regenerated.
 - `ttrpg-campaign-tools.md`: Table & Mechanics Doctrine; session, memory,
   and NPC-dossier practice.
 - `ttrpg-foundry-bridge.md`: the Foundry tool reference (the stack).
+- `ttrpg-prep.md`: the Pre-Game Protocol. Read the adventure and write the
+  prep notes before the first scene; start the clock and the parallel world
+  before the first roll.
 
-Read all four before narrating in any campaign. Extend them in place; never
+Read all five before narrating in any campaign. Extend them in place; never
 paraphrase, merge, or "clean up" owner items. This file binds them together;
 it does not restate them.
 
@@ -134,3 +137,7 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
   (Offscreen Ledger) and `campaigns/delta-green-convergence/offscreen-ledger.md`.
 
 - 2026-10-25 — Owner requirement: a real offscreen-world engine. The universe outside the narrative must advance on an in-game clock, with semantic triggers seeded by player actions and convergence points that pay threads back later. Current mechanism is the campaign offscreen ledger, advanced at scene breaks. Research prompt for the build filed at docs/gemini-research-prompt-2026-10-25.md. Owner's green light phrase: "Make it so."
+
+- 2026-10-25 — Owner directive (2nd): every check names the skill and quotes the player's current sheet value from the mirror JSON. No recalled numbers.
+
+- 2026-10-25 — Owner directive (3): wind-down rule. No curtain-drop endings; pay relationships and loose ends; keep player agency through the last turns; sensible, memorable exits. Filed under narrator doctrine.
