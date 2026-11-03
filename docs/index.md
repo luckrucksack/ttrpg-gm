@@ -18,7 +18,7 @@ the Pre-Game Protocol. The next build is the offscreen world engine.
   knowledge
 - [Offscreen World Engine — target architecture](architecture/offscreen-world-engine.md) —
   the parallel-timeline engine the GM needs, with the research brief
-- [Pre-Game Protocol](../bot/skills/ttrpg-prep.md) — what every new GM instance
+- [Pre-Game Protocol](https://github.com/luckrucksack/ttrpg-gm/blob/main/bot/skills/ttrpg-prep.md) — what every new GM instance
   does before the first scene
 - [Repo Map](REPO-MAP.md) — what lives where, the reading order, and the known
   gaps
