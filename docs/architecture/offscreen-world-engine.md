@@ -20,6 +20,29 @@ The campaign's offscreen ledger (`campaigns/<id>/offscreen-ledger.md`) is advanc
 
 See `docs/gemini-research-prompt-2026-10-25.md` for the full brief to Gemini Deep Research, covering prior art, patterns, MV design, convergence mechanics, and failure modes.
 
+## Rules from the Convergence postmortem (2026-11-06)
+
+Evidence and full analysis: `docs/convergence-living-world-postmortem-2026-11-06.md`.
+The campaign's offscreen layer worked when it was on, and the failures all
+share one shape: lone human NPCs with phones and goals that were never
+ticked. Binding rules below.
+
+1. Reaction functions for every tracked NPC, not just factions: "X hears Y →
+   X does Z by time T." Derive from the dossiers (they already contain
+   them); the engine imports reactions, it does not invent them mid-scene.
+2. Explicit state flags per NPC: ACTIVE / WAITING-ON(<trigger>) /
+   STILLED-BY(<cause>) / DONE. Stillness is intentional annotation, never
+   an accident; freeze audits become possible.
+3. Owed-beats queue: every ticked NPC owes an on-screen or reachable
+   pay-back; the engine schedules the convergence.
+4. Freeze detector: any NPC not ticked in N scene-breaks gets asked in the
+   tick pass why it is still identical.
+5. Advance the ledger through the finale: run a world wrap-up pass that
+   closes or defuses every pending consequence. The climax is where the
+   engine earns its keep — and where Convergence went blind.
+6. Write the NPC's next action when the player leaves them, as part of the
+   scene-break hook, not at a later tick.
+
 ## Next steps
 
 1. Review Gemini research findings.

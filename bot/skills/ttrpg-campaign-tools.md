@@ -53,6 +53,35 @@ session:
   notes: ""
 ```
 
+## Campaign Timeline Index (per campaign, keep current)
+
+`campaigns/<campaign>/timeline.md` is the running chronological index —
+always-on answer sheet for "when did X happen / what did we believe on date
+Y". It is campaign data (gitignored), one block per session, newest last:
+
+```markdown
+## Session <n> — <date>: <one-line summary>
+- Key events this session (bullets, NPCs + outcomes)
+- Open threads entering/leaving the table
+- Reference: <pointer to the full session log>
+```
+
+Rules:
+
+- **Append at session end** (see Session Conclusion below) — the index is
+  the first thing read before play and the cheap answer path mid-play.
+- **Timeline queries:** read the index, pull the referenced session log for
+  detail, and cross-check current world state in Foundry journals via the
+  bridge (`search_journals` → `get_journal`). "As of session N" answers read
+  only entries up to and including N. The world stays source of truth for
+  current state; the index sources the past.
+- **Seed on campaign start:** module install + chargen + first-session
+  milestones belong in the index from day one.
+- **Backfill not required:** finished campaigns (e.g. Convergence) keep
+  their history in TencentDB; backfill only if the player asks.
+- Offscreen-ledger ticks advance alongside the index; the two files agree
+  on the current fiction date.
+
 ## Between-Session Routines
 
 Run via cron in the ttrpg profile:
@@ -82,8 +111,14 @@ When the session ends:
 
 1. GM Bot generates session log from conversation history
 2. Writes log to TencentDB as episodic memory
-3. Runs world state snapshot
-4. Generates next-session hook (one-sentence teaser)
+3. Appends one block to `campaigns/<campaign>/timeline.md` (summary, key
+   events, open threads, log pointer) and ticks the offscreen ledger
+4. Runs world state snapshot
+5. Generates next-session hook (one-sentence teaser)
+6. At adventure end: run the world wrap-up pass (Living World Doctrine) so
+   every open thread ends in the record.
+7. Commit and push the repo. Standing authorization in `AGENTS.md`: no
+   approval prompt, tree clean and nothing unpushed when the session closes.
 
 ## Table & Mechanics Doctrine (owner-directed, 2026-09-29)
 
@@ -199,17 +234,70 @@ the debrief.
 
 ## Offscreen Ledger (keep current)
 
-`campaigns/<campaign>/offscreen-ledger.md` tracks what every significant NPC is
-doing when the player cannot see them: where they are, what they want, what they
-do next, and what the player could notice. Every scene that leaves people behind
-gets an entry, and every advance of time ticks the entries forward. Pay them
-back on screen when the player's path crosses theirs; the world keeps moving
+`campaigns/<campaign>/offscreen-ledger.md` tracks what every significant NPC,
+faction, and creature is doing when the player cannot see them: where they are,
+what they want, what they do next, what triggers it, and what the player could
+notice when paths cross. Every scene that leaves people behind gets an entry,
+and every advance of time ticks the entries forward. The world keeps moving
 whether or not anyone is watching.
 
+## Living World Doctrine (compulsory; any system)
 
-## The offscreen world breathes (owner requirement, 2026-10-25)
+Applies to every campaign, whatever the ruleset. The VTT owns the mechanics
+(dice, sheets, combat); this layer owns causation, time, and intent only. The
+rules below were drawn from the Convergence postmortem
+(`docs/convergence-living-world-postmortem-2026-11-06.md`), where the offscreen
+layer worked when it was switched on and every failure was an actor that was
+never given a next action.
 
-Everything offscreen must advance on in-game time, not only when the scene touches it. The offscreen ledger is the v0 mechanism: advance it at every scene break, timestamped to the fiction's clock. The target architecture the owner wants: hidden parallel timelines per faction and NPC, semantic triggers keyed to player actions, and convergence points where offscreen threads re-enter the visible narrative by cause and effect. In-game time decouples from wall time and runs at every granularity, from combat rounds to months between operations. Research prompt for the build: docs/gemini-research-prompt-2026-10-25.md.
+**Every ledger line answers five questions.** Where the actor is, what they
+want, what they will do next, what triggers that (a semantic trigger, e.g.
+"when the player learns X", or a scheduled one, e.g. "at dusk"), and their
+state flag.
+
+**State flags.** Every tracked actor carries one:
+- `ACTIVE` — will move on its own.
+- `WAITING-ON(<event>)` — holds still until the event fires.
+- `STILLED-BY(<cause>)` — deliberately not moving (a truce, a hush, a hostage
+  lull). The cause is named, so stillness is a choice, not a gap.
+- `DONE` — thread closed; no more ticks owed.
+
+**Write the next action at departure.** The instant the player leaves an actor
+behind, write that actor's next action into the ledger — not at the next scene
+break, not from memory later. This single discipline prevents the freeze that
+hit the human NPCs in Convergence (Merle, Derringer, Jane): they were met, then
+never given anything to do in the player's absence.
+
+**Scene-break tick pass.** Every time the player moves on:
+1. Advance the fiction clock; timestamp the entry.
+2. Fire every trigger that has come due; update position and state.
+3. Freeze check: any `ACTIVE` actor with no tick for three scene breaks gets
+   resolved now — a move, or an explicit flag to `STILLED-BY`/`DONE`. No actor
+   sits in limbo.
+4. Log the pay-back hook: what the player would notice if their path crossed
+   the actor's.
+
+**Convergence queue.** Keep a short list of pay-backs owed to the table: an NPC
+who heard about the player, a faction that prepared for them, a promise with a
+deadline. Threads re-enter the visible narrative off this queue, by cause and
+effect, at a moment that costs the player something. The player sees the
+effect, never the machinery.
+
+**Wrap-up pass (campaign end).** When the adventure closes, run a final pass
+over the ledger: every `ACTIVE` and `WAITING-ON` actor receives an ending
+state, and every owed pay-back either lands on screen or is deliberately
+dropped. The climax is not the end of the bookkeeping; the final state of every
+open thread belongs in the record.
+
+**Target architecture (owner requirement, 2026-10-25).** Everything offscreen
+must advance on in-game time, not only when a scene touches it. The ledger is
+the v0 mechanism; the target is hidden parallel timelines per faction and NPC,
+semantic triggers keyed to player actions, and convergence points where
+offscreen threads re-enter the visible narrative by cause and effect. In-game
+time decouples from wall time and runs at every granularity, from combat rounds
+to months between operations. Research prompt for the build:
+`docs/gemini-research-prompt-2026-10-25.md`; build spec:
+`docs/architecture/offscreen-world-engine.md`.
 
 
 ## Name the skill and the sheet value, always (owner directive, 2026-10-25)

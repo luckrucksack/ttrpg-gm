@@ -38,7 +38,9 @@ In-game time starts before the player arrives.
 The world is not still while the camera is off it. Even when nothing is happening yet, the ledger exists and the factions are listed.
 
 - Every faction and significant NPC gets a line: what it wants, its next move, its trigger, and when it was last advanced.
+- Every line carries a state flag: ACTIVE / WAITING-ON(<event>) / STILLED-BY(<cause>) / DONE. A still world is a decision, not a default.
 - Advance the ledger at scene breaks and after big player actions. What the player did changes what the world does next.
+- When the player leaves an actor behind, write its next action into the ledger in that same sitting, not later. The live rules are in `ttrpg-campaign-tools.md` (Living World Doctrine).
 - Use semantic triggers, not only timers. "If the player learns the water source, the faction sets a watch." Not "three hours later, an event."
 - Keep it hidden. The player sees effects, never the simulation. Hidden threads surface later, by cause and effect, at a moment that costs the player something.
 

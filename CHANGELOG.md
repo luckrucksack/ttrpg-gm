@@ -3,6 +3,15 @@
 Chronological project history, newest first. Formerly STATUS.md. For the
 current state, see STATUS.md.
 
+**2026-11-04 — Campaign timeline capability (cheap path).**
+`campaigns/extremophilia/timeline.md` created as the running chronological
+index (seeded: session 0 bring-up, Extremophilia install, open threads).
+New "Campaign Timeline Index" section in `bot/skills/ttrpg-campaign-tools.md`
+— append per session, timeline-query procedure (index → session logs →
+Foundry journals via bridge), no backfill for finished campaigns; Session
+Conclusion now appends the timeline block (step 3). Graphiti stays parked
+per the temporal-facts evaluation; revisit only if the cheap path fails.
+
 **2026-11-03 — Extremophilia bot profile.**
 Cloned the `ttrpg` profile into `extremophilia` (config, .env, SOUL, skills,
 plugins; messaging channels excluded). Verified: loads the six doctrine files

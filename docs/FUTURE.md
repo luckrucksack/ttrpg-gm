@@ -31,7 +31,8 @@ done, delete the item.
   changed module text before the next session. Do not trust memory of it.
 - **When the map phase begins.** The bridge has no create-scene or create-token
   tool. Solve that first (Foundry-side setup, or extend the bridge), then wire
-  scene reading into the session start.
+  scene reading into the session start. Engineering brief + do-it-better design:
+  `docs/familiar-scene-orchestration-2026-11-06.md`.
 
 ## Pinned, no trigger yet
 

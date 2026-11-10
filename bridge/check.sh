@@ -69,6 +69,18 @@ if ! grep -q '^MCP_FOUNDRY_PASSWORD=.\+' "$ENV_FILE"; then
 fi
 pass "MCP_FOUNDRY_PASSWORD present"
 
+# --- 2b. Journal text limit set (dossiers must not truncate) -------------------
+# The server defaults to 500 chars per journal page; dossiers are 700-2100.
+# The gate's own launch forces 20000, so this would silently pass while real
+# profile-spawned sessions truncated every dossier read. Enforce it in the env.
+if grep -q '^FOUNDRY_JOURNAL_TEXT_LIMIT=.\+' "$ENV_FILE"; then
+  pass "FOUNDRY_JOURNAL_TEXT_LIMIT set (full journal reads)"
+else
+  fail "FOUNDRY_JOURNAL_TEXT_LIMIT missing/empty — NPC dossiers are read truncated to 500 chars"
+  info "add FOUNDRY_JOURNAL_TEXT_LIMIT=4000 to $ENV_FILE (4000 covers dossier pages)"
+  exit 1
+fi
+
 # --- 3. Real launch: does the server register tools? --------------------------
 FOUNDRY_URL="$FOUNDRY_URL" \
 FOUNDRY_USERNAME="$FOUNDRY_USERNAME" \

@@ -10,6 +10,11 @@ next build is the offscreen world engine.
   holds the character, the dossiers, and the adventure outline journal.
   Campaign files (sheet mirror, GM notes, offscreen ledger, research) live in
   `campaigns/delta-green-convergence/` and are not tracked.
+- **CAMPAIGN_TIMELINE (2026-11-04):** `campaigns/extremophilia/timeline.md`
+  is the running index; the GM appends a block per session and answers
+  timeline queries from it + Foundry journals via the bridge. Cheap path
+  adopted (doctrine in `bot/skills/ttrpg-campaign-tools.md`, session
+  conclusion step 3); Graphiti stays parked.
 - **GM bots:** `ttrpg` holds the Convergence history; `extremophilia` is a
   cloned bot profile (deepseek flash, same doctrine via `skills.external_dirs`)
   with its own permanent Bot Chat for the next campaign.
@@ -51,3 +56,4 @@ next build is the offscreen world engine.
 - History: `CHANGELOG.md`
 - Reading order and gaps: `docs/REPO-MAP.md`
 - Conventions: `AGENTS.md`
+- Living-world lessons (2026-11-06): `docs/convergence-living-world-postmortem-2026-11-06.md`

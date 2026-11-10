@@ -24,6 +24,14 @@ session that touches this project.
    a pin lifted, a step finished, a plan superseded — make the edit in the
    same pass and report it. Never flag a doc as needing an update and wait
    for permission.
+7. **Commit and push without asking.** `origin` is the owner's private repo
+   (`luckrucksack/ttrpg-gm`); work here is pre-authorized to publish. When a
+   coherent unit of work lands — a session wrap-up, a doc or skill update, a
+   fix — stage, commit with a descriptive message, and push to `main`. Never
+   ask for approval. A task is done when `git status --short` is empty and
+   `git log origin/main..HEAD` is empty. Hard limits: no force-push, no
+   history rewrite, no new remotes, no secrets (`.env` stays ignored), and
+   nothing goes to a public upstream repo without explicit approval.
 
 ## Verify the Foundry bridge before trusting it
 
