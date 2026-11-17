@@ -3,6 +3,22 @@
 Chronological project history, newest first. Formerly STATUS.md. For the
 current state, see STATUS.md.
 
+**2026-11-17 — Offscreen world engine, v1: the pinned build, started.**
+The 2026-10-25 trigger had gone nine days past due with nothing built, so the
+prototype was built. `worldengine/` (stdlib Python, `python3 -m worldengine`)
+implements the deterministic half of the architecture: in-game clock at any
+granularity, per-actor event table with scheduled and semantic triggers,
+evidence flags, convergence queue, freeze audit, wrap-up pass, and a one-way
+importer for the hand-written ledger. 24 unit tests pass. Doctrine updated:
+session start runs `status` (advance-on-read), the scene break runs `tick
+--append-ledger`; the weekly wall-clock agenda tick is deleted — the world
+moves on fiction time only. Convergence's ledger migrated (51 entries, 8
+sections, 22 actors, all `UNREVIEWED` pending triage); the markdown ledger
+itself is untouched. Prior art survey:
+`docs/offscreen-world-engine-research-2026-11-17.md`. The two-week trigger in
+FUTURE.md is discharged and removed. Not yet exercised in live play —
+Extremophilia has not started.
+
 **2026-11-04 — Campaign timeline capability (cheap path).**
 `campaigns/extremophilia/timeline.md` created as the running chronological
 index (seeded: session 0 bring-up, Extremophilia install, open threads).

@@ -6,9 +6,6 @@ done, delete the item.
 
 ## Temporal triggers
 
-- **Two weeks after 2026-10-25 (cron reminder exists).** Review whether the
-  offscreen engine prototype has started. If not, start it from
-  `docs/architecture/offscreen-world-engine.md` and issue #1.
 - **First week of each quarter.** Review dated docs: anything that no longer
   informs a decision moves to `docs/archive/` and the nav is updated.
 

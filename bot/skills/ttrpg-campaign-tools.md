@@ -89,9 +89,10 @@ Run via cron in the ttrpg profile:
 1. **Session Log Compaction** (weekly). Compresses finished sessions
    into durable scene blocks in TencentDB. Removes redundant logs.
 
-2. **NPC Agenda Advancement** (weekly). Advance offscreen NPC agendas one
-   tick, and append whatever the table will eventually notice to that NPC's
-   Foundry dossier journal.
+2. **Offscreen freeze review** (weekly, optional). Read
+   `python3 -m worldengine status <campaign>`. Any ACTIVE actor the freeze audit
+   names gets resolved before it hardens into a gap. The world advances on the
+   in-game clock, never on wall time — there is no weekly agenda tick.
 
 3. **World State Snapshot** (after each session). Save Foundry's world
    state to TencentDB as a reference snapshot.
@@ -101,9 +102,12 @@ Run via cron in the ttrpg profile:
 When a session starts:
 
 1. GM Bot loads the current campaign context from TencentDB
-2. Loads current Foundry state (scene, actor positions, quest journals)
-3. Generates a session opener based on where the party left off
-4. Sends the opener to the player
+2. Runs `python3 -m worldengine status <campaign>` — advance-on-read fires
+   anything that came due since the last scene; read the freeze audit and the
+   convergence queue before narrating
+3. Loads current Foundry state (scene, actor positions, quest journals)
+4. Generates a session opener based on where the party left off
+5. Sends the opener to the player
 
 ## Session Conclusion
 
@@ -112,11 +116,14 @@ When the session ends:
 1. GM Bot generates session log from conversation history
 2. Writes log to TencentDB as episodic memory
 3. Appends one block to `campaigns/<campaign>/timeline.md` (summary, key
-   events, open threads, log pointer) and ticks the offscreen ledger
+   events, open threads, log pointer); ticks the engine
+   (`tick ... --append-ledger`) so the clock, triggers, and freeze audit move
+   with the fiction
 4. Runs world state snapshot
 5. Generates next-session hook (one-sentence teaser)
-6. At adventure end: run the world wrap-up pass (Living World Doctrine) so
-   every open thread ends in the record.
+6. At adventure end: `python3 -m worldengine wrapup <campaign> --strict` — every
+   open actor gets an ending state and every owed beat is paid or dropped
+   (Living World Doctrine)
 7. Commit and push the repo. Standing authorization in `AGENTS.md`: no
    approval prompt, tree clean and nothing unpushed when the session closes.
 
@@ -232,14 +239,39 @@ what landed, the owner's feedback, the mechanics exercised and still owed, and
 pacing observations. Add to it during play; at the adventure's end, use it for
 the debrief.
 
-## Offscreen Ledger (keep current)
+## Offscreen Ledger (engine-backed since 2026-11-17)
 
-`campaigns/<campaign>/offscreen-ledger.md` tracks what every significant NPC,
-faction, and creature is doing when the player cannot see them: where they are,
-what they want, what they do next, what triggers it, and what the player could
-notice when paths cross. Every scene that leaves people behind gets an entry,
-and every advance of time ticks the entries forward. The world keeps moving
-whether or not anyone is watching.
+`campaigns/<campaign>/engine.json` is the authoritative offscreen state: the
+in-game clock, every actor's five answers plus a state flag, the event table
+(scheduled and semantic triggers), evidence flags, and the convergence queue.
+`offscreen-ledger.md` stays the human narrative beside it — appended from the
+tick report, never regenerated, never the source of truth.
+
+Engine: `python3 -m worldengine` from `~/ttrpg_gm` (stdlib only, no install).
+
+```
+status   <campaign>                  # advance-on-read: fires what is due, audits
+tick     <campaign> --by 2h --label "Day 4, dusk" --note "one line" --append-ledger
+actor    add|set|list <campaign> ...
+actor    reaction <campaign> NAME --on-flag F --does "..." --after 30m [--owed]
+event    add <campaign> --actor A --at ISO | --when-flag F ... --text "..." [--owed]
+flag     set <campaign> F [--note "..."]      # evidence the player uncovered
+converge list|pay|drop <campaign> ...
+wrapup   <campaign> --strict
+```
+
+What the engine enforces: the clock never moves backwards; `WAITING-ON` and
+`STILLED-BY` need a named detail; a fired event ticks its actor and clears a
+wait; `ACTIVE` actors untouched for three scene breaks surface in the freeze
+audit; `--owed` lands the pay-back on the convergence queue.
+
+### Scene-break tick pass (engine form)
+
+1. Set one flag per thing the player learned or saw this scene.
+2. `tick --by/--to ... --label ... --note "one line" --append-ledger`.
+3. Read the tick block and the freeze audit. Resolve every frozen actor now:
+   give it a move, or flag it `STILLED-BY(<cause>)` / `DONE`.
+4. Pay or drop the owed beats the scene just landed; add new ones with `--owed`.
 
 ## Living World Doctrine (compulsory; any system)
 

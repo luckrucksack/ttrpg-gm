@@ -9,7 +9,8 @@ published TTRPG adventures in Foundry VTT with a Hermes Agent Bot as the GM.
 GM-only NPC dossiers in the Foundry world.
 
 **Status:** the Convergence campaign is complete. The GM doctrine now includes
-the Pre-Game Protocol. The next build is the offscreen world engine.
+the Pre-Game Protocol. The offscreen world engine is built (`worldengine/`,
+2026-11-17); the next test is running it in play.
 
 ## Start Here
 

@@ -29,7 +29,9 @@ Keep the prep in the campaign folder, not in chat. It is the GM's memory. Update
 
 In-game time starts before the player arrives.
 
-- Establish the date and hour, and write both into the offscreen ledger.
+- Establish the date and hour; initialize the engine (`python3 -m worldengine
+  init <campaign> --clock <ISO> --label "<Day n, part of day>"`) and write the
+  same into the offscreen ledger.
 - Timestamp every scene break from then on. Time passes while the player eats, drives, sleeps, and argues. It does not wait.
 - Start the adventure's clock on day one: deadlines, festivals, phases of the moon, scheduled runs, the villain's plan. If the adventure has a timer, it is running.
 

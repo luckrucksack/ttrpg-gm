@@ -1,8 +1,8 @@
 # STATUS
 
-**Current as of 2026-10-25.** The Convergence campaign is complete. The AI GM
+**Current as of 2026-11-17.** The Convergence campaign is complete. The AI GM
 doctrine set includes the Pre-Game Protocol (`bot/skills/ttrpg-prep.md`). The
-next build is the offscreen world engine.
+offscreen world engine is built; the next test is running it in play.
 
 ## Where things stand
 
@@ -25,9 +25,13 @@ next build is the offscreen world engine.
   sheet value on every check; stop at every roll; real open GM rolls; doubles
   verified digit by digit; WP spent before the roll; marked failures improve
   at session end; fiction first, no meta.
-- **Offscreen world:** the campaign ledger runs as v0 of the engine. Target
-  architecture and research brief are in
-  `docs/architecture/offscreen-world-engine.md`; tracking issue #1 on GitHub.
+- **Offscreen world engine (2026-11-17):** `worldengine/` is the v1 prototype —
+  in-game clock, event table with scheduled and semantic triggers, evidence
+  flags, convergence queue, freeze audit, wrap-up pass, ledger importer; 24
+  tests. Doctrine wired into `ttrpg-campaign-tools.md` (status before the
+  opener, tick at the scene break). Convergence's ledger is migrated: 51
+  entries, 8 sections, 22 actors awaiting state flags. Not yet exercised in
+  live play. Architecture: `docs/architecture/offscreen-world-engine.md`.
 - **Docs site:** MkDocs publishes `docs/` to GitHub Pages. Older architecture
   revisions are in `docs/archive/`. The repo map is `docs/REPO-MAP.md`.
 
@@ -43,11 +47,14 @@ next build is the offscreen world engine.
 
 ## Next
 
-1. Review the Gemini research findings on the offscreen engine, then
-   prototype the clock and event table.
-2. Add map and token awareness to the GM workflow: read scene and token data
+1. Exercise the engine in play: the first Extremophilia scene initializes the
+   clock, the actor set, and the event table; review the freeze audit after the
+   session, not before.
+2. Triage Convergence's migrated actors to state flags (three of the 22 are the
+   same man under different names), or leave them as an archive.
+3. Add map and token awareness to the GM workflow: read scene and token data
    through the bridge even when playing theater of the mind.
-3. Evaluate on-screen Foundry orchestration (fog, tokens, lighting) as a
+4. Evaluate on-screen Foundry orchestration (fog, tokens, lighting) as a
    later phase, cost-conscious.
 
 ## Pointers

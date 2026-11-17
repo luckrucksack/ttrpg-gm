@@ -1,5 +1,18 @@
 # Offscreen World Engine — Architecture Outline
 
+## Status: v0.1 built (2026-11-17)
+
+`worldengine/` implements the deterministic half of this design: an in-game
+clock at any granularity, a per-actor event table with scheduled and semantic
+triggers, evidence flags, a convergence queue, the freeze audit, the wrap-up
+pass, and a one-way importer for the hand-written ledger. 24 unit tests
+(`python3 -m unittest discover -s tests`).
+
+Deliberately not built: continuous wall-clock simulation — the fiction clock is
+the only clock — and any model call inside the engine. The LLM authors events
+and narrates convergence; the tick itself is arithmetic. Prior art behind those
+two calls: `docs/offscreen-world-engine-research-2026-11-17.md`.
+
 ## What the player wants
 
 Everything offscreen must advance on in-game time, not only when a scene touches it. Player actions seed consequences that mature in hidden parallel timelines: an alien faction survives a barn fire, communicates across its network, and directs its assets to set traps. Those threads re-enter the visible narrative later, by cause and effect, not by GM fiat.
@@ -45,10 +58,20 @@ ticked. Binding rules below.
 
 ## Next steps
 
-1. Review Gemini research findings.
-2. Prototype the clock/event table in Python.
-3. Integrate into the GM bot session start/end hooks.
-4. Migrate the offscreen ledger to the event table format.
+1. ~~Review the research findings.~~ Done 2026-11-17 — the brief was answered
+   by a live web survey rather than a Gemini Deep Research run. Conclusion:
+   keep the LLM at event authoring and convergence narration; the tick stays
+   deterministic.
+2. ~~Prototype the clock and event table in Python.~~ Done — `worldengine/`.
+3. ~~Integrate into the GM bot session start/end hooks.~~ Done in doctrine
+   (`bot/skills/ttrpg-campaign-tools.md`): `status` before the opener, `tick`
+   at the scene break. The calls stay manual CLI steps, not a plugin.
+4. ~~Migrate the offscreen ledger to the event table format.~~ Convergence
+   migrated (51 entries, 8 sections, 22 actors). Its actors are `UNREVIEWED`
+   until someone assigns state flags. Extremophilia initializes at its first
+   scene, per its own rule that the clock starts with play.
+5. First live use is the test that matters: run the engine through one full
+   Extremophilia session, then review the freeze audit and the cost of a tick.
 
 ## Foundry orchestration goals (added 2026-10-25)
 

@@ -34,6 +34,7 @@ For a human, or a new GM instance orienting itself:
   - `index.md` — front page
   - `ttrpg-gm-architecture-2026-09-29.md` — current architecture (v4)
   - `architecture/offscreen-world-engine.md` — the parallel world engine
+  - `offscreen-world-engine-research-2026-11-17.md` — prior art and design call
   - `REPO-MAP.md` — this file
   - `archive/` — older architecture revisions, kept for history
   - research and design documents, each dated
@@ -42,6 +43,9 @@ For a human, or a new GM instance orienting itself:
     `ttrpg-narrator.md`, `ttrpg-prohibitions.md`, `ttrpg-campaign-tools.md`,
     `ttrpg-foundry-bridge.md`
 - `bridge/` — the Foundry MCP bridge: setup, check script, vendored patch
+- `worldengine/` — the offscreen world engine: in-game clock, event table,
+  semantic triggers, convergence queue (`python3 -m worldengine`)
+- `tests/` — unit tests for `worldengine/`
 - `pipeline/` — PDF adventure ingestion (MarkItDown to LLM to Foundry JSON)
 - `scripts/setup.sh` — one-time setup helper
 - `campaigns/README.md` — the untracked campaign folder convention
@@ -62,8 +66,9 @@ For a human, or a new GM instance orienting itself:
 
 ## Known gaps, in priority order
 
-1. **The offscreen engine is still a file, not a clock.** The ledger is v0.
-   The research brief exists; the prototype does not. This is the next build.
+1. ~~The offscreen engine is still a file, not a clock.~~ Closed 2026-11-17:
+   `worldengine/` is the prototype (26 tests). The open question moved to live
+   use — no session has run through it yet.
 2. **The architecture doc predates the prep protocol and the campaign
    outcome.** It needs one refresh paragraph pointing at `ttrpg-prep.md` and
    the engine doc, and its "next" section should match `STATUS.md`.

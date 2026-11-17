@@ -138,6 +138,8 @@ de-absolutized); style-dial idea pinned (docs/backlog.md).
 
 - 2026-10-25 — Owner requirement: a real offscreen-world engine. The universe outside the narrative must advance on an in-game clock, with semantic triggers seeded by player actions and convergence points that pay threads back later. Current mechanism is the campaign offscreen ledger, advanced at scene breaks. Research prompt for the build filed at docs/gemini-research-prompt-2026-10-25.md. Owner's green light phrase: "Make it so."
 
+- 2026-11-17 — Engine built: `worldengine/` (in-game clock, event table with scheduled and semantic triggers, convergence queue, freeze audit, wrap-up pass, ledger importer; 26 tests). The markdown ledger is now the narrative mirror, not the state. Filed: `ttrpg-campaign-tools.md` (Offscreen Ledger, engine form).
+
 - 2026-10-25 — Owner directive (2nd): every check names the skill and quotes the player's current sheet value from the mirror JSON. No recalled numbers.
 
 - 2026-10-25 — Owner directive (3): wind-down rule. No curtain-drop endings; pay relationships and loose ends; keep player agency through the last turns; sensible, memorable exits. Filed under narrator doctrine.
