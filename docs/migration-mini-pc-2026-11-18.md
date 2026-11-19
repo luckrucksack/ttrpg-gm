@@ -15,9 +15,10 @@ The B1 Pro will run this stack, and it is the floor, not the sweet spot.
 - **RAM:** 8 GB LPDDR4, soldered, not upgradable. Enough for Foundry, the
   gateway, the bridge, and the memory store if the machine stays headless. Do
   not also run the browser, SearXNG, or camofox there.
-- **Storage:** 128 GB eMMC, slow and finite. The slot is **M.2 2280 SATA3**,
-  not NVMe. Buy a SATA M.2 SSD, up to 2 TB, and put the OS, Foundry data, and
-  backups on it. Do not buy an NVMe drive.
+- **Storage:** this unit has 500 GB, so capacity is settled; the whole stack is
+  about 1.2 GB. The slot is **M.2 2280 SATA3**, not NVMe, so an NVMe drive
+  cannot be used and does not need to be bought. Confirm whether the 500 GB is
+  a SATA SSD or eMMC. Either works; the SSD is faster and wears better.
 - **Network:** Gigabit Ethernet. Use the cable, not Wi-Fi 5.
 - **Power:** 12 V, 24 W supply, fanless in most units. Good always-on box.
 
@@ -52,7 +53,8 @@ already in hand, this plan uses it.
 
 ## Phase 1: hardware and OS
 
-1. Fit the SATA M.2 SSD. Keep the eMMC as the emergency install or wipe it.
+1. Confirm the 500 GB drive type. If it is a SATA M.2 SSD, nothing to buy. If
+   it is eMMC, the stack still fits; the SSD is an optional speed upgrade.
 2. Install Ubuntu Server 24.04 LTS, hostname `gm`, user `chriscoon`, OpenSSH.
 3. Give it a DHCP reservation on the router, or a static address.
 4. Install Tailscale and join the tailnet. Confirm the Mac can reach it by
@@ -121,7 +123,8 @@ already in hand, this plan uses it.
 
 ## Gotchas, in the order they will bite
 
-1. **SATA, not NVMe.** The M.2 slot is SATA3. Check the drive before buying.
+1. **SATA, not NVMe.** The M.2 slot is SATA3. Do not buy an NVMe drive for
+   this machine; the 500 GB it already has is enough.
 2. **Absolute paths.** The config and scripts are full of `/Users/chriscoon`.
    A blind copy will start and then fail to find the bridge, the skills, or the
    node binary.
