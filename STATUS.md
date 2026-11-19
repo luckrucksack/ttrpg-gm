@@ -59,6 +59,7 @@ offscreen world engine is built; the next test is running it in play.
 
 ## Pointers
 
+- Migration plan (Bmax mini PC): `docs/migration-mini-pc-2026-11-18.md`
 - Future work with triggers: `docs/FUTURE.md`
 - History: `CHANGELOG.md`
 - Reading order and gaps: `docs/REPO-MAP.md`
