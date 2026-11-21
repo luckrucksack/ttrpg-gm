@@ -32,7 +32,10 @@ export MCP_CMD
 export FOUNDRY_JOURNAL_TEXT_LIMIT="${FOUNDRY_JOURNAL_TEXT_LIMIT:-20000}"
 
 # npx lives in a few common places depending on how node was installed.
-for d in "$HOME/.local/bin" /opt/homebrew/bin /usr/local/bin; do
+# Availability only — never reorder: ~/.local/bin is the node the profile
+# config pins, so it must stay ahead of /opt/homebrew/bin, whose node keg can
+# go stale against a bumped Homebrew library (dyld: libsimdjson).
+for d in /usr/local/bin /opt/homebrew/bin "$HOME/.local/bin"; do
   [ -d "$d" ] && PATH="$d:$PATH"
 done
 export PATH
