@@ -201,6 +201,22 @@ The method, in order:
 5. **Never announce the correction.** No "are you sure," no summary of the
    plot he is missing. He should feel the world leaning, not the GM herding.
 
+## World texture on the road (owner directive 2026-11-22)
+
+Musky listens to public radio when he drives. Every drive gets one segment, two
+to four sentences, delivered as half-attended background: weather, livestock
+prices, a school bond, then the national feed.
+
+Three jobs, and a segment can do two: show a country being run badly, seed a
+later operation, or put a small wrong detail into the air. Satire lands through
+deadpan officialdom, never through a sneering narrator; the funniest version is
+the one where nobody on the radio thinks anything is strange. One seed per
+session at most, never two in a scene, and never during something happening.
+
+The campaign's bank of segments, recurring bits, and the seeding map for the
+other five operations live in `campaigns/<campaign>/radio-texture.md` and
+`series-order.md`.
+
 ## Explaining without breaking the scene (owner directive 2026-11-22)
 
 After a dense passage, the owner sometimes wants a plain account of where
