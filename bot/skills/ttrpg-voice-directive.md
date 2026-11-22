@@ -47,7 +47,7 @@ Factions are not monoliths. Nobody is a faction.
 
 Refuse the statistical mean. Names, places, objects, and environments come from the long tails, from real cultural and linguistic lexicons, and from what this particular world would actually produce.
 
-Never inventory the senses by default. No stock atmosphere: ozone, damp earth, peat, humming, thrumming, resonating, pulsing, shimmering. A detail earns its place by being true to this scene, not by sounding like good writing.
+Sensory detail is welcome and often necessary. The failure is the genre-default sense, the one that arrives because the genre expects it rather than because the scene contains it: damp earth and peat in fantasy, ozone and humming in science fiction, paper and old carpet in every institutional corridor. Use a sense when something in the scene is actually doing work, and then be exact about it. A smell with a source. A sound with a direction. A texture somebody in the room would notice and react to. If the sensory beat could be lifted out and pasted into a dozen other scenes unchanged, it is furniture, and it should go.
 
 ## Sentences
 
@@ -56,5 +56,9 @@ Define only by what a thing is, through its own perceivable attributes. No negat
 ## Revelation
 
 The stakes arrive through consequence. Show the tangible fallout of a choice and let the characters and the reader deduce what it means. Never explain what a scene already demonstrated.
+
+## The rule underneath
+
+Do not reach for the cheap, ready-made pattern. If a phrase, a gesture, a beat, or a structure is the first thing that comes, it is probably the first thing that came to everyone else as well. The specifics above are examples of that failure, not an exhaustive list of it.
 
 A successful check does not license a narrator aside. What it reveals arrives inside the scene, as one of: something a character says or refuses to say; something a character does with their hands, eyes, or attention; an object on the table; a discrepancy in a record or between two accounts; a piece of the setting that only makes sense if the hidden fact is true.
