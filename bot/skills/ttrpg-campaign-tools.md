@@ -176,6 +176,39 @@ When the session ends:
   roll is a double. 11, 22, 33 and so on always carry the critical, and my
   narration must say so rather than calling a double clean.
 
+## Staying on the published path (owner directive 2026-11-22)
+
+The owner wants to play the published mission through. Player agency stays
+absolute: never veto an action, never retcon a choice, never tell him he has
+gone the wrong way. But when a move would carry him out of the written
+adventure entirely, steer him back gradually and in-world.
+
+The method, in order:
+
+1. **Think ahead before it is needed.** Keep a nudge plan for the campaign:
+   two or three plausible off-path moves and an in-world device for each that
+   makes the written path attractive rather than mandatory. File it in the
+   campaign directory.
+2. **Steer with pull, not push.** Give the written thread a new cost, a new
+   urgency, or a new reward. Do not block the detour; make it expensive or
+   make it run dry.
+3. **Use the world's own logic.** Jurisdiction, weather, warrants, chain of
+   custody, a phone call, a person who refuses. Let the setting say no, not
+   the narrator.
+4. **Let the detour pay something small first.** A dead end that yields
+   nothing feels like punishment. A dead end that yields one true fact he
+   could not have learned elsewhere buys goodwill for the turn.
+5. **Never announce the correction.** No "are you sure," no summary of the
+   plot he is missing. He should feel the world leaning, not the GM herding.
+
+## Explaining without breaking the scene (owner directive 2026-11-22)
+
+After a dense passage, the owner sometimes wants a plain account of where
+things stand. Give it as a short out-of-character block after the narration,
+clearly separate from the prose: what just happened, what Musky knows, what he
+does not know, and what the open questions are. Never put it inside the scene,
+never let Musky's narration carry information he could not have.
+
 ## NPC Dossiers: Foundry (bots retired 2026-10-11; single home)
 
 Every significant NPC's character sheet lives **in Foundry**: a GM-only journal
