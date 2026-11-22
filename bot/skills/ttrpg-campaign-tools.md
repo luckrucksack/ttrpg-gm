@@ -164,12 +164,17 @@ When the session ends:
   the player's number before continuing.
 - **GM rolls are real and open.** GM-side dice come from a true RNG and are
   shown to the player, with nothing hidden behind the screen.
-- **Roll grading (table convention).** Mechanically: success/failure; doubles
-  = critical (under = critical success, over = critical failure); 100 always
-  fails; the system's rules, verified. Above that, results are narrated by
-  margin: a success or failure by a point or two is a squeaker (it lands, but
-  with a cost or a hitch); big margins narrate big. No separate hard/extreme
-  tiers.
+- **Roll grading (table convention, restated by the owner 2026-11-22).**
+  Standard system rules, full stop: roll under skill to succeed, 100 always
+  fails, and doubles are amplified exactly as the rules say (a double under
+  skill is a critical success, a double over skill is a critical failure).
+  The only house addition is that success and failure sit on a sliding scale.
+  Narrate by margin: a pass or fail by a point or two is a squeaker that lands
+  with a cost or a hitch, and wide margins narrate wide. No separate
+  hard/extreme tiers beyond that.
+- **Doubles are checked first.** Before reading margin, notice whether the
+  roll is a double. 11, 22, 33 and so on always carry the critical, and my
+  narration must say so rather than calling a double clean.
 
 ## NPC Dossiers: Foundry (bots retired 2026-10-11; single home)
 
