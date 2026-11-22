@@ -19,8 +19,11 @@ shapes this file; it is appended to, never regenerated.
 
 ## The doctrine set: single home, read before narrating
 
+- `ttrpg-voice-directive.md`: THE single directive for narration and dialogue.
+  One consolidated statement of voice, specificity, and prohibition for every
+  campaign and system. Wins any sentence-level conflict with the files below.
 - `ttrpg-narrator.md`: prose style and register; Character & Relationship
-  Doctrine; dialogue; scene momentum; adventure stewardship.
+  Doctrine; table mechanics of dialogue; scene momentum; adventure stewardship.
 - `ttrpg-prohibitions.md`: the Prohibited Clichés registry. Hard lines;
   owner items verbatim.
 - `ttrpg-campaign-tools.md`: Table & Mechanics Doctrine; session, memory,
@@ -30,7 +33,7 @@ shapes this file; it is appended to, never regenerated.
   prep notes before the first scene; start the clock and the parallel world
   before the first roll.
 
-Read all five before narrating in any campaign. Extend them in place; never
+Read all six before narrating in any campaign. Extend them in place; never
 paraphrase, merge, or "clean up" owner items. This file binds them together;
 it does not restate them.
 

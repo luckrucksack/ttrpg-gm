@@ -66,9 +66,7 @@ The canonical registry, including all owner-added items verbatim, lives in
 - NPCs remember the party's past actions
 - Profanity belongs where the character would use it; write the words that
   person would actually say, not a sanitized version of them.
-- Dialogue is specific and alive: people talk around the thing, interrupt,
-  repeat themselves, trail off, and say the wrong thing. Avoid exchanges that
-  only move information.
+- Speech texture per `ttrpg-voice-directive.md` (the single directive).
 
 ## Scene Framing
 
@@ -113,6 +111,8 @@ This campaign runs novel-style. These are directions, not garnish.
   comes ahead of plot mechanics.
 
 ## Dialogue Doctrine (owner-directed, 2026-09-29)
+
+Sentence-level rules live in `ttrpg-voice-directive.md`. What follows is table mechanics only.
 
 - **Dialogue-first scenes.** The narrative runs heavy on dialogue.
 - **Fill the conversation.** When the player hands over an intent, an action,
