@@ -47,7 +47,14 @@ scn = bridge.clue(scn, id="ruiz_tip", text="Ruiz mentions the widow's brother",
 bridge.audit(scn)   # ['actor ruiz -> potter', 'clue ruiz_tip -> body (jacobs)']
 ```
 
-`flexibility_used()` counts how much of the campaign is bridge material. A campaign carrying forty invented clues and six printed ones has drifted, and the number says so without anyone having to argue about it.
+`flexibility_used()` counts how much of the campaign is bridge material. `drift()` turns that count into a judgement by putting it beside the signals that actually matter:
+
+- **ratio** of invented routes to printed routes, with an alarm threshold at 1.0
+- **coverage**: the share of printed nodes the player has actually entered
+- **bypassed**: printed nodes that are reachable, whose neighbours have been seen, and which have not been visited, which is the shape of a text being quietly skipped
+- **alarm**: true when the ratio is over threshold or anything is bypassed
+
+The honest limitation is that provenance counting cannot see everything. A GM can stay at a 0.2 ratio and still gut the adventure by contradicting printed facts without adding a single clue, and nothing here would notice. That is why the drift report is a smoke alarm and the page read is the actual safeguard.
 
 ## The runtime query that matters
 

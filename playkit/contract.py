@@ -66,6 +66,53 @@ def report(scn: Scenario, st: State | None = None) -> Report:
     return Report(viol, warn, invented)
 
 
+DRIFT_RATIO_ALARM = 1.0   # invented material outweighing printed material
+
+
+def drift(scn: Scenario, st: State | None = None) -> dict:
+    """The paraphrase alarm.
+
+    Provenance counts alone are a smoke alarm, not a verdict: a campaign can
+    carry a lot of invented scaffolding and still be faithful, because the
+    spine is printed and the scaffolding sits between its joints. So this
+    combines four signals and reports them together.
+
+      printed       things the module contains
+      invented      bridge material, all of it tethered
+      ratio         invented routes per printed route
+      coverage      share of printed nodes the player has actually entered
+      bypassed      printed nodes reachable but not visited, once their
+                    neighbours have been seen (the text quietly skipped)
+    """
+    printed_nodes = [n for n in scn.nodes]
+    printed_clues = [c for c in scn.clues if c.source == "printed"]
+    inv_clues = [c for c in scn.clues if c.source != "printed"]
+    ratio = (len(inv_clues) / len(printed_clues)) if printed_clues else 0.0
+    out = {
+        "printed_clues": len(printed_clues),
+        "invented_clues": len(inv_clues),
+        "invented_actors": sum(1 for a in scn.actors if a.source != "printed"),
+        "bridge_scenes": len(scn.improv),
+        "ratio": round(ratio, 3),
+    }
+    if st is not None:
+        visited_printed = [n.id for n in printed_nodes if n.id in st.visited]
+        out["coverage"] = round(len(visited_printed) / len(printed_nodes), 3) if printed_nodes else 0.0
+        neighbours_seen = {n.id for n in printed_nodes
+                           if n.id in st.visited or n.id in st.resolved}
+        bypassed = []
+        for n in printed_nodes:
+            if n.id in st.visited or n.id in st.resolved:
+                continue
+            inbound = [c for c in scn.clues
+                       if c.leads_to == n.id and (c.found_at is None or c.found_at in neighbours_seen)]
+            if inbound:
+                bypassed.append(n.id)
+        out["bypassed"] = bypassed
+    out["alarm"] = ratio > DRIFT_RATIO_ALARM or bool(out.get("bypassed"))
+    return out
+
+
 def flexibility_used(scn: Scenario) -> dict[str, int]:
     """How much bridge material a campaign is carrying, by kind."""
     return {

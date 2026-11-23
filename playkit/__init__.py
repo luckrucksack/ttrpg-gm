@@ -15,11 +15,11 @@ Nothing here knows what a d20 is. See docs/playkit-architecture.md.
 from .model import Scenario, Node, Clue, Tick, Actor, Improv, Conclusion, load
 from .lint import lint, Issue
 from .state import State
-from .contract import report, flexibility_used, INVARIANTS, Report
+from .contract import report, flexibility_used, drift, INVARIANTS, Report
 from .backend import Intent, Backend, Recorder, Table
 from . import runtime, bridge
 
 __all__ = ["Scenario", "Node", "Clue", "Tick", "Actor", "Improv", "Conclusion",
-           "load", "lint", "Issue", "State", "report", "flexibility_used",
+           "load", "lint", "Issue", "State", "report", "flexibility_used", "drift",
            "INVARIANTS", "Report", "Intent", "Backend", "Recorder", "Table",
            "runtime", "bridge"]
