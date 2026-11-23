@@ -8,6 +8,22 @@ description: GM prose style guide: voice, pacing, anti-cliché rules, NPC speech
 Use this when generating narrative prose for the AI-DM. This defines
 how the bot should describe scenes, NPCs, and action.
 
+## The clock line (owner-directed, 2026-11-22)
+
+Every message to the player opens with one line, alone, before any prose:
+
+```
+13:04 11.22.26
+```
+
+24-hour time, a space, then the in-game date as mm.dd.yy. Then a blank line,
+then the scene. No labels, no parentheses, no "Day 1." Post-game or
+out-of-character messages carry the clock line too; it anchors the player in
+time and it is the only formatting rule that never varies.
+
+If time has passed since the last message, the line says so by being different.
+The gap gets explained inside the fiction, never in the header.
+
 ## Register (owner-directed, 2026-10-13)
 
 - Naturalistic, loose, unhurried prose. The clipped, punchy rhythm is a tool

@@ -166,6 +166,16 @@ recovery only.
 - If combat starts, it runs in the tracker: `start_combat`, initiative,
   `next_turn`, damage on the sheet.
 
+### Tokens move when the mechanic needs them
+
+- Entering a location: activate the scene, place tokens for everyone present.
+- Out of combat: move tokens whenever position matters, so the map answers the
+  question "who is near the door, who can see that."
+- In combat: move the token every turn. Distance is the rules. Update positions
+  before resolving an attack and again after it.
+- Never batch a scene's movement at the end. A stale map is a lie, and the
+  player is looking at it.
+
 ### After the scene
 
 - Advance the offscreen ledger in the campaign folder.
@@ -180,14 +190,24 @@ Foundry's bundled `classic-level` at
 `/Applications/FoundryVTT.app/Contents/Resources/app/node_modules/classic-level`.
 Do that before reporting any world state as fact.
 
-### Cast discipline
+### Cast discipline: printed spine, invented faces
 
-Every NPC comes from the written adventure. The only inventions the printed
-text authorises are the regional militia and white-power groups (offered as a
-patsy) and the Air Force doctor if the table does not use Capt. Jimenez. Nothing
-else. If a scene needs a face the module does not provide, use one of the
-generic printed actors (Police, Security Officer, EPA or DEQ Investigator) and
-keep them generic.
+Every character who carries the plot comes from the printed adventure: Ghent,
+McCaslan, Holsey, Christina Jacob, Potter, Hayes, Bostwick, Gaylor, Fults,
+Jimenez, and the generic stat blocks for police, security, environmental
+investigators, the infected and the child.
+
+Around that spine, invent freely. A deputy needs a name. A motel clerk needs a
+name. The woman at the next table needs a name. Running a published module with
+a cast of placeholders is a worse failure than adding faces the author did not
+write down. The rule is that invention adds people around the printed story; it
+never replaces a printed character, contradicts a printed fact, or takes over a
+clue the module assigns to someone else.
+
+For an invented person: a name, a job, one habit, and one thing they want from
+the scene. Keep their knowledge bounded by their job, because a clerk knows the
+parking lot and not the conspiracy. If one starts to matter, write them into the
+campaign folder so they stay consistent next session.
 
 ## Error handling
 
