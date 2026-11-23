@@ -201,6 +201,43 @@ The method, in order:
 5. **Never announce the correction.** No "are you sure," no summary of the
    plot he is missing. He should feel the world leaning, not the GM herding.
 
+## Two layers of prep: outline and page (owner directive 2026-11-22)
+
+Running a published scenario needs two documents, and they do different jobs.
+
+**The outline** is the campaign-level one-pager: the spine as nodes, what each
+node yields, the routes into each, and the conspiracy's shape. Read it at the
+start of a session so the scene in front of you sits inside the whole. Without
+it, every scene is a reaction and the campaign has no direction. Keep it short
+enough to read in a minute, and append to it as play creates new threads.
+
+**The page** is the printed text for the scene you are about to run, read in
+full from Foundry, before you narrate. The outline must never substitute for
+it: an outline is a map, and a map is not the ground.
+
+Both live in `campaigns/<campaign>/`, and each scenario in a campaign gets its
+own outline section rather than a rewrite.
+
+### Stolen wholesale, with credit
+
+- **The Three Clue Rule** (Justin Alexander, thealexandrian.net). For any
+  conclusion the players must reach, provide at least three clues. Published
+  investigations are usually thinner than they look, and the fix is to add a
+  route rather than to lower the bar.
+- **Node-based design** (same source). Model the scenario as nodes and links,
+  not as a line of scenes. Every node should link to at least two others so the
+  investigation cannot dead-end.
+- **The conspyramid** (Robin Laws and Ken Hite, *Night's Black Agents*). Build
+  the conspiracy in layers, each node carrying a clue that points upward. The
+  agent's job is to climb it.
+- **The eight steps of the Lazy DM** (Sly Flourish): strong start, potential
+  scenes, secrets and clues, fantastic locations, important NPCs, meaningful
+  monsters, treasure, session notes. Use the secrets-and-clues step to check
+  the session has something to find.
+- **Delta Green handler practice**: write the timeline of past and future
+  events before anything else. These scenarios are exacting about detail, and
+  the timeline is what makes NPCs move when the agents are elsewhere.
+
 ## World texture on the road (owner directive 2026-11-22)
 
 Musky listens to public radio when he drives. Every drive gets one segment, two
