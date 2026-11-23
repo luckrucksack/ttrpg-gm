@@ -127,6 +127,68 @@ it with the corrected text; never recreate without deleting first).
    `apply_status_effect(tokenId, statusId)`
 6. Defeated: zero the actor's health field (see Combat above)
 
+## Running a published module through Foundry (owner directive 2026-11-22)
+
+Foundry is the table, not a reference library. The owner's standing instruction:
+follow the written adventure literally, add detail inside it, invent no
+characters, and use Foundry at every junction where it does something real.
+
+Forbidden without a specific reason: running a scene from a summary file. Read
+the actual page for the scene you are about to run, from Foundry, in full,
+before you narrate it. Page-level reads are affordable; whole-module reads are
+not. The mirror in `campaigns/<campaign>/research/module/` exists for offline
+recovery only.
+
+### Before every scene: the four-step open
+
+1. **Read the page.** Pull the exact section from the module journal. Not last
+   session's notes. The printed facts, names, skill targets and possibilities.
+2. **Activate the scene.** `Scenes` in the world holds the module's maps
+   (floorplans, the county, the pit, the tower, the green box interior, and the
+   handout scenes). Switch to the right one so the player's screen matches the
+   fiction.
+3. **Place the tokens.** The module's actors exist as world actors. Put the ones
+   present into the scene. An NPC who is in the room has a token in the room.
+4. **Open the clock.** Note the in-game date and time, and whether any printed
+   timeline event falls in this scene.
+
+### During the scene
+
+- Opposed rolls use the NPC's own sheet skill value. Never invent a target
+  number when the actor has the skill.
+- GM rolls go through the Foundry dice roller so they land in the chat log with
+  the formula visible. The player rolls his own and reports numbers.
+- Handouts are pushed, not described. The module's Handouts journal holds the
+  dashboard footage, the tape, notes, the sandstone chunk, the green box
+  contents. When the fiction hands one over, put it in front of the player.
+- Every stat change (HP, WP, SAN, conditions) is written to the actor sheet in
+  the same scene it happens.
+- If combat starts, it runs in the tracker: `start_combat`, initiative,
+  `next_turn`, damage on the sheet.
+
+### After the scene
+
+- Advance the offscreen ledger in the campaign folder.
+- Update the in-game clock.
+
+### Verification, because the bridge lies in both directions
+
+The MCP cache returns deleted documents and misses existing ones, and
+`refresh_world_data` times out. Ground truth is the world's own LevelDB: copy
+the directory under `Data/worlds/<world>/data/<collection>` and read it with
+Foundry's bundled `classic-level` at
+`/Applications/FoundryVTT.app/Contents/Resources/app/node_modules/classic-level`.
+Do that before reporting any world state as fact.
+
+### Cast discipline
+
+Every NPC comes from the written adventure. The only inventions the printed
+text authorises are the regional militia and white-power groups (offered as a
+patsy) and the Air Force doctor if the table does not use Capt. Jimenez. Nothing
+else. If a scene needs a face the module does not provide, use one of the
+generic printed actors (Police, Security Officer, EPA or DEQ Investigator) and
+keep them generic.
+
 ## Error handling
 
 - A failed tool call: retry once after 2s, then report the failure plainly.
