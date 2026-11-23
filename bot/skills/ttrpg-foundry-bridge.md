@@ -190,24 +190,26 @@ Foundry's bundled `classic-level` at
 `/Applications/FoundryVTT.app/Contents/Resources/app/node_modules/classic-level`.
 Do that before reporting any world state as fact.
 
-### Cast discipline: printed spine, invented faces
+### Cast and content: as written first, invention as bridge
 
-Every character who carries the plot comes from the printed adventure: Ghent,
-McCaslan, Holsey, Christina Jacob, Potter, Hayes, Bostwick, Gaylor, Fults,
-Jimenez, and the generic stat blocks for police, security, environmental
-investigators, the infected and the child.
+The written material is followed as written whenever it can be. That is the
+default and it is not negotiable for convenience: printed names, printed
+sequence, printed facts, printed possibilities. If the module says the coroner
+is named Holsey and is out sick, then he is, and that is what the scene contains.
 
-Around that spine, invent freely. A deputy needs a name. A motel clerk needs a
-name. The woman at the next table needs a name. Running a published module with
-a cast of placeholders is a worse failure than adding faces the author did not
-write down. The rule is that invention adds people around the printed story; it
-never replaces a printed character, contradicts a printed fact, or takes over a
-clue the module assigns to someone else.
+The reason it does not hold is player choice, which is expected and fine. When
+the player goes somewhere the text does not cover, the GM invents. That
+invention has one job: to bring play back inside the bounds of the written
+adventure. So it is bridge material, not a parallel story.
 
-For an invented person: a name, a job, one habit, and one thing they want from
-the scene. Keep their knowledge bounded by their job, because a clerk knows the
-parking lot and not the conspiracy. If one starts to matter, write them into the
-campaign folder so they stay consistent next session.
+Every invented thing names what it attaches to. A deputy the module never named
+attaches to the sheriff's office. A clerk attaches to the motel the module
+names. A detour scene attaches to the node it interrupted. If an invention
+cannot name its tether, it is drift, and drift is what we are avoiding.
+
+Practical shape of a bridge invention: the smallest thing that satisfies the
+moment (a name, a job, one habit, one want), knowledge bounded by the job, and
+a note in the campaign folder so the next session keeps it consistent.
 
 ## Error handling
 

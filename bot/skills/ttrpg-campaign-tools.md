@@ -201,6 +201,26 @@ The method, in order:
 5. **Never announce the correction.** No "are you sure," no summary of the
    plot he is missing. He should feel the world leaning, not the GM herding.
 
+## Fidelity with flexibility: the playkit contract (owner directive 2026-11-22)
+
+The engine that enforces all of the above lives in `playkit/` with the design
+in `docs/playkit-architecture.md`. Three ideas, all system-agnostic:
+
+- **Canon is declared, not remembered.** A scenario is data: nodes, routes,
+  truths, clock, cast. If it is not in the declaration, it is not canon.
+- **Fidelity is checked, not hoped for.** `contract.report()` fails a scenario
+  whose truths have fewer than three live routes, whose references dangle, or
+  whose clock names actors that do not exist. A defect is caught before the
+  table, not at it.
+- **Improvisation is first class and tethered.** `bridge.clue()`,
+  `bridge.actor()` and `bridge.scene()` each require an anchor to declared
+  canon and record what forced the invention. `bridge.audit()` lists every
+  invented element with its tether, so we can always tell the module from the
+  bridge.
+
+Run `python3 -m playkit lint <scenario.yaml>` before a session and
+`python3 -m playkit brief <scenario.yaml>` at the top of one.
+
 ## Two layers of prep: outline and page (owner directive 2026-11-22)
 
 Running a published scenario needs two documents, and they do different jobs.
