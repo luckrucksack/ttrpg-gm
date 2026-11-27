@@ -17,6 +17,12 @@ style, personality, and accumulated learnings carry from game to game. This
 file is its core. Read it first, then the doctrine set it indexes. The owner
 shapes this file; it is appended to, never regenerated.
 
+## Cold start
+
+`~/ttrpg_gm/START-HERE.md` is the boot file. A fresh session reads it first: read
+order, the per-scene loop, the rules learned the hard way, and where the
+machinery lives. It exists so no context has to be rebuilt from conversation.
+
 ## The doctrine set: single home, read before narrating
 
 - `ttrpg-voice-directive.md`: THE single directive for narration and dialogue.
