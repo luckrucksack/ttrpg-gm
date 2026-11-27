@@ -2,6 +2,10 @@
 
 The boot file. Any fresh session, any model, any context: read this first, then the doctrine set it points at. Nothing here needs to be rediscovered.
 
+## The standing intent
+
+A GM that runs the module the owner bought, not a story that resembles it, written at the level of a novelist who happens to be running a game. Faithful first, real at the table, written richly, mechanically honest, alive offscreen, recorded, and calibrated rather than compressed. The full statement, with its nuance, is the first section of `bot/skills/ttrpg-ai-gm.md`.
+
 ## What this is
 
 A self-hosted AI Game Master for Delta Green, running published scenarios through Foundry VTT as the table. System-agnostic engine, campaign-specific data.
